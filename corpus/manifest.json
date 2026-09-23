@@ -1,0 +1,757 @@
+{
+ "source_repo": "https://github.com/argythana/uoa_py_course",
+ "commit": "0cc874704aaa640345109edc08b9a107e275a98e",
+ "exported_on": "2026-09-14",
+ "files": [
+  {
+   "path": "uoa_py_course/lecture_01/goals_01.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/goals_01.md",
+   "chars": 1365,
+   "sha256": "f788db217c919d0a0d5d66c7e72ded8bcdd95b27de9d961d38ef528eb6d46d12"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/instruct_01a_install_python.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/instruct_01a_install_python.txt",
+   "chars": 2154,
+   "sha256": "ded85b2633b2a410af9c35f9ab20def08e1efd8c6d4387defb33f3de0bcb5b86"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/instruct_01b_run_python.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/instruct_01b_run_python.txt",
+   "chars": 4353,
+   "sha256": "d209b5c8da2862547831147719d34e9bb26fa3987d301662194ead32b0cc52b0"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/instruct_01c_create_run_script.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/instruct_01c_create_run_script.txt",
+   "chars": 3355,
+   "sha256": "892d93c55db96b12f2508f00f44fc8ff78c61ba68fec6485f45fa4cc79d921e2"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/instruct_01d_IDEs_AI_copilot.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/instruct_01d_IDEs_AI_copilot.ipynb",
+   "chars": 3163,
+   "sha256": "4a5e8681290e8179d8945cae7915f30677f6a9ed7b9c0731363c9f43f566ffce"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/lec_01a_operations_print_help.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/lec_01a_operations_print_help.py",
+   "chars": 1255,
+   "sha256": "52220a1331a4b9dfdccbac7a6d15549e0f29485e8761bbfef7a8ee34c55c4d5f"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/lec_01b_syntax_style_pemdas.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/lec_01b_syntax_style_pemdas.py",
+   "chars": 5054,
+   "sha256": "ab08b8b7b7df2a49d4916c72d2b85379f3b6214c191c0082be4796dec14526ea"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/read_agents_intro.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/read_agents_intro.md",
+   "chars": 12129,
+   "sha256": "c57068c59d4dea202d83809df52d6628481f96c29ff44362a6599b46581630cc"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/lec_01_exercises.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/practice_exercises/lec_01_exercises.md",
+   "chars": 2179,
+   "sha256": "2dc4ab1dd00f8958a9786a55e2b6fd62e6a9c304650a29d5395dd5458a674d6e"
+  },
+  {
+   "path": "uoa_py_course/lecture_01/lec_01_exercises_solutions.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/practice_exercises/lec_01_exercises_solutions.py",
+   "chars": 3534,
+   "sha256": "c213a0f8bd10c819d30ba34da679e6dbffce0063ce77a1cfc33f993051d09a17"
+  },
+  {
+   "path": "uoa_py_course/lecture_02/goals_02.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_02_built-in_types_functions/reading_material/goals_02.md",
+   "chars": 1557,
+   "sha256": "15726fbf9f0a9d3156958f1db9d5e3b39e4014b8a4527d61afbc7b5f759ea723"
+  },
+  {
+   "path": "uoa_py_course/lecture_02/lec_02a_types_assignments_numeric_operations.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_02_built-in_types_functions/reading_material/lec_02a_types_assignments_numeric_operations.py",
+   "chars": 5422,
+   "sha256": "75161004f74ec00cae8fb273c144716e0f3ede5d483f9ad92522e99b6f57345e"
+  },
+  {
+   "path": "uoa_py_course/lecture_02/lec_02b_strings_basic_operations.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_02_built-in_types_functions/reading_material/lec_02b_strings_basic_operations.py",
+   "chars": 3179,
+   "sha256": "f47a6f9ed3ef8baeb723c1b97a1c21fcf0d296c5c00d6a3643fbbda3cc0145ad"
+  },
+  {
+   "path": "uoa_py_course/lecture_02/lec_02c_built-in_functions_intro.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_02_built-in_types_functions/reading_material/lec_02c_built-in_functions_intro.py",
+   "chars": 5807,
+   "sha256": "eb627736c38f7467f8e037b5ea389ff9dbb330b2103cfc138c26a91ede29cd33"
+  },
+  {
+   "path": "uoa_py_course/lecture_02/lec_02d_bonus_print_syntax_format.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_02_built-in_types_functions/reading_material/lec_02d_bonus_print_syntax_format.py",
+   "chars": 3473,
+   "sha256": "2eebeccb943383b675e7180c8b03220d08d39aa281018d24f46146e82b354ffc"
+  },
+  {
+   "path": "uoa_py_course/lecture_02/read_agents_tokens_model_selection.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_02_built-in_types_functions/reading_material/read_agents_tokens_model_selection.md",
+   "chars": 7828,
+   "sha256": "5408a4d58abdf7977f7754f2ceed8c6d071038ab1d6612cee6f74d781c4d0564"
+  },
+  {
+   "path": "uoa_py_course/lecture_02/read_py_function_parameters_arguments.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_02_built-in_types_functions/reading_material/read_py_function_parameters_arguments.md",
+   "chars": 9607,
+   "sha256": "b4d752ab9790a93ae95a5d9e5e55f1e236f3cbdb20e7a5ba565ba01e123925d6"
+  },
+  {
+   "path": "uoa_py_course/lecture_02/practice_lec_02.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_02_built-in_types_functions/practice_exercises/practice_lec_02.py",
+   "chars": 2154,
+   "sha256": "bfbc474377c44deea58708ea142dafbbaca37cd3dd05c9d41cfc463530289691"
+  },
+  {
+   "path": "uoa_py_course/lecture_03/goals_03.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_03_cwd_path_pip_venv_imports/reading_material/goals_03.md",
+   "chars": 1241,
+   "sha256": "7f69631cced243143f2a603ac637eeb00ed5756190a86887d266f45a808395dd"
+  },
+  {
+   "path": "uoa_py_course/lecture_03/instruct_03a_cli_basic_commands.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_03_cwd_path_pip_venv_imports/reading_material/instruct_03a_cli_basic_commands.txt",
+   "chars": 2691,
+   "sha256": "9f6e768a7530104de73fd5c4567a7edcfd0933f89c1991bfc5acc5eb498fd088"
+  },
+  {
+   "path": "uoa_py_course/lecture_03/instruct_03b_path_cwd_location.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_03_cwd_path_pip_venv_imports/reading_material/instruct_03b_path_cwd_location.txt",
+   "chars": 2829,
+   "sha256": "69cefb3c21bcace262496d825877ca451884e59cecf9ebb9dcdfb1942727dc04"
+  },
+  {
+   "path": "uoa_py_course/lecture_03/instruct_03c_pip_venv.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_03_cwd_path_pip_venv_imports/reading_material/instruct_03c_pip_venv.ipynb",
+   "chars": 7125,
+   "sha256": "44d003ed76ff170e626263a5f1b48f5902d3dab8ba4b6760e39c6d45124beeef"
+  },
+  {
+   "path": "uoa_py_course/lecture_03/instruct_03d_jupyterlab.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_03_cwd_path_pip_venv_imports/reading_material/instruct_03d_jupyterlab.ipynb",
+   "chars": 4652,
+   "sha256": "184804bc0880f8fae1d0ff47d2694be9b5b325c111c8829e3dcc57ec64b36c43"
+  },
+  {
+   "path": "uoa_py_course/lecture_03/lec_03e_import_built_in_modules.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_03_cwd_path_pip_venv_imports/reading_material/lec_03e_import_built_in_modules.py",
+   "chars": 3053,
+   "sha256": "548e977da1bfeb96dfc9bb8a9037385b04d4db6316f3b3650d39924bd0f7960d"
+  },
+  {
+   "path": "uoa_py_course/lecture_03/practice_lec_03.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_03_cwd_path_pip_venv_imports/practice_exercises/practice_lec_03.py",
+   "chars": 1888,
+   "sha256": "6554399b734e6bc32961d85438bc64cbeb1e3b5a935c492287e129b1fa5b7f75"
+  },
+  {
+   "path": "uoa_py_course/lecture_04/goals_04.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_04_index_slice_str_list_dict/reading_material/goals_04.md",
+   "chars": 971,
+   "sha256": "a5cf9795c6f5b5b66ad7ff83f4772180c050e172334672ffb3729bd7efde9e85"
+  },
+  {
+   "path": "uoa_py_course/lecture_04/lec_04a_index_slice_str.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_04_index_slice_str_list_dict/reading_material/lec_04a_index_slice_str.ipynb",
+   "chars": 6780,
+   "sha256": "dbd1f029d62510eca65a5f1d14625a32211a7ddd1d3568e0f83c65b17a40bc22"
+  },
+  {
+   "path": "uoa_py_course/lecture_04/lec_04b_index_slice_list_tuple_set.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_04_index_slice_str_list_dict/reading_material/lec_04b_index_slice_list_tuple_set.ipynb",
+   "chars": 12550,
+   "sha256": "8a30a168efb9f0cbc623f46a61288f9444e287b7c14bd21c95f61d694975cc38"
+  },
+  {
+   "path": "uoa_py_course/lecture_04/lec_04c_dictionaries.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_04_index_slice_str_list_dict/reading_material/lec_04c_dictionaries.ipynb",
+   "chars": 11281,
+   "sha256": "f6920ba53248e3e1f3df71e5b12caf343296d5cfe5ebda12ee49b21496edef8a"
+  },
+  {
+   "path": "uoa_py_course/lecture_04/index_slice_list_exercise.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_04_index_slice_str_list_dict/practice_exercises/index_slice_list_exercise.py",
+   "chars": 1979,
+   "sha256": "216cf8f551c7151e4b208a75ae9863af2f450c904023b4b71eb23d502b928ad1"
+  },
+  {
+   "path": "uoa_py_course/lecture_04/index_slice_practice.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_04_index_slice_str_list_dict/practice_exercises/index_slice_practice.ipynb",
+   "chars": 2081,
+   "sha256": "d5945feb9e1f17a2f979ca72a8a1ddc94bb02b437cabca1c7cbebe7bc6d245ef"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/explain_print.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/reading_material/explain_print.py",
+   "chars": 232,
+   "sha256": "3628f06a97c775e714ad601b1184d403a414db47b77c0006c0221ac64cce2335"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/goals_05.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/reading_material/goals_05.md",
+   "chars": 1104,
+   "sha256": "2ac53d8d1c3612c58a0eea5fa7c0a1610e3ebebb1db417073ccc68d0d56f9ba8"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/lec_05a_boolean.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/reading_material/lec_05a_boolean.ipynb",
+   "chars": 8054,
+   "sha256": "22612187f1a1e8afeef37df196f413f688d2fa1195fe8362378675fb482ab76b"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/lec_05b_while_loop.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/reading_material/lec_05b_while_loop.ipynb",
+   "chars": 6853,
+   "sha256": "3b4d5bd8be8ac8ec330a6f1a45507cdaf2a3cef55d5c2b8aa66dea7b0e120b87"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/lec_05c_if_condition.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/reading_material/lec_05c_if_condition.ipynb",
+   "chars": 8151,
+   "sha256": "d012d1faad8d518dabdc53cb2aa565f0e01176c7296089aceda8761fd04ac130"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/lec_05d_for_loop.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/reading_material/lec_05d_for_loop.ipynb",
+   "chars": 6637,
+   "sha256": "f0b42c9976cd85b1ea7f4a6c8ed3d82994cf5990584894c15da9f8b98e4697b4"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/practice_lec_05a_boolean.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/practice_exercises/practice_lec_05a_boolean.ipynb",
+   "chars": 3097,
+   "sha256": "3cd68421bb0c812ee1ebc1c112a0e33cdb04f1758e26a8c477dc9ac46b9c3c60"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/practice_lec_05b_while_loop.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/practice_exercises/practice_lec_05b_while_loop.ipynb",
+   "chars": 2275,
+   "sha256": "330dde20cdba67ec618e9dae78a2b7771260c908edc644a45c14e63c523d1456"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/practice_lec_05c_if_condition.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/practice_exercises/practice_lec_05c_if_condition.ipynb",
+   "chars": 2581,
+   "sha256": "7a4fc69d50c988c3c2d94436c87ca67da26d6fe9488be1d8b7877deb1ce5bca6"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/practice_lec_05d_for_loop.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/practice_exercises/practice_lec_05d_for_loop.ipynb",
+   "chars": 2424,
+   "sha256": "a825a0c94afe0c86af538e9c88dc6cb14226ae19bf655b146f37789af9053cce"
+  },
+  {
+   "path": "uoa_py_course/lecture_05/practice_lec_05e_guessing_game.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_05_boolean_conditions_control_statements/practice_exercises/practice_lec_05e_guessing_game.ipynb",
+   "chars": 1036,
+   "sha256": "49f3860053072f47ad20ee0936e93e646df77428bba1157ac29d61f8cf80d7a7"
+  },
+  {
+   "path": "uoa_py_course/lecture_06/function_parameters_arguments.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_06_define_functions/reading_material/function_parameters_arguments.ipynb",
+   "chars": 10591,
+   "sha256": "3a5f1928a76ddfcb5478c81a4ad7e349316433b7092ed4d2c463bf0409539bc4"
+  },
+  {
+   "path": "uoa_py_course/lecture_06/goals_06.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_06_define_functions/reading_material/goals_06.md",
+   "chars": 1349,
+   "sha256": "94593133adecb6761d6dacd53a6fdef01a5e9ea5bc242473ea59fdd4c09c2bee"
+  },
+  {
+   "path": "uoa_py_course/lecture_06/hypot_module.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_06_define_functions/reading_material/hypot_module.py",
+   "chars": 1544,
+   "sha256": "cb82a3d03dbe89b182a15957061388c8aa4104553de4398c2ef348d744fe946f"
+  },
+  {
+   "path": "uoa_py_course/lecture_06/lec_06a_custom_functions_demo.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_06_define_functions/reading_material/lec_06a_custom_functions_demo.ipynb",
+   "chars": 9855,
+   "sha256": "2c674d4539215ac5bc112bae2817a8243ce725506d8b7e8365e764994950fd56"
+  },
+  {
+   "path": "uoa_py_course/lecture_06/lec_06b_define_functions.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_06_define_functions/reading_material/lec_06b_define_functions.ipynb",
+   "chars": 13041,
+   "sha256": "a48e8d11103337e4d394b13ef0bf067e55b9956e1103d17042e832b57bb8a884"
+  },
+  {
+   "path": "uoa_py_course/lecture_06/lec_06c_stand_alone_scripts.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_06_define_functions/reading_material/lec_06c_stand_alone_scripts.ipynb",
+   "chars": 3742,
+   "sha256": "5dae898ed7fe1e794b7b6cb70b74cbff65f9078b7c5077f6763b54f11be1fea9"
+  },
+  {
+   "path": "uoa_py_course/lecture_06/lec_06d_user_modules_scripts.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_06_define_functions/reading_material/lec_06d_user_modules_scripts.ipynb",
+   "chars": 8817,
+   "sha256": "113ccf16aa7965e071dede3cf78f903ea57a7112f4187265602657ac80ceea99"
+  },
+  {
+   "path": "uoa_py_course/lecture_06/practice_lec_06.md",
+   "source": "lectures_01_06_fundamentals_for_data_science/lecture_06_define_functions/practice_exercises/practice_lec_06.ipynb",
+   "chars": 2549,
+   "sha256": "5d6e5df130db7b9a53b377367701ccf83c134f815f7afb7f0625fdb254f8f271"
+  },
+  {
+   "path": "uoa_py_course/lecture_07/goals_07.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_07_pandas/reading_material/goals_07.md",
+   "chars": 904,
+   "sha256": "886144899febaa4d4dcf57f4469031b8a540d15e7f13b0d0cec6d8c1db59a69d"
+  },
+  {
+   "path": "uoa_py_course/lecture_07/lec_07a_pandas_df_index_slice.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_07_pandas/reading_material/lec_07a_pandas_df_index_slice.ipynb",
+   "chars": 13934,
+   "sha256": "76a68aecd7b8a487563552ecf926edebebde70a2bc8db45997908a73fda45810"
+  },
+  {
+   "path": "uoa_py_course/lecture_07/lec_07b_pandas_methods.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_07_pandas/reading_material/lec_07b_pandas_methods.ipynb",
+   "chars": 15212,
+   "sha256": "d512582fcb4344e3fb04aff3632ea3b083212fc890a198572fcc212869df08df"
+  },
+  {
+   "path": "uoa_py_course/lecture_07/lec_07c_updated_informed_data_management_modules.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_07_pandas/reading_material/lec_07c_updated_informed_data_management_modules.ipynb",
+   "chars": 19404,
+   "sha256": "0bb260647cfc5d0dc29c98117e47c1db521824af474f14467643ff6dd8ba2337"
+  },
+  {
+   "path": "uoa_py_course/lecture_07/practice_lec_07a_join_dfs.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_07_pandas/practice_exercises/practice_lec_07a_join_dfs.ipynb",
+   "chars": 3148,
+   "sha256": "3acbd939fb8e04dceba47017d1547a72d3c678059fce9c215aac0e727f7438dd"
+  },
+  {
+   "path": "uoa_py_course/lecture_07/practice_lec_07a_join_dfs_solutions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_07_pandas/practice_exercises/practice_lec_07a_join_dfs_solutions.ipynb",
+   "chars": 7199,
+   "sha256": "4b37c1b3adbb24d94cb65d1fe967c7a63f5c9975dd4f39c08c05101a1423f23e"
+  },
+  {
+   "path": "uoa_py_course/lecture_07/practice_lec_07b_advanced_polars.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_07_pandas/practice_exercises/practice_lec_07b_advanced_polars.txt",
+   "chars": 673,
+   "sha256": "53d8352ed5b044d8b576769b4264b777700743a06951a3a5e91a5fd2787ba47f"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/app_dash.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/app_dash.py",
+   "chars": 1727,
+   "sha256": "827a4fbaea2da20d84be9b8287d7652acfdc770c7bfb52c57d13177dcc969609"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/app_gradio.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/app_gradio.py",
+   "chars": 1902,
+   "sha256": "c2b23086c30abd0708f65e33090a3dd4ca951dbd3aa5da297456f5d912dbf996"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/app_streamlit.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/app_streamlit.py",
+   "chars": 1903,
+   "sha256": "13ec7117a05c321248a2e3053c6b5394e847b2200a9150ccf85f90a90aeae641"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/app_taipy.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/app_taipy.py",
+   "chars": 1860,
+   "sha256": "93234947932ad50fa3ec8a38b9f3e61adef5f8532b3b6b3473f0860bdf452308"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/goals_08.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/goals_08.md",
+   "chars": 2685,
+   "sha256": "0a185e865c0c161bec29158008a5bac4aba63a8d7c33aaac57726ed629aa1c6f"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08a_interactive_plots.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/lec_08a_interactive_plots.ipynb",
+   "chars": 20804,
+   "sha256": "4d891e4cdc8b080b2ca82c62be0238751f3e3019c9864861bd2a70f78e8e8f37"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08b_static_plots.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/lec_08b_static_plots.ipynb",
+   "chars": 19509,
+   "sha256": "859f39a84b1348c6e85218ecf9e3632bc09cd50061733b58a23936c71fdffae2"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08c_more_interactive_plots.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/lec_08c_more_interactive_plots.ipynb",
+   "chars": 6510,
+   "sha256": "c6097ba7a93ae9d6972867cd12b9f14a03f709b897bdf0fb2ffb517d41f682bd"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08d_example_EDA_iris.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/lec_08d_example_EDA_iris.ipynb",
+   "chars": 7170,
+   "sha256": "dbf5f3006b769872d71a8fcd92271ea1172c3b8c91ade8d3171f361ce37309d1"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08e_example_EDA_heart_disease.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/lec_08e_example_EDA_heart_disease.ipynb",
+   "chars": 17113,
+   "sha256": "68f55da54090a58037bcf7ab4f23af0accb9c20f26f6a6df014e302d2b95c2b8"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08f_auto_EDA.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/lec_08f_auto_EDA.ipynb",
+   "chars": 6757,
+   "sha256": "e1f3a6124eed4f3423f7ae37b76934d02127729bd1762e459b71aa47e5bd4e73"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08g_web_app_frameworks.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/reading_material/lec_08g_web_app_frameworks.ipynb",
+   "chars": 18533,
+   "sha256": "e80725e7ba79ca7beca476b44474a3674a936c8f6058ff0dd982cde31890445d"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08_exercises.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/practice_exercises/lec_08_exercises.ipynb",
+   "chars": 10328,
+   "sha256": "25c2c9d50a4a7b70619ed5d4ea98aebdb952be3d48f2a8bfacfdcd0ce6d2ec15"
+  },
+  {
+   "path": "uoa_py_course/lecture_08/lec_08_exercises_solutions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_08_EDA_plots/practice_exercises/lec_08_exercises_solutions.ipynb",
+   "chars": 18865,
+   "sha256": "5c376a2db2d4b9b375a930aaa658131b2e81c64f084ccfdba768e5069a0cdd85"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/app.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/app.py",
+   "chars": 12312,
+   "sha256": "3cb5143edad3aa42de81ec3cf82354f45fe98ba6721d34e7d0ad02e64230a423"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/goals_09.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/goals_09.md",
+   "chars": 6037,
+   "sha256": "57f64f1d67b0a27768c48314d730a99b37b363aa58b7bb61193ca2cea86d48de"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/lec_09a_kmeans_clustering.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/lec_09a_kmeans_clustering.ipynb",
+   "chars": 51220,
+   "sha256": "2baabb53a68ce364fe261e7d32ed62353b9ec6795d05670da3cee0bdb7789a3c"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/lec_09b_kmeans_assumptions_caveats.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/lec_09b_kmeans_assumptions_caveats.ipynb",
+   "chars": 13181,
+   "sha256": "77a68b8b07a385968649d190f73181c264421ebb94c482eea40cf1dc67f2808a"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/lec_09c_gradio_app_huggingface_deploy.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/lec_09c_gradio_app_huggingface_deploy.ipynb",
+   "chars": 28397,
+   "sha256": "9b5532e440945e2163f38626a3dd8fd9abe0ee6dce12a8083cbf6a8c747d0a94"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/lec_09d_kmeans_other_parameters.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/lec_09d_kmeans_other_parameters.ipynb",
+   "chars": 14021,
+   "sha256": "0b32e29125d3718eeb29f195b0dc5254bf775b21b6465ce643202c363613df6d"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/lec_09e_kmeans_step_by_step_animations.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/lec_09e_kmeans_step_by_step_animations.ipynb",
+   "chars": 15092,
+   "sha256": "f65ae5bdb4e65faa2c3ee72585e117906c907805bcacf4b61649f5b40a6aca30"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/lec_09f_other_clustering_algos.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/lec_09f_other_clustering_algos.ipynb",
+   "chars": 4686,
+   "sha256": "294b9f311cdad239ab14ea9b0e3f20a8d4948f9a8ffd14fdae93248da23d345f"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/read_agents_clustering_workflows.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/read_agents_clustering_workflows.md",
+   "chars": 8617,
+   "sha256": "b81d0473bc9ce444bc6038ea1ad2b33f7b9fd41e513ee6d34f4d8b4341ae1e70"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/read_train_test_split_in_clustering.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/read_train_test_split_in_clustering.md",
+   "chars": 6899,
+   "sha256": "ceb6aeb0399cb804ec697be11c2e67abb3583475ee503df4247088a055f9d6b2"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/requirements.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/reading_material/requirements.txt",
+   "chars": 204,
+   "sha256": "ffff613e89dafaf82d0c151ede74e13c7b3d057cfa41c099897dd628c6dd23c6"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/lec_09_exercises.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/practice_exercises/lec_09_exercises.ipynb",
+   "chars": 13760,
+   "sha256": "7c9b356ccbc51e809734b370af61fca82dd88080c3d23e643da15efb31154d81"
+  },
+  {
+   "path": "uoa_py_course/lecture_09/lec_09_exercises_solutions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_09_clustering_deploy_hf_app/practice_exercises/lec_09_exercises_solutions.ipynb",
+   "chars": 12325,
+   "sha256": "df0e2b7725a06eafcc9061503c3bc1a2ce4dac755f4130f7b03fc3babd89efda"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/goals_10.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/reading_material/goals_10.md",
+   "chars": 7339,
+   "sha256": "937ba2efad85c35d19d9eb1fd78355803404a0564b60cc310e5f9a919df27c68"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/lec_10a_knn_classification.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/reading_material/lec_10a_knn_classification.ipynb",
+   "chars": 37782,
+   "sha256": "37d00e8245af040f490056d00f664c38a30f15a5aadef064bdbf66b665d0c8b8"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/lec_10b_knn_assumptions_caveats.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/reading_material/lec_10b_knn_assumptions_caveats.ipynb",
+   "chars": 17942,
+   "sha256": "9730b34430746022ca9e5c37903b8d25529e22d4025301f16b75b85080f97f56"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/lec_10c_knn_decision_boundaries.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/reading_material/lec_10c_knn_decision_boundaries.ipynb",
+   "chars": 9303,
+   "sha256": "ccf1ad0895a3d20c09e8e8d6143c22854d2322be4e4beb1a9dd2db77cc870cc4"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/lec_10d_knn_other_parameters.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/reading_material/lec_10d_knn_other_parameters.ipynb",
+   "chars": 20038,
+   "sha256": "d4b7fbc27eee4c393f13d41c38685f35905d8193949cfcd27d2f598f2ebf08b3"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/lec_10e_knn_vs_other_classifiers.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/reading_material/lec_10e_knn_vs_other_classifiers.ipynb",
+   "chars": 7026,
+   "sha256": "015c306f6ff6c439d60755819be50d796d8f3359de1fbc46240d5e1c1ae987d2"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/lec_10f_knn_regression_teaser.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/reading_material/lec_10f_knn_regression_teaser.ipynb",
+   "chars": 4689,
+   "sha256": "817d374f21ef8ff1f78a8026758a7baa3b27c99f66c7f1da4c1d4062c829cdce"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/read_agents_knn_workflows.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/reading_material/read_agents_knn_workflows.md",
+   "chars": 14965,
+   "sha256": "ef2f9c47934726e79b27194c51bff1a8a6ac113a9acf98983cf98ea22e0210ee"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/lec_10_exercises.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/practice_exercises/lec_10_exercises.ipynb",
+   "chars": 14172,
+   "sha256": "6f9cfa5520ae6bc0a55d646f7a4a68c109cc70262260f938ef228fe60d160ad9"
+  },
+  {
+   "path": "uoa_py_course/lecture_10/lec_10_exercises_solutions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_10_knn_train_test_split/practice_exercises/lec_10_exercises_solutions.ipynb",
+   "chars": 19608,
+   "sha256": "eca3933d18d3ef366ab24cdf9d5c5ffd8c643fbde8fe8ba984ed95bb7248622a"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/goals_11.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/reading_material/goals_11.md",
+   "chars": 9616,
+   "sha256": "fc9427d8d84f7da1e27784208b5c25a52c07205a38f78fbd5f2d358fe85d14bc"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/lec_11a_simple_lin_regression.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/reading_material/lec_11a_simple_lin_regression.ipynb",
+   "chars": 16884,
+   "sha256": "2ef95b51b47494ad57248da2611c6ddd842f5bec42acdd0231d5c5bb6875dc72"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/lec_11b_linear_regression_assumptions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/reading_material/lec_11b_linear_regression_assumptions.ipynb",
+   "chars": 27301,
+   "sha256": "8b583286eb72d93f7a2fd10bbad283be3f3829470b2383e9d3832c7fda00212a"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/lec_11c_multiple_linear_regression.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/reading_material/lec_11c_multiple_linear_regression.ipynb",
+   "chars": 26666,
+   "sha256": "565cc88cb0d7aec32b1a5d6c634af252fee031a7fc5347c07215bbdfbfda5640"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/lec_11d_advanced_linear_model_coeff_interpretation.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/reading_material/lec_11d_advanced_linear_model_coeff_interpretation.ipynb",
+   "chars": 14435,
+   "sha256": "7a233e849d5c7955530a1b35ceff0e909daebfcda90c88d4abd827ef1768b7e0"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/lec_11e_polynomial_regression.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/reading_material/lec_11e_polynomial_regression.ipynb",
+   "chars": 36781,
+   "sha256": "9d94d82e755c71bd8527628ef3679382ca099accff0ca2c3d09621d244834494"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/lec_11f_regression_advanced_topics.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/reading_material/lec_11f_regression_advanced_topics.ipynb",
+   "chars": 37491,
+   "sha256": "98d1a60d0504bc4cb1a183aca0b0a1a838f1568dba1a0a844be563fa09761d1e"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/read_agents_regression_workflows.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/reading_material/read_agents_regression_workflows.md",
+   "chars": 20073,
+   "sha256": "143677eef80f92b9da1a4bddbcf101c24fc22796f3d4a2534247723685d644b3"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/lec_11_exercises.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/practice_exercises/lec_11_exercises.ipynb",
+   "chars": 13899,
+   "sha256": "292840ce8536681f0e147e9424c5ccd9946c36808cf3b70e19845765e5e2cd9d"
+  },
+  {
+   "path": "uoa_py_course/lecture_11/lec_11_solutions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_11_regression_linear_polynomial/practice_exercises/lec_11_solutions.ipynb",
+   "chars": 31786,
+   "sha256": "499ef507d0c6533016fbef20b92e5c9a2a2ac173c4a29b386ee40b86fec5b681"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/goals_12.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/reading_material/goals_12.md",
+   "chars": 12328,
+   "sha256": "2825ebec5a3de0bbb97aa406774c0c8060ddbd77ced47eff98e8d1e46fed871a"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/lec_12a_logistic_regression_intuition.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/reading_material/lec_12a_logistic_regression_intuition.ipynb",
+   "chars": 29435,
+   "sha256": "07b581ebadd4a289f4b7c4095f1bd817773b32ab7678bcba2defb5d6256849f5"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/lec_12b_logit_probit_values_predictions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/reading_material/lec_12b_logit_probit_values_predictions.ipynb",
+   "chars": 22362,
+   "sha256": "b8f9475c1822e2e7f925f3718fd240ef278b79772bf2d4642806c7c4dd02dead"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/lec_12c_logistic_regression_assumptions_caveats.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/reading_material/lec_12c_logistic_regression_assumptions_caveats.ipynb",
+   "chars": 27024,
+   "sha256": "a75531f0d4cc217642e6b0e93a51ed41d529dbb63ded862e849b3aaf0404ccfe"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/lec_12d_logistic_regression_hyperparameters.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/reading_material/lec_12d_logistic_regression_hyperparameters.ipynb",
+   "chars": 25545,
+   "sha256": "87bb06353ccca7916c8f5644e76398da3d050b65d3b8e14707813cc79501c0aa"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/lec_12e_naive_bayes.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/reading_material/lec_12e_naive_bayes.ipynb",
+   "chars": 22221,
+   "sha256": "dfd11ed9d84d0512812f4c4bf7e2aee15d9954bcce9d26058383521d0dc27486"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/lec_12f_SVM.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/reading_material/lec_12f_SVM.ipynb",
+   "chars": 13997,
+   "sha256": "c5aa778d8614e4507782da98ef2c3d6975be1d6814417ccadc80e0a05963f3d6"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/read_agents_classification_workflows.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/reading_material/read_agents_classification_workflows.md",
+   "chars": 16403,
+   "sha256": "98756e9f8395022c25cf28a03bd36354022c33af97dc615b68465b73c6abb078"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/lec_12_exercises.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/practice_exercises/lec_12_exercises.ipynb",
+   "chars": 8771,
+   "sha256": "0f63dae262bc5b19567d2e7af2f9b2509009105c4c5110940ce1b048cdcdfaf0"
+  },
+  {
+   "path": "uoa_py_course/lecture_12/lec_12_exercises_solutions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_12_logistic_regression_naive_bayes_svm/practice_exercises/lec_12_exercises_solutions.ipynb",
+   "chars": 14414,
+   "sha256": "d8a6641c3682cbbfe18e67006f89ddd574e38426521b9d06c9b300f7bc53e3b6"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/goals_13.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/goals_13.md",
+   "chars": 6227,
+   "sha256": "18fe9cef7aa0f7a6e01a365fd5699e1d24f62ef1981fe6b286e4128def76c045"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13a_gridsearchcv_hyperparameter_tuning.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/lec_13a_gridsearchcv_hyperparameter_tuning.ipynb",
+   "chars": 21096,
+   "sha256": "29808112a2c48c343663e62635f8c0ed7eea3a082d7d4c9094a98db5170ea6e0"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13b_pipelines_preprocessing_models.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/lec_13b_pipelines_preprocessing_models.ipynb",
+   "chars": 24025,
+   "sha256": "376e851260aedac23e8afed0b41c0057bf1312f98b41570eadf55b197e1ef9fe"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13c_mlflow_tracking_basics.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/lec_13c_mlflow_tracking_basics.ipynb",
+   "chars": 21364,
+   "sha256": "2d56b18cf76611318d336178bf2b3357d4ff360b49cdb2eb236c11788dcfe3be"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13d_mlflow_evaluation_registry.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/lec_13d_mlflow_evaluation_registry.ipynb",
+   "chars": 14089,
+   "sha256": "bb037cfc89a212255ac7336b1547ef866e5dfe8c8a56a4850c2ebc4e51fab5f0"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13e_mlflow_logging_sweeps.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/lec_13e_mlflow_logging_sweeps.ipynb",
+   "chars": 12173,
+   "sha256": "cee7c4b2fafa61033001d255506952c6e88a5b485904a27f299c29d02d882823"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13f_mlflow_model_serving.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/lec_13f_mlflow_model_serving.ipynb",
+   "chars": 12668,
+   "sha256": "789bbb1c283998bffc4d8d20df956715fd93120c0bfc1641f295a725af1830fd"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13g_automl_autogluon.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/lec_13g_automl_autogluon.ipynb",
+   "chars": 17710,
+   "sha256": "59aebed0f0830a4f74a0b95d20ebfd2830049e0f84cf22fca9f76d19d1d7ce74"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/read_agents_automation_mlops.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/reading_material/read_agents_automation_mlops.md",
+   "chars": 15026,
+   "sha256": "0bdfc7ed5fb34585f0235e4ec00e91993060636264503361cbae2168b2a7296d"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13_exercises.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/practice_exercises/lec_13_exercises.ipynb",
+   "chars": 11813,
+   "sha256": "3fc1ac617a267c990ff0eee82f4167f2228c9ae945ac82d40e454f3162c52cb5"
+  },
+  {
+   "path": "uoa_py_course/lecture_13/lec_13_exercises_solutions.md",
+   "source": "lectures_07_13_pandas_plots_scikit/lecture_13_pipelines_gridsearch_mlflow/practice_exercises/lec_13_exercises_solutions.ipynb",
+   "chars": 18387,
+   "sha256": "7267927ec776b71e1573672eb6adcdf20647d1b6eaedf58ecf6fb11623f8816b"
+  }
+ ]
+}

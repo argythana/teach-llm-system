@@ -1,0 +1,111 @@
+<!-- source: lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/instruct_01c_create_run_script.txt @ 0cc874704aaa -->
+
+# instruct_01c_create_run_script.txt
+
+```text
+BIS UOA class, February 2022
+author: Argyriou Thanasis
+Lecture 1, instructions, part C, Simple script.
+
+-------------------------
+CREATE, RUN, EDIT py SCRIPT:
+-------------------------
+
+	Third thing to learn: Create a script, save, run, edit it.
+
+	--------------
+    Important Note: To "run" a script and to open a script file in order to "edit" is not the same thing.
+    ---------------
+
+    ---------------
+    Important Note:
+    ---------------
+	If you double-click on a .py file of this lecture: 
+	It will not open for "editing". Python will "run" it.
+	So, in this case you will see nothing.
+    -----------------------------------------------------
+
+	
+	1) First contact, be brave!
+	
+	Open the IDLE.
+	Type what you see after >>> and press enter.
+	
+	>>> foo = 4
+	>>> foo
+	4
+	
+	You created an "object" with "name" (foo) and "assigned" a "value" to it (4).
+	Every time you "call" this variable by its "name",
+	python will "return" its "value".
+	
+	Please remember the concepts:
+	"object", "name", "assign", "value", "call", "return".
+	
+	MY UGLY ROMANTIC POEM ABOUT PYTHON.
+	(Read it slowly like a poem, twice)
+	------
+	In python everything that we create is an "object",
+	We give it a "name",
+	we "call" it by its "name",
+	We "assign" a "value" to it (and attributes and methods too).
+	So, when we "call" an "object" by its "name", e.g "foo",
+	python "returns" to us its "value".
+	After some lectures, this ugly poem will make sense to you.
+	------ (end of ugly poem)
+
+	What is an "ASSIGNMENT" according to the official definition:
+	"Assignment" statements are used to (re)bind names to values and to
+    modify attributes or items of mutable objects.
+
+	Which is better?
+
+	
+	2) First file.
+	
+	From the IDLE menu click "File" then "New File".
+	Now you may work "non-interactively" and write thousands lines of code.
+	Just enter the same as above:
+	
+	foo = 4
+	foo
+	
+	Select "Run" from the editor menu and save it.
+	(Save in a folder you have made for this course)
+	There is no output in the IDLE interpreter window, by design.
+	
+	To have a value shown to us we need a special "function" called print().
+	In the editor write:
+	
+	foo = 4
+	print(foo)
+	
+	Save and select "Run".
+	
+	WoW, you just created a small script.
+	It prints a value in the window of the interpeter.
+	A small step for us, and a big-nothing-burger for humanity.
+	
+	To "run" a py file from windows command line:
+	> python file_name.py
+	(make sure to be in the same directory, or to give the correct path).
+	
+	----------------------------------------
+	
+	How to "EDIT" a saved python file:
+	
+	i) open IDLE menu "File" -> "Open" and select the file.
+	or:
+	ii) from a graphics window: right click and select "edit with IDLE".
+
+========================================
+
+Quick checklist (Lecture 1):
+	1) Create a new script, save it, and run it from IDLE.
+	2) Add at least one print() line and re-run.
+	3) Change a variable value and check the new output.
+
+Next:
+	- Run: lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/lec_1a_operations_print_help.py
+	- Then: lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/lec_1b_syntax_style_pemdas.py
+```

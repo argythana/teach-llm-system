@@ -1,0 +1,124 @@
+<!-- source: lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/instruct_01b_run_python.txt @ 0cc874704aaa -->
+
+# instruct_01b_run_python.txt
+
+```text
+
+BIS UOA course
+author: Argyriou Thanasis
+Lecture 1, instructions, part B, Start python.
+
+----------------------------------------
+OPEN the PYTHON "INTERPRETER" and "IDLE"
+----------------------------------------
+
+	Second thing to learn: python "interpreter" and python "IDLE".
+	We use the IDLE only in the first lecture.
+
+	Preliminary Definitions:
+	------------------------
+	a) "Command Line Interface (CLI)", "Terminal", "Console", "Shell", "Γραμμή εντολών".
+	For the purpose of this course all these mean the same.
+	Note: The PC Operating System (Windows, Mac, Linux) has its own "terminal".  
+        Python has a different kind of "terminal".
+	
+	b) "python interpreter"
+	
+	Documentation, please read:
+	https://docs.python.org/3.13/tutorial/interpreter.html
+	
+    Simplistic explantation:
+	We talk to the "interpeter" using a programming language (called Python).
+	The "interpreter":
+    translates python to computer language,
+    communicates with the Computer and,
+    replies back to us in human language.
+    
+    But, only if we use the right words. "Please" does not work, "sorry" neither.
+	
+	Keyword to remember: the "interpeter" works INTERACTIVELY (use for testing, debugging, to find errors)
+	
+	c) "python IDLE"
+	IDLE is Python’s Integrated Development and Learning Environment.
+    Simply: a (simple) python editor.
+	The distinctive feature is: we can edit a script NON-INTERACTIVELY.
+	
+	IDLE also has an interactive interpreter window,
+	but the IDLE non-interactive editor window is where most of the fun is.
+
+	Using the IDLE you may work either "interactively", or "non-interactively".
+	
+	Documentation, please just read once it to get an idea:
+	https://docs.python.org/3/library/idle.html
+
+=============================================================================
+	
+	A) How to open the python "interpreter":
+	You open a dark door, don't have any fear of the dark.
+    
+	i) Using "Start Menu" key:
+		a) press the "Windows" key also known as "Start Menu" key,
+		b) type "python" and press "Enter". (check version)
+		Now, you have entered the python interpreter terminal if you see
+		the first line with the python version and then the python "prompt":
+		
+		>>> _
+	
+	OR
+	ii) Using the Windows Command Line:
+	You need to open a dark door with the label "Windows" on it,
+	then a second dark door with the label "python". NO FEAR.
+    
+	First open Windows CLI:
+		a) press "Windows key" + "R",
+		b) type the word "cmd", press Enter.
+
+		You are in the Windows Command Line if you see:
+		the first line with the Windows version and the Windows prompt.
+		C:\Users\your_windows_user_name>_
+
+
+	Now open the python interpreter command line:
+		c) type "python" or "py" and press "Enter".
+		You 're in the python interpreter terminal if you see:
+		the first line with the python version, some initial info and the "prompt":
+		>>> _
+
+	* On Windows, if you have installed different versions you can run then  
+	  from the CLI using the "py -version.number" argument:
+	  "py -3.13"
+	  
+		e.g.
+		C:\Users\tharg>py -3.13
+		
+	* On Mac, the keyboard shortcut to the CLI is: "command key" + "space".
+	
+=============================================================================
+
+	B) How to open the python IDLE:
+    
+    i) From the "Start Menu":
+		a) press "start Menu" key,
+		b) type "idle" and press "Enter".
+	
+	Oh, we see some briht light now!
+	You have opened the IDLE GUI (Graphical User Interface). Yes, it has amazing graphics.
+		
+	ii) From the Windows Command Line:
+    	a) press "Windows key" + "R",
+    	b) type "cmd", press Enter,
+    	c) in the command prompt type "python -m idlelib" (without quotes) and press "Enter".
+		
+		* On Mac, the keyboard shortcut to the CLI is: "command" key + "space".
+
+========================================
+
+Quick checklist (Lecture 1):
+	1) Open the python interpreter and check the version.
+	2) Run the lecture script from IDLE or CLI.
+	3) Compare interactive vs script output.
+
+Next:
+	- Run: lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/lec_1a_operations_print_help.py
+	- Then: lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/lec_1b_syntax_style_pemdas.py
+```

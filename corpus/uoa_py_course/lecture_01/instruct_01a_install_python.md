@@ -1,0 +1,61 @@
+<!-- source: lectures_01_06_fundamentals_for_data_science/lecture_01_install_open_run/reading_material/instruct_01a_install_python.txt @ 0cc874704aaa -->
+
+# instruct_01a_install_python.txt
+
+```text
+
+BIS UOA course
+author: Argyriou Thanasis
+Lecture 1, Instructions part A, Install python.
+
+---------------
+INSTALL PYTHON:
+---------------
+
+	First thing to learn: Version control matters.
+	(Version of python, version of Operating System.)
+	
+	Don't download the latest version of python.
+	Use a major release that is at least more than 1+ year old, unless you're a pro, or you want to test the new features.
+	
+	(Hundreds of packages need to be updated for compatibility.)
+	(Online help is scarce.)
+	
+	For example:
+	Because Python 3.14.0 has been released some months ago =>
+
+	You should install major version 3.13
+
+    1. Go to https://www.python.org/downloads/
+		Scroll down and click on "Release version":
+		Python 3.13.12
+
+		
+    2. Download the python installer (scroll down to bottom of page).
+		
+		Click on "Windows installer (64-bit)" if your PC is on Windows 64-bit.
+		In the "Description" column it must be the recommended installer for your PC.
+		Since most students use Windows, the course is in Windows.
+		Support will be provided for all Operating Systems, btw I use Linux.
+	
+    3. Run the downloaded executable file.
+
+    4. Make sure to check boxes:
+		- tick all Optional features if asked.
+		- tick all Advanced Options.
+		- Install launcher for all users.
+		- tick "Add python to PATH". (or "Add python to environment variables")
+		- In Windows disable the path length limit.
+
+	Important:
+	You can have more than one versions of python installed.
+	Sometimes you need to use different versions for different projects. or even in the same project.
+	Make sure you understand which version of python you run each time.
+	
+	Alternatively, on Windows you may install python from the "Microsoft Store".
+	This has some benefits but misses the goal of this lecture.
+	Again make sure:
+
+	Install a major version that is one number before the latest one.
+	For example, if python 3.14 has been released recently then you should install python 3.13.
+```
