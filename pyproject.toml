@@ -69,6 +69,8 @@ packages = ["llm_course"]
 
 [tool.ruff]
 line-length = 88
+# corpus/ is generated from uoa_py_course by tools/export_corpus.py; keep its code as-is.
+extend-exclude = ["corpus"]
 # ruff lints the notebooks too (*.ipynb are included by default);
 # the target Python version is inferred from requires-python.
 

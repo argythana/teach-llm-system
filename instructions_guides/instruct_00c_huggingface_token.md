@@ -31,7 +31,8 @@ contain a token. The notebooks load it with `python-dotenv`:
 
 ```python
 from dotenv import load_dotenv
-load_dotenv()          # reads .env into environment variables
+
+load_dotenv()  # reads .env into environment variables
 ```
 
 The `huggingface_hub` library then picks up `HF_TOKEN` automatically. `python-dotenv` is

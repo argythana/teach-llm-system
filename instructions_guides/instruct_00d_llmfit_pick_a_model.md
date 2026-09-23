@@ -33,8 +33,8 @@ models that fit you should actually use.
 Every notebook starts with a configuration cell:
 
 ```python
-TIER = "cpu"      # 8-16 GB RAM, no GPU (default)
-# TIER = "gpu"    # >= 8 GB VRAM: bigger, better answers
+TIER = "cpu"  # 8-16 GB RAM, no GPU (default)
+# TIER = "gpu"  # >= 8 GB VRAM: bigger, better answers
 ```
 
 Leave `"cpu"` unless `llmfit recommend` lists `qwen3:8b` as fitting comfortably on a
