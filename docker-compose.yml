@@ -1,0 +1,28 @@
+# Optional: a PostgreSQL + pgvector server for lecture 2's career-track notebook
+# (lec_02e_pgvector_docker_compose). The mandatory path uses Chroma and needs no Docker.
+#
+#   docker compose up -d        # start (first run downloads the image)
+#   docker compose ps           # wait for "healthy"
+#   docker compose down         # stop; add -v to also delete the data volume
+#
+# Defaults are for local teaching only. Override with a .env file (PG_USER, PG_PASSWORD, PG_DB, PG_PORT).
+services:
+  pgvector:
+    image: pgvector/pgvector:pg17
+    container_name: llm-course-pgvector
+    environment:
+      POSTGRES_USER: ${PG_USER:-course}
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-course}
+      POSTGRES_DB: ${PG_DB:-course}
+    ports:
+      - "${PG_PORT:-5433}:5432"
+    volumes:
+      - pgvector-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER:-course} -d ${PG_DB:-course}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgvector-data:

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+*.egg-info/
+
+# Virtual environment (uv)
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Course runtime state (rebuilt by the notebooks; never committed)
+# Chroma index, embedding caches, fetched Wikipedia pages
+data/
+# mlflow.db + mlartifacts/ written by `mlflow server`
+mlflow_server/*
+!mlflow_server/.gitignore
+!mlflow_server/README.md
+mlartifacts/
+mlruns/
+mlflow.db
+**/*.npy
+
+# Secrets and per-machine config
+.env
+.env.*
+!.env.example
+.envrc
+
+# Claude Code: keep only shared skills
+.claude/*
+!.claude/skills/
+
+# Executed-notebook scratch output from tools/run_all.py
+_executed/
+
+# Raw Claude Code transcripts (contain personal data; the curated export is tracked instead)
+ai_collaboration_log/raw/
+
+# Instructor's private drafts, not for publication yet
+final_assignment/alternative_ideas.md
+lecture_04_assess_smart_manufacturing/
