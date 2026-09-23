@@ -1,0 +1,4 @@
+# Everything `mlflow server` writes here (mlflow.db, mlartifacts/) is per-developer runtime state.
+*
+!.gitignore
+!README.md
