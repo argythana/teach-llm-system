@@ -1,0 +1,72 @@
+# Pre-commit hooks for this teaching repo. Run with `prek` (a fast pre-commit drop-in, a dev dependency):
+#   uv run prek install            # wire the git hook (one-time)
+#   uv run prek run --all-files    # apply to the whole repo
+#   uv run prek run <hook-id> --all-files
+# Skip: `git commit --no-verify`, or `SKIP=<hook-id>[,<hook-id>] git commit ...`
+# Hook ids: gitleaks, detect-private-key, check-added-large-files, check-json, check-toml, check-yaml,
+#   check-merge-conflict, end-of-file-fixer, trailing-whitespace, mdformat, ruff-format-nb, ruff-check-nb,
+#   ruff-check-py, wrap-notebook-markdown.
+#
+# `corpus/` is a dataset (exported course notes), not authored prose: formatters leave it alone.
+default_language_version:
+  python: "python3"
+default_stages: [pre-commit]
+fail_fast: false
+exclude: "^corpus/"
+
+repos:
+  - repo: "https://github.com/gitleaks/gitleaks"
+    rev: "v8.30.1"
+    hooks:
+      - id: "gitleaks" # a pasted HF token or API key must never reach GitHub
+
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: "v6.0.0"
+    hooks:
+      - id: "detect-private-key"
+      - id: "check-added-large-files"
+        args: ["--maxkb=1024"]
+        exclude: "^uv\\.lock$" # the lockfile is text and grows with the stack
+      - id: "check-json" # .ipynb files are JSON: catches a corrupted notebook
+      - id: "check-toml"
+      - id: "check-yaml"
+      - id: "check-merge-conflict"
+      - id: "end-of-file-fixer"
+        exclude: "\\.ipynb$" # notebook JSON tail is managed by nbformat
+      - id: "trailing-whitespace"
+        exclude: "\\.(md|ipynb)$" # preserve markdown hard breaks
+
+  # Project tools, pinned via uv.lock and run through `uv run`.
+  - repo: local
+    hooks:
+      - id: "mdformat"
+        name: "mdformat (Markdown docs, wrap 88)"
+        entry: uv run mdformat --wrap 88
+        language: system
+        files: "\\.md$"
+        exclude: "^\\.claude/" # skill frontmatter is not plain Markdown
+        require_serial: true
+      - id: "ruff-format-nb"
+        name: "ruff format (notebook code cells)"
+        entry: uv run ruff format
+        language: system
+        files: "\\.ipynb$"
+        require_serial: true
+      - id: "ruff-check-nb"
+        name: "ruff check --fix (notebook code cells)"
+        entry: uv run ruff check --fix
+        language: system
+        files: "\\.ipynb$"
+        require_serial: true
+      - id: "ruff-check-py"
+        name: "ruff format + check (llm_course/, tools/)"
+        entry: bash -c 'uv run ruff format "$@" && uv run ruff check --fix "$@"' --
+        language: system
+        files: "^(llm_course|tools)/.*\\.py$"
+        require_serial: true
+      - id: "wrap-notebook-markdown"
+        name: "wrap + justify (notebook markdown cells)"
+        entry: uv run python tools/wrap_notebook_markdown.py --width 120 --justify
+        language: system
+        files: "\\.ipynb$"
+        require_serial: true

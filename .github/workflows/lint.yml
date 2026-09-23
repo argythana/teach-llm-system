@@ -1,0 +1,48 @@
+# Lint and smoke-test the repo on Linux and Windows. Notebooks are NOT executed here:
+# every lecture calls a local Ollama model, which a hosted runner does not have.
+# Execute them locally with `uv run python tools/run_all.py` before pushing.
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint and import smoke test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install locked dependencies
+        run: uv sync --locked
+      - name: Lockfile must not contain sdist-only vector libraries
+        shell: bash
+        run: |
+          if grep -q '^name = "hnswlib"' uv.lock; then echo "hnswlib found in uv.lock" && exit 1; fi
+      - name: Ruff
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+      - name: Import smoke test (Windows wheels included)
+        run: uv run python -c "import llm_course, chromadb, langchain_ollama, langgraph, mlflow, transformers, huggingface_hub; print('ok')"
+      - name: Corpus manifest is consistent
+        run: uv run python tools/export_corpus.py --check
+      - name: Pre-commit hooks (Linux only)
+        if: runner.os == 'Linux'
+        run: uv run prek run --all-files --show-diff-on-failure

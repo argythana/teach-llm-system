@@ -1,0 +1,8 @@
+# gitleaks configuration: the default rules plus an allowlist for the corpus.
+# corpus/ is an export of another public repository's teaching notes; it contains
+# example localhost URLs with placeholder tokens, never real credentials.
+[extend]
+useDefault = true
+
+[allowlist]
+paths = ['''corpus/''']
