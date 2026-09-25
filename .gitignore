@@ -1,3 +1,5 @@
+admin_docs/*
+
 # Python
 __pycache__/
 *.py[oc]

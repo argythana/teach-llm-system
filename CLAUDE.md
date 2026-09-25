@@ -52,7 +52,11 @@ Every teaching notebook, in this order:
    `**Status: Optional / career-track.**`), one paragraph connecting back to the
    previous notebook, `**What this notebook covers**` bullets.
 1. The imports cell, then **the configuration cell, identical in every notebook**: the
-   student edits only `TIER`.
+   student edits only `TIER`. It loads `.env` (`load_dotenv(REPO / ".env")`) before
+   reading any setting and offers commented-out per-notebook overrides for `OLLAMA_HOST`
+   and `MLFLOW_URI`, never for a token. Settings live in `.env`; setting environment
+   variables in the terminal is explained in guide `01d_env_hugging_face` but never the
+   course's pattern.
 1. A "Rebuild inputs" cell when the notebook depends on earlier work, calling
    `llm_course` helpers so a student who missed a session can continue.
 1. Numbered sections `## 1.` ...: Markdown motivates, code demonstrates, Markdown reads
@@ -62,7 +66,23 @@ Every teaching notebook, in this order:
 Naming and layout follow uoa_py_course:
 `lecture_NN_topic/reading_material/lec_NNa_topic.ipynb`, `goals_NN.md`,
 `practice_exercises/lec_NN_exercises.ipynb` plus `_solutions`. Letters encode dependency
-order; `a`-`d` are mandatory (two per session), `e`-`f` optional. Do not renumber.
+order; `a`-`d` are mandatory (two per session), `e`-`f` optional. Do not renumber. Each
+lecture also has `infra_tools/` (below), this course's own addition.
+
+## Infrastructure guides
+
+Each lecture has an `infra_tools/` folder with the guides for the tools and services it
+needs, named `NNx_topic.md`
+(`lecture_01_ollama_models_prompts_langchain/infra_tools/01c_ollama.md`); letters give
+the order of use. `troubleshooting.md` at the repository root covers all lectures. Refer
+to a guide by its name (`01c_ollama`), never by a bare number, which would clash with
+the notebook `lec_01c`. Optional guides carry `**Status: Optional / career-track.**`
+under the title. The guides are run together in class, not as homework (the README maps
+each to the session that needs it). Each starts with `## Quick start`: the commands by
+OS, step by step, no explanation, the slow downloads marked "leave it running". Then
+`## Overview` and the detailed sections, which explain every quick-start command and are
+study material. A quick start never uses a command that the detailed sections do not
+explain.
 
 ## Environment
 
@@ -80,8 +100,10 @@ order; `a`-`d` are mandatory (two per session), `e`-`f` optional. Do not renumbe
   (`qwen3:8b` for the gpu tier). Thinking is off per call (`think=False`,
   `reasoning=False`) except where deciding is the point (lec_03c).
 - **MLflow tracking server** started from `mlflow_server/`:
-  `uv run mlflow server --host 127.0.0.1 --port 5010`. Experiments are named
-  `llm-course-01-basics`, `llm-course-02-rag`, `llm-course-03-eval`. Notebooks call
+  `uv run mlflow server --host 127.0.0.1 --port 5010`. MLflow enters in lecture 2
+  (`lec_02b` introduces tracing); experiments are named `llm-course-02-rag` and
+  `llm-course-03-eval`. Lecture 1's configuration cell still carries `MLFLOW_URI` and
+  `EXPERIMENT`, unused, because the cell is identical everywhere. Notebooks call
   `mlflow.tracing.disable_notebook_display()` so trace iframes do not end up in
   committed outputs. The LLM judge uses MLflow's native `ollama:/` provider, which only
   talks to the default local port.

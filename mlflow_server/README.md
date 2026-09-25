@@ -9,17 +9,17 @@ uv run mlflow server --host 127.0.0.1 --port 5010
 ```
 
 Open <http://127.0.0.1:5010>. See
-`instructions_guides/instruct_00e_start_mlflow_server.md`. The files it creates
-(`mlflow.db`, `mlartifacts/`) are gitignored: they are your local history, not course
-material.
+`lecture_02_embeddings_rag_vector_store/infra_tools/02a_mlflow_server.md`. The files it
+creates (`mlflow.db`, `mlartifacts/`) are gitignored: they are your local history, not
+course material.
 
 ## What the server holds
 
-| Experiment                                                        | Written by                       | What you see                                                                                 |
-| ----------------------------------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------------------- |
-| `llm-course-01-basics`, `llm-course-02-rag`, `llm-course-03-eval` | the lecture notebooks            | traces of every model call (lecture 1d on), evaluation runs (lecture 3)                      |
-| `llm-course-01-exercises` and siblings                            | the exercise notebooks           | the same, for the practice exercises                                                         |
-| `ai-collaboration-log`                                            | `tools/log_session_to_mlflow.py` | the sessions in which this course was built with an AI assistant, ported into MLflow (below) |
+| Experiment                                | Written by                       | What you see                                                                                 |
+| ----------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------------------- |
+| `llm-course-02-rag`, `llm-course-03-eval` | the lecture notebooks            | traces of every model call (lecture 2 on), evaluation runs (lecture 3)                       |
+| `llm-course-NN-exercises`                 | the exercise notebooks           | the same, for the practice exercises                                                         |
+| `ai-collaboration-log`                    | `tools/log_session_to_mlflow.py` | the sessions in which this course was built with an AI assistant, ported into MLflow (below) |
 
 ## The course's own build, ported into MLflow
 

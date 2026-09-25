@@ -28,12 +28,9 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
   roles, and resend history for a multi-turn conversation. *(lec_01c §1-2)* <!-- G8 -->
 - Use few-shot examples and JSON-schema structured output to get answers a program can
   parse, and load them into a DataFrame. *(lec_01c §3-5)* <!-- G9 -->
-- Build a LangChain chain (prompt template, chat model, output parser), run it with
-  `invoke` and `batch`, and use structured output inside it. *(lec_01d §1-3)*
-      <!-- G10 -->
-- Enable MLflow tracing with `mlflow.langchain.autolog()` and read from a trace the
-  prompt that was actually sent, the spans, and the token usage. *(lec_01d §4)*
-      <!-- G11 -->
+- Build a LangChain chain (prompt template, chat model, output parser), read the prompt
+  it renders, run it with `invoke` and `batch`, and use structured output inside it.
+  *(lec_01d §1-3)* <!-- G10 -->
 
 ### Optional / Career track
 
@@ -52,8 +49,8 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
   model cards, quantization, llmfit, comparing candidates, decision record.
 - `lec_01c_prompts_roles_structured_output.ipynb`: prompts as functions, roles,
   few-shot, JSON-schema output, DataFrames, streaming.
-- `lec_01d_langchain_chain_mlflow_tracing.ipynb`: LangChain parts and chains, MLflow
-  traces and spans.
+- `lec_01d_langchain_chains.ipynb`: LangChain parts and chains, rendered prompts,
+  structured output in a chain, the one-line model swap.
 
 ### Optional / Further reading
 
@@ -63,8 +60,8 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 - `lec_01f_pydantic_and_hosted_inference.ipynb`: typed schemas and the one-line swap to
   a hosted model. Career-track value: how production systems mix local and hosted
   models.
-- Guides in `instructions_guides/` (00a-00g): installation, tokens, llmfit, MLflow
-  server, troubleshooting.
+- Guides in `infra_tools/` (`01a_git_uv` to `01d_env_hugging_face`): git and uv, llmfit,
+  Ollama, the `.env` settings file and a Hugging Face token.
 
 ## Practice
 

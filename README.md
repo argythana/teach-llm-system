@@ -26,8 +26,8 @@ decision loop at the end.
 | Lecture | Session | Notebooks (`reading_material/`)                                                                                                                                                    |
 | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1       | 1       | `lec_01a` your laptop as an LLM server: uv, Ollama, tokens, context, temperature · `lec_01b` choosing a model: requirements first, then the Hugging Face Hub, quantization, llmfit |
-| 1       | 2       | `lec_01c` prompts as code and structured output · `lec_01d` LangChain chains and MLflow tracing                                                                                    |
-| 2       | 3       | `lec_02a` embeddings and cosine similarity · `lec_02b` a hand-built RAG, traced                                                                                                    |
+| 1       | 2       | `lec_01c` prompts as code and structured output · `lec_01d` LangChain chains                                                                                                       |
+| 2       | 3       | `lec_02a` embeddings and cosine similarity · `lec_02b` a hand-built RAG, traced with MLflow                                                                                        |
 | 2       | 4       | `lec_02c` chunking · `lec_02d` Chroma, retrievers, and the LangChain RAG chain                                                                                                     |
 | 3       | 5       | `lec_03a` an evaluation set and deterministic scorers · `lec_03b` LLM-as-judge and comparing variants                                                                              |
 | 3       | 6       | `lec_03c` tools and agents · `lec_03d` an agentic RAG loop with LangGraph; what it takes                                                                                           |
@@ -38,21 +38,31 @@ judging the judge, and DSPy prompt optimization. Each lecture has `goals_NN.md` 
 you should be able to do) and `practice_exercises/` with solutions. The course ends with
 a [final assignment](final_assignment/).
 
-## Before the first session ("homework zero")
+## Setup, together in class
 
-Follow the guides in `instructions_guides/`, in order:
+Setting up the tools is part of the course, not homework: we run it together in class,
+one guide at a time. Each lecture keeps its guides in an `infra_tools/` folder, next to
+`reading_material/` and `practice_exercises/`. Each guide starts with a **Quick start**,
+the commands for your system without explanation; the rest of the guide explains them
+and is study material.
 
-1. [Install uv, git and the project](instructions_guides/instruct_00a_install_uv.md):
-   `git clone ...`, then `uv sync`
-1. [Install Ollama and pull the models](instructions_guides/instruct_00b_install_ollama.md):
-   `ollama pull qwen3:1.7b` and `ollama pull nomic-embed-text`
-1. [Create a Hugging Face token](instructions_guides/instruct_00c_huggingface_token.md)
-1. [Check what fits your machine with llmfit](instructions_guides/instruct_00d_llmfit_pick_a_model.md):
-   `uvx llmfit recommend`
-1. [Start the MLflow server](instructions_guides/instruct_00e_start_mlflow_server.md)
-   (from lecture 1d on)
+| When                          | Guide                                                                                                    | You end with                             |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Session 1, start              | [`01a_git_uv`](lecture_01_ollama_models_prompts_langchain/infra_tools/01a_git_uv.md)                     | the course folder and its environment    |
+| Session 1, start              | [`01b_llmfit`](lecture_01_ollama_models_prompts_langchain/infra_tools/01b_llmfit.md)                     | your tier: `cpu` or `gpu`                |
+| Session 1, start              | [`01c_ollama`](lecture_01_ollama_models_prompts_langchain/infra_tools/01c_ollama.md)                     | Ollama running, the course models pulled |
+| Session 1, before `lec_01b`   | [`01d_env_hugging_face`](lecture_01_ollama_models_prompts_langchain/infra_tools/01d_env_hugging_face.md) | your settings file with a read token     |
+| Session 3, before `lec_02b`   | [`02a_mlflow_server`](lecture_02_embeddings_rag_vector_store/infra_tools/02a_mlflow_server.md)           | the tracking server running              |
+| Only for `lec_02e` (optional) | [`02b_docker_pgvector`](lecture_02_embeddings_rag_vector_store/infra_tools/02b_docker_pgvector.md)       | a PostgreSQL vector database             |
 
-Then `uv run jupyter lab` and open `lecture_01_.../reading_material/lec_01a_...ipynb`.
+`uv sync` and the model downloads take several minutes when a whole class downloads at
+once, so we start them first and talk while they run. If your connection is slow, you
+may run the quick starts of `01a_git_uv` to `01c_ollama` before class; nothing is lost
+if you do not. When something fails, look up the message in
+[troubleshooting](troubleshooting.md).
+
+After `01c_ollama`, open the first notebook in JupyterLab:
+`lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_uv_ollama_first_call_tokens.ipynb`.
 
 Hardware: any laptop with 8 GB of RAM runs the default `cpu` tier (`qwen3:1.7b`). Every
 notebook starts with a configuration cell where a GPU owner can switch to the `gpu`

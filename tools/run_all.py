@@ -7,8 +7,9 @@
     uv run python tools/run_all.py --inplace          # refresh the committed outputs
     uv run python tools/run_all.py --tier gpu         # run with the GPU tier (COURSE_TIER env var)
 
-Preflight checks Ollama, the models, and the MLflow server, then runs each notebook
-with its own folder as the working directory via `jupyter nbconvert --execute`.
+Preflight checks Ollama, the models, and (from lecture 2 on) the MLflow server, then
+runs each notebook with its own folder as the working directory via
+`jupyter nbconvert --execute`.
 Executed copies go to _executed/ (gitignored) unless --inplace.
 """
 
@@ -19,6 +20,8 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
@@ -59,15 +62,19 @@ def main():
     args = parser.parse_args()
 
     os.environ["COURSE_TIER"] = args.tier
+    # The same settings file the notebooks' configuration cell reads.
+    load_dotenv(REPO / ".env")
+    todo = list(notebooks(args.lecture, args.optional))
     if not args.skip_preflight:
         from llm_course.checks import check_mlflow, check_ollama
 
         check_ollama(
             os.environ.get("OLLAMA_HOST", "http://localhost:11434"), MODELS[args.tier]
         )
-        check_mlflow(os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5010"))
+        # Lecture 1 does not use MLflow; tracing starts in lec_02b.
+        if any(int(NOTEBOOK.match(path.name).group(1)) >= 2 for path in todo):
+            check_mlflow(os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5010"))
 
-    todo = list(notebooks(args.lecture, args.optional))
     print(f"Running {len(todo)} notebooks (tier={args.tier}, optional={args.optional})")
     failures = []
     for path in todo:

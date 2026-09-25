@@ -4,7 +4,8 @@ Written in lec_01a. A cryptic connection error two cells later is the most commo
 way a beginner loses ten minutes; these checks name the fix instead.
 """
 
-GUIDES = "instructions_guides"
+OLLAMA_GUIDE = "lecture_01_ollama_models_prompts_langchain/infra_tools/01c_ollama.md"
+MLFLOW_GUIDE = "lecture_02_embeddings_rag_vector_store/infra_tools/02a_mlflow_server.md"
 
 
 def check_ollama(host, models):
@@ -20,8 +21,9 @@ def check_ollama(host, models):
     except Exception as exc:  # ConnectionError, httpx errors, ...
         raise RuntimeError(
             f"Cannot reach Ollama at {host}.\n"
-            "Is it running? Start the Ollama app, or run `ollama serve` in a terminal.\n"
-            f"Install guide: {GUIDES}/instruct_00b_install_ollama.md\n"
+            "Is it running? Open the Ollama app, or on Linux run in a terminal:\n"
+            "  sudo systemctl start ollama\n"
+            f"Install guide: {OLLAMA_GUIDE}\n"
             f"(original error: {exc})"
         ) from None
 
@@ -35,7 +37,7 @@ def check_ollama(host, models):
         raise RuntimeError(
             "These models are not pulled yet. Run in a terminal:\n"
             f"{pulls}\n"
-            f"then re-run this cell. Guide: {GUIDES}/instruct_00b_install_ollama.md"
+            f"then re-run this cell. Guide: {OLLAMA_GUIDE}"
         )
     print(f"Ollama OK at {host}; models ready: {', '.join(models)}")
 
@@ -53,7 +55,7 @@ def check_mlflow(tracking_uri):
             "Start it in a separate terminal, from the mlflow_server/ folder:\n"
             "  cd mlflow_server\n"
             "  uv run mlflow server --host 127.0.0.1 --port 5010\n"
-            f"Guide: {GUIDES}/instruct_00e_start_mlflow_server.md\n"
+            f"Guide: {MLFLOW_GUIDE}\n"
             f"(original error: {exc})"
         ) from None
     print(f"MLflow OK at {tracking_uri}")
