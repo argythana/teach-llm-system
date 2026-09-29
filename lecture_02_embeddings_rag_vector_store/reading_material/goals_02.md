@@ -35,7 +35,7 @@ Two sessions. Session 3: `lec_02a` and `lec_02b`. Session 4: `lec_02c` and `lec_
 
 ## Files
 
-### Required
+### Required notebooks
 
 - `lec_02a_embeddings_cosine_similarity.ipynb`: embeddings, cosine similarity, a
   heatmap, meaning versus words, blind spots.

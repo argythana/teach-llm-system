@@ -46,7 +46,7 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 
 ## Files
 
-### Required
+### Required notebooks
 
 - `lec_01a_uv_ollama_first_call_tokens.ipynb`: uv and the lock file, Ollama as a local
   server and its API, local versus hosted, the first call and its reply, tokens, context
