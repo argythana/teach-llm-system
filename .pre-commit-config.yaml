@@ -44,7 +44,8 @@ repos:
         entry: uv run mdformat --wrap 88
         language: system
         files: "\\.md$"
-        exclude: "^\\.claude/" # skill frontmatter is not plain Markdown
+        # Skill frontmatter is not plain Markdown; exported transcripts stay verbatim.
+        exclude: "^(\\.claude/|ai_collaboration_log/sessions/)"
         require_serial: true
       - id: "ruff-format-nb"
         name: "ruff format (notebook code cells)"
