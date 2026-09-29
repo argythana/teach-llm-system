@@ -1,7 +1,8 @@
 """Environment checks that fail early with a friendly message.
 
-Written in lec_01a. A cryptic connection error two cells later is the most common
-way a beginner loses ten minutes; these checks name the fix instead.
+``check_ollama`` was written in lec_01a, ``check_mlflow`` is used from lec_02b on. A
+cryptic connection error two cells later is the most common way a beginner loses ten
+minutes; these checks name the fix instead.
 """
 
 OLLAMA_GUIDE = "lecture_01_ollama_models_prompts_langchain/infra_tools/01c_ollama.md"

@@ -28,7 +28,7 @@ decision loop at the end.
 | 1       | 1       | `lec_01a` your laptop as an LLM server: uv, Ollama, tokens, context, temperature · `lec_01b` choosing a model: requirements first, then the Hugging Face Hub, quantization, llmfit |
 | 1       | 2       | `lec_01c` prompts as code and structured output · `lec_01d` LangChain chains                                                                                                       |
 | 2       | 3       | `lec_02a` embeddings and cosine similarity · `lec_02b` a hand-built RAG, traced with MLflow                                                                                        |
-| 2       | 4       | `lec_02c` chunking · `lec_02d` Chroma, retrievers, and the LangChain RAG chain                                                                                                     |
+| 2       | 4       | `lec_02c` chunking · `lec_02d` Chroma, filters, the LangChain RAG chain, and measuring retrieval                                                                                   |
 | 3       | 5       | `lec_03a` an evaluation set and deterministic scorers · `lec_03b` LLM-as-judge and comparing variants                                                                              |
 | 3       | 6       | `lec_03c` tools and agents · `lec_03d` an agentic RAG loop with LangGraph; what it takes                                                                                           |
 

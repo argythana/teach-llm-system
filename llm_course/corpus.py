@@ -1,9 +1,10 @@
 """The course corpus: the uoa_py_course notes exported to Markdown.
 
 ``notebook_to_markdown`` is the exporter used by ``tools/export_corpus.py``
-(standard library only). ``load_corpus`` turns the exported files into LangChain
-``Document`` objects with metadata (lec_02b). ``fetch_wikipedia_pages`` is the
-optional, larger corpus for lec_02f.
+(standard library only). ``load_sections`` is lec_02b's split at ``## `` headings;
+``load_corpus`` turns the exported files into LangChain ``Document`` objects with
+metadata (lec_02d); ``load_eval_set`` reads the evaluation set (lec_02d).
+``fetch_wikipedia_pages`` is the optional, larger corpus for lec_02f.
 """
 
 import json
@@ -14,7 +15,9 @@ _DATA_IMAGE = re.compile(
     r"!\[[^\]]*\]\(data:image[^)]*\)|<img[^>]*src=\"data:[^\"]*\"[^>]*>"
 )
 _ATTACHMENT = re.compile(r"!\[[^\]]*\]\(attachment:[^)]*\)")
-_LECTURE_DIR = re.compile(r"lecture_(\d{2})_")
+_LECTURE_DIR = re.compile(r"lecture_(\d{2})")
+_WIKI_SOURCE = re.compile(r"Source: (\S+) \(revision (\d+)\)")
+_EXPORT_NOTE = re.compile(r"\A<!-- source:.*?-->\s*", flags=re.DOTALL)
 
 
 def notebook_to_markdown(path):
@@ -65,11 +68,13 @@ def load_corpus(corpus_dir="corpus/uoa_py_course", lectures=None):
     corpus_dir = Path(corpus_dir)
     docs = []
     for path in sorted(corpus_dir.rglob("*.md")):
-        match = _LECTURE_DIR.search(str(path))
+        match = _LECTURE_DIR.search(path.parent.name)
         lecture = int(match.group(1)) if match else 0
         if lectures is not None and lecture not in lectures:
             continue
-        text = path.read_text(encoding="utf-8")
+        # The exporter's provenance note (<!-- source: ... -->) belongs in metadata,
+        # not in the text, where its words would match questions (lec_02c).
+        text = _EXPORT_NOTE.sub("", path.read_text(encoding="utf-8"))
         heading = re.search(r"^#\s+(.+)$", text, flags=re.MULTILINE)
         docs.append(
             Document(
@@ -85,38 +90,77 @@ def load_corpus(corpus_dir="corpus/uoa_py_course", lectures=None):
     return docs
 
 
+def load_sections(corpus_dir="corpus/uoa_py_course", lectures=(10, 11, 12, 13)):
+    """Split the course notes at their ``## `` headings, as lec_02b does by hand.
+
+    Returns a list of dicts ``{"source", "heading", "text"}``, one per section.
+    """
+    corpus_dir = Path(corpus_dir)
+    sections = []
+    for lecture in lectures:
+        for path in sorted((corpus_dir / f"lecture_{lecture:02d}").glob("*.md")):
+            text = path.read_text(encoding="utf-8")
+            for part in re.split(r"(?m)^(?=## )", text):
+                if part.strip():
+                    sections.append(
+                        {
+                            "source": f"lecture_{lecture:02d}/{path.name}",
+                            "heading": next(
+                                (ln for ln in part.splitlines() if ln.startswith("#")),
+                                "",
+                            )[:80],
+                            "text": part,
+                        }
+                    )
+    return sections
+
+
+def load_eval_set(path="corpus/eval/qa_eval_set.jsonl"):
+    """Read the evaluation set (lec_02d): one JSON object per line."""
+    lines = Path(path).read_text(encoding="utf-8").splitlines()
+    return [json.loads(line) for line in lines if line.strip()]
+
+
 def fetch_wikipedia_pages(titles, out_dir="data/wikipedia", lang="en"):
     """Download Wikipedia articles as plain text and return them as Documents.
 
     Uses the MediaWiki API directly (no extra library). Text is CC BY-SA 4.0;
     each file starts with an attribution header. Cached: a page already on disk
-    is not fetched again.
+    is not fetched again. Polite to the API: a User-Agent with a contact URL, one
+    second between requests, and a wait-and-retry when told "429 Too Many Requests".
     """
+    import time
+
     import requests
     from langchain_core.documents import Document
 
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     headers = {
-        "User-Agent": "teach-llm-system/0.1 (course material; contact via GitHub)"
+        "User-Agent": "teach-llm-system/0.1 (https://github.com/argythana/teach-llm-system)"
     }
     docs = []
     for title in titles:
         path = out_dir / (re.sub(r"[^A-Za-z0-9_-]+", "_", title) + ".md")
         if not path.exists():
-            response = requests.get(
-                f"https://{lang}.wikipedia.org/w/api.php",
-                params={
-                    "action": "query",
-                    "prop": "extracts|info",
-                    "explaintext": 1,
-                    "redirects": 1,
-                    "format": "json",
-                    "titles": title,
-                },
-                headers=headers,
-                timeout=30,
-            )
+            for attempt in range(4):
+                time.sleep(1)  # at most one request per second
+                response = requests.get(
+                    f"https://{lang}.wikipedia.org/w/api.php",
+                    params={
+                        "action": "query",
+                        "prop": "extracts|info",
+                        "explaintext": 1,
+                        "redirects": 1,
+                        "format": "json",
+                        "titles": title,
+                    },
+                    headers=headers,
+                    timeout=30,
+                )
+                if response.status_code != 429:
+                    break
+                time.sleep(int(response.headers.get("Retry-After", 10)))
             response.raise_for_status()
             page = next(iter(response.json()["query"]["pages"].values()))
             if "extract" not in page:
@@ -129,6 +173,7 @@ def fetch_wikipedia_pages(titles, out_dir="data/wikipedia", lang="en"):
             )
             path.write_text(header + page["extract"] + "\n", encoding="utf-8")
         text = path.read_text(encoding="utf-8")
+        origin = _WIKI_SOURCE.search(text)
         docs.append(
             Document(
                 page_content=text,
@@ -137,6 +182,9 @@ def fetch_wikipedia_pages(titles, out_dir="data/wikipedia", lang="en"):
                     "lecture": 0,
                     "kind": "wikipedia",
                     "title": title,
+                    "url": origin.group(1) if origin else "",
+                    "revision": origin.group(2) if origin else "",
+                    "license": "CC BY-SA 4.0",
                 },
             )
         )

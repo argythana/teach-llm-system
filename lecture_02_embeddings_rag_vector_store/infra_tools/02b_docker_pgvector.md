@@ -74,6 +74,19 @@ password `course`, database `course`. These defaults are for local teaching only
 The container does **not** start again by itself after a restart of your computer or of
 Docker Desktop. Run `docker compose up -d` again; the data is kept.
 
+### If port 5433 is taken
+
+If `docker compose up -d` fails with `port is already allocated`, another database
+already uses port 5433. Put another port in your `.env` file (lecture 1, guide
+`01d_env_hugging_face`):
+
+```text
+PG_PORT=5434
+```
+
+Docker Compose reads the same `.env` file as the notebooks, so this one line moves the
+database and tells `lec_02e` where to find it. Run `docker compose up -d` again.
+
 ## 3. Install the Python side
 
 From the `teach-llm-system` folder:
