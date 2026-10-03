@@ -2,23 +2,35 @@
 
 ## Quick start
 
-In a browser:
+1. In a browser, log in at <https://huggingface.co> and open
+   <https://huggingface.co/settings/tokens>.
 
-1. Log in at <https://huggingface.co> and open <https://huggingface.co/settings/tokens>.
+   ![Hugging Face, Access Tokens page: the Create new token button is circled](screenshots/01d_hf_tokens_page.png)
+
 1. **Create new token**, role **Read**, name `teach-llm-system`, create it, and copy it.
+   The token is shown only once.
 
-In a terminal, from the `teach-llm-system` folder:
+   ![Create new Access Token form: Read selected (1), the name teach-llm-system (2), Create token (3)](screenshots/01d_hf_create_read_token.png)
 
-```powershell
-Copy-Item .env.example .env          # Windows PowerShell
-```
+   ![Save your Access Token window: the Copy button is circled](screenshots/01d_hf_copy_token.png)
 
-```bash
-cp .env.example .env                 # macOS / Linux
-```
+1. Create your settings file: a new file named `.env`, copied from the template
+   `.env.example`. In a terminal, from the `teach-llm-system` folder:
 
-Open `.env` in VS Code or another plain-text editor, paste the token after `HF_TOKEN=`,
-and save.
+   ```powershell
+   Copy-Item .env.example .env          # Windows PowerShell
+   ```
+
+   ```bash
+   cp .env.example .env                 # macOS / Linux
+   ```
+
+   ![PowerShell in the teach-llm-system folder: the Copy-Item command is circled](screenshots/01d_powershell_copy_env.png)
+
+1. Add the token to the new file: open `.env` in VS Code or another plain-text editor,
+   paste the token after `HF_TOKEN=` in place of `hf_...`, and save.
+
+   ![VS Code: the .env file in the Explorer panel (1) and the HF_TOKEN line with an example token (2)](screenshots/01d_vscode_env_token.png)
 
 The sections below explain every step; they are part of the study material. If a step
 fails, look up the message in [troubleshooting](../../troubleshooting.md).
@@ -48,17 +60,8 @@ that queries it, `huggingface_hub`, is installed by `uv sync`:
 
 ## 2. Your settings file `.env`
 
-Some values differ from student to student and do not belong in the notebooks: a token
-is a secret, and the address of Ollama or MLflow depends on your computer. The course
-keeps them in one plain-text file, `.env`, in the `teach-llm-system` folder, one
-`NAME=value` per line:
-
-| Setting                                             | Do you need it?                                 | What it is                                                             |
-| --------------------------------------------------- | ----------------------------------------------- | ---------------------------------------------------------------------- |
-| `HF_TOKEN`                                          | yes, from lecture 1b                            | your Hugging Face read token                                           |
-| `OLLAMA_HOST`                                       | only if Ollama runs on another computer or port | where Ollama answers (guide `01c_ollama`)                              |
-| `MLFLOW_TRACKING_URI`                               | only if you start MLflow on another port        | where the MLflow server answers (lecture 2, guide `02a_mlflow_server`) |
-| `HOSTED_BASE_URL`, `HOSTED_API_KEY`, `HOSTED_MODEL` | optional, you add them in `lec_01f`             | a hosted model provider                                                |
+A token is a secret, so it does not belong in a notebook. The course keeps it in one
+plain-text file, `.env`, in the `teach-llm-system` folder, one `NAME=value` per line.
 
 Why a file:
 
@@ -66,13 +69,12 @@ Why a file:
   uploads it, and a notebook you share never contains your token.
 - **One place for every notebook.** Change a value once, and every notebook uses it the
   next time its configuration cell runs.
-- **It stays.** It survives restarts and works the same in JupyterLab and VS Code, on
-  every operating system.
+- **It stays.** It survives restarts and works the same on every operating system.
 
 ### Create it
 
-The course ships a template, `.env.example`. Copy it in a terminal, from the
-`teach-llm-system` folder:
+`.env` is not part of the download: you create it yourself, as a copy of the template
+`.env.example` that the course ships. In a terminal, from the `teach-llm-system` folder:
 
 ```bash
 cp .env.example .env                 # macOS / Linux
@@ -86,90 +88,56 @@ Open `.env` in VS Code or any plain-text editor (not Word) and paste the token a
 HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
-Leave the other lines as they are unless a guide tells you to change them. A name that
-starts with a dot hides the file in the macOS Finder (`Cmd+Shift+.` shows it) and in
-`ls` (`ls -a` shows it); VS Code's file panel always shows it.
+`hf_xxx...` stands for your own token; the picture in the quick start shows the file in
+VS Code.
+
+Leave the other lines as they are; a later guide tells you when one of them needs a
+change. A name that starts with a dot hides the file in the macOS Finder (`Cmd+Shift+.`
+shows it) and in `ls` (`ls -a` shows it); VS Code's file panel always shows it.
 
 ### How the notebooks read it
 
-The configuration cell at the top of every notebook contains:
+The configuration cell at the top of every notebook runs `load_dotenv(REPO / ".env")`.
+It copies each line of `.env` into an **environment variable**: a named value the
+operating system keeps for a running program, outside its code. The `huggingface_hub`
+library then finds `HF_TOKEN` by itself; your code never names the token.
 
-```python
-load_dotenv(REPO / ".env")  # your settings file: OLLAMA_HOST, HF_TOKEN, ...
-OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
-```
+- **Without a `.env` file** the notebooks still run; only the cells that need the token
+  complain.
+- **After editing `.env`** while a notebook is open, restart the kernel (**Restart** in
+  the notebook toolbar) and run the cells again.
 
-An **environment variable** is a named value the operating system keeps for a running
-program, outside its code. `load_dotenv` copies each line of `.env` into one;
-`os.environ.get` reads one back, with a default for when `.env` does not set it. Some
-libraries read theirs directly: `huggingface_hub` finds `HF_TOKEN` without your code
-naming it. Without a `.env` file the notebooks still run on the defaults; only the cells
-that need the token complain. `load_dotenv` comes from `python-dotenv`, installed by
-`uv sync`: [source on GitHub](https://github.com/theskumar/python-dotenv).
+`load_dotenv` comes from `python-dotenv`, installed by `uv sync`:
+[source on GitHub](https://github.com/theskumar/python-dotenv).
 
-`load_dotenv` does not replace a value it already loaded. If you edit `.env` while a
-notebook is open, restart the kernel (**Kernel → Restart Kernel**) and run the cells
-again.
+## 3. Other ways to set a value
 
-## 3. Three ways to set a value, and which to use
+`.env` is the course's pattern for every setting. You will meet two other ways:
 
-| Way                 | Where you write it                           | Applies to                                            | When                                      |
-| ------------------- | -------------------------------------------- | ----------------------------------------------------- | ----------------------------------------- |
-| **1. `.env`**       | a line in `.env`                             | every notebook, until you change the line             | **always: this is the course's pattern**  |
-| **2. One notebook** | a line in that notebook's configuration cell | that notebook only                                    | trying another address; **never a token** |
-| **3. The terminal** | a command typed before `uv run jupyter lab`  | notebooks started from that terminal, until it closes | not recommended                           |
+- **In one notebook.** The configuration cell ends with commented-out lines such as
+  `# OLLAMA_HOST = "http://192.168.1.20:11434"`. Delete the `#`, edit the address and
+  run the cell: the value applies to that notebook only. Use it to try another address,
+  **never for a token**: a notebook is a file you save and share, and the token would
+  travel with it.
 
-### 1. In `.env` (recommended)
+- **In the terminal.** Other tutorials set a variable before they start a program:
 
-Section 2. Use it for every setting, including the token.
+  ```bash
+  export OLLAMA_HOST=http://192.168.1.20:11434      # macOS / Linux
+  uv run python my_script.py
+  ```
 
-### 2. In one notebook
+  ```powershell
+  $env:OLLAMA_HOST = "http://192.168.1.20:11434"    # Windows PowerShell
+  uv run python my_script.py
+  ```
 
-The configuration cell ends its settings with:
+  The value reaches only programs started from that terminal and is gone when the
+  terminal closes. The course does not use it.
 
-```python
-# To override .env in this notebook only, uncomment and edit (never a token):
-# OLLAMA_HOST = "http://192.168.1.20:11434"
-# MLFLOW_URI = "http://127.0.0.1:5011"
-```
-
-Delete the `# ` in front of a line, edit the address, and run the cell again. The line
-runs after `.env` is read, so it wins, in this notebook only. Put the `# ` back to
-return to `.env`. Never type a token in a notebook: the notebook is a file you save,
-share and maybe push to GitHub, and the token would travel with it.
-
-### 3. In the terminal (not recommended)
-
-You will meet this in other tutorials, so here is what it looks like:
-
-```bash
-export OLLAMA_HOST=http://192.168.1.20:11434      # macOS / Linux
-uv run jupyter lab
-```
-
-```powershell
-$env:OLLAMA_HOST = "http://192.168.1.20:11434"    # Windows PowerShell
-uv run jupyter lab
-```
-
-This course does not use it, because:
-
-- **It is invisible.** Nothing in the project shows the value; a week later nobody
-  remembers it was set.
-- **It is short-lived and local.** It lasts until that terminal window closes, and it
-  does not reach notebooks opened in VS Code or from another terminal.
-- **The syntax differs** between macOS/Linux, PowerShell and the old Windows `cmd`.
-- **It silently beats `.env`.** `load_dotenv` does not replace a variable that already
-  exists, so a value left in the terminal (or in a startup file such as `~/.bashrc`)
-  wins, and editing `.env` seems to do nothing.
-
-When a setting seems ignored, print it in the notebook (`print(OLLAMA_HOST)`), then
-check the terminal: `echo $OLLAMA_HOST` (macOS/Linux) or `echo $env:OLLAMA_HOST`
-(PowerShell) should print an empty line.
-
-One exception: the `ollama` command-line tool does not read `.env`, so guide
-`01c_ollama` sets `OLLAMA_HOST` in the terminal for a one-off test of that command. That
-is a test, not a course setting.
+A variable that is already set wins over `.env`. If a change to `.env` seems ignored
+after a kernel restart, check the terminal: `echo $OLLAMA_HOST` (macOS/Linux) or
+`echo $env:OLLAMA_HOST` (PowerShell) should print an empty line.
 
 ## 4. If a token ever leaks
 
