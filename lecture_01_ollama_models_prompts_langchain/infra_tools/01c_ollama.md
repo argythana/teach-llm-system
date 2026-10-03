@@ -24,7 +24,7 @@ Only on the `gpu` tier (guide `01b_llmfit`):
 ```bash
 ollama pull qwen3:8b
 ollama run qwen3:8b --verbose --think=false "Say hello in one sentence."
-ollama ps                       # should show 100% GPU
+ollama ps                       # if you should show high GPU usage %
 ```
 
 The sections below explain every step; they are part of the study material. If a step

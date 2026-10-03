@@ -74,7 +74,7 @@ finds the exact name.
 
 ## Which kind of model this course needs
 
-The course uses two kinds of model, and llmfit labels each with a **use case**:
+The course uses two kinds of models, and llmfit labels each with a **use case**:
 
 | Job in the course                                       | Course model             | llmfit use case     |
 | ------------------------------------------------------- | ------------------------ | ------------------- |
@@ -101,10 +101,11 @@ answers requests is a **model provider**:
   [Hugging Face's inference providers](https://huggingface.co/docs/inference-providers/index)
   (`lec_01f`).
 
-A provider runs a model with an **engine**, llmfit's `Runtime` column: Ollama and LM
-Studio use the llama.cpp engine on GGUF files; [vLLM](https://docs.vllm.ai) is an engine
-for GPU servers. llmfit's `Provider` column means something else: who published the
-model (Alibaba for Qwen).
+A provider runs a model with an **engine**, llmfit's `Runtime` column:
+
+- Ollama and LMStudio use the llama.cpp engine on GGUF files.
+- [vLLM](https://docs.vllm.ai) is an engine for GPU servers. llmfit's `Provider` column
+  means something else: who published the model (Alibaba for Qwen).
 
 ## The 5 best chat models for your machine and the course's usecases
 
