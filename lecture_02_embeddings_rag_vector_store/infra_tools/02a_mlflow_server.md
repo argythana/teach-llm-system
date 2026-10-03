@@ -37,10 +37,10 @@ application. It is a program running inside that terminal:
 - **Your runs and traces are not lost** when it stops; they are saved in files (next
   section) and reappear on the next start.
 
-A working session therefore has two terminals open, both started from the
-`teach-llm-system` folder: one running the MLflow server, one running
-`uv run jupyter lab` (lecture 1, guide `01a_git_uv`). Ollama needs none; it runs in the
-background.
+A working session therefore keeps one terminal open, started from the `teach-llm-system`
+folder and running the MLflow server, next to the notebooks in VS Code (lecture 1, guide
+`01a_git_uv`). VS Code's **Terminal → New Terminal** is a convenient place for it.
+Ollama needs no terminal; it runs in the background.
 
 The port is `5010`, not the `5000` you used in the Python course, because `5000` is
 often taken (macOS AirPlay, other MLflow servers). If the notebook's check says

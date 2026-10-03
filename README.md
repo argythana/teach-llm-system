@@ -61,7 +61,7 @@ may run the quick starts of `01a_git_uv` to `01c_ollama` before class; nothing i
 if you do not. When something fails, look up the message in
 [troubleshooting](troubleshooting.md).
 
-After `01c_ollama`, open the first notebook in JupyterLab:
+After `01c_ollama`, open the first notebook in VS Code (guide `01a_git_uv`):
 `lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_uv_ollama_first_call_tokens.ipynb`.
 
 Hardware: any laptop with 8 GB of RAM runs the default `cpu` tier (`qwen3:1.7b`). Every

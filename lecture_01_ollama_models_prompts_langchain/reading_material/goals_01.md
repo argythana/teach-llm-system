@@ -6,9 +6,9 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 
 ### Required
 
-- Set up the course environment with `uv sync` and run notebooks with
-  `uv run jupyter lab`; explain why `pip install` is not used in a `uv` project.
-  *(lec_01a §1)* <!-- G1 -->
+- Set up the course environment with `uv sync` and run the notebooks in VS Code with
+  that environment as the kernel; explain why `pip install` is not used in a `uv`
+  project. *(lec_01a §1)* <!-- G1 -->
 - Run a local model through Ollama from Python, read tokens in, tokens out and tokens
   per second from the response, and tell whether the model runs on CPU or GPU. *(lec_01a
   §2)* <!-- G2 -->
