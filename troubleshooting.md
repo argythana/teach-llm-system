@@ -4,36 +4,79 @@ The guides named below are in each lecture's `infra_tools/` folder:
 [lecture 1](lecture_01_ollama_models_prompts_langchain/infra_tools/),
 [lecture 2](lecture_02_embeddings_rag_vector_store/infra_tools/).
 
-| Symptom                                                           | Fix                                                                                                                                                                    |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Cannot reach Ollama at http://localhost:11434`                   | Ollama is not running: open the Ollama app, or `sudo systemctl start ollama` on Linux (guide `01c_ollama`).                                                            |
-| `could not connect to ollama server` in a terminal                | Same cause and fix as the line above.                                                                                                                                  |
-| `ollama serve` says `bind: address already in use`                | Ollama is already running in the background; nothing to fix (guide `01c_ollama`, section 2).                                                                           |
-| `These models are not pulled yet`                                 | Run the `ollama pull ...` lines the message prints, in a terminal.                                                                                                     |
-| `No MLflow server at http://127.0.0.1:5010`                       | Start it from `mlflow_server/` (guide `02a_mlflow_server`). It stops when you close its terminal and after every restart.                                              |
-| First answer takes 10-30 s                                        | Normal: the model is loading into memory. Later calls are faster. `ollama ps` shows what is loaded.                                                                    |
-| Answers are slow (< 5 tokens/s)                                   | Another model may be loaded too (`ollama ps`); close other heavy apps; check your tier with `llmfit plan` (guide `01b_llmfit`); stay on `TIER = "cpu"`.                |
-| The answer starts with `<think>` and is very long                 | Thinking mode is on. The notebooks pass `think=False` / `reasoning=False`; copy that argument.                                                                         |
-| `uv: command not found` after installing                          | Reopen the terminal; on Windows check PATH (guide `01a_git_uv`).                                                                                                       |
-| `llmfit: command not found`                                       | Use `uvx llmfit`, or after `uv tool install llmfit` run `uv tool update-shell` and reopen the terminal (guide `01b_llmfit`).                                           |
-| PowerShell refuses to run the uv installer                        | The command in guide `01a_git_uv` includes `-ExecutionPolicy ByPass`; run PowerShell as your user, not as administrator.                                               |
-| `` No `pyproject.toml` found `` from `uv sync` or `uv run`        | The terminal is in the wrong folder: `cd` into `teach-llm-system` (guide `01a_git_uv`).                                                                                |
-| `uv sync` fails on a package build                                | Update uv (`uv self update`), delete `.venv/`, run `uv sync` again. Report the package name to the instructor.                                                         |
-| `ModuleNotFoundError: llm_course`                                 | The notebook is not using `.venv/`: in VS Code click the kernel name (top right of the notebook) and select `teach-llm-system` (guide `01a_git_uv`, section 6).        |
-| `ModuleNotFoundError` after a `git pull`                          | The course added a package: run `uv sync`, then restart the kernel.                                                                                                    |
-| `ModuleNotFoundError` in an optional notebook                     | Run its `uv sync --group ...` line (guide `01a_git_uv`, "Optional packages"); a plain `uv sync` removes those packages.                                                |
-| `git pull` says local changes would be overwritten                | You changed a course file, often just by running a notebook. Keep your work in a renamed copy, then `git restore .` and pull again (guide `01a_git_uv`, section 2).    |
-| A cell about `HF_TOKEN` fails with 401                            | The model is gated: accept its license on huggingface.co, or use an ungated model (guide `01d_env_hugging_face`).                                                      |
-| A change to `.env` has no effect                                  | Restart the kernel and run the cells again. Still ignored: the same variable is set in the terminal, which wins over `.env` (guide `01d_env_hugging_face`, section 3). |
-| `Address already in use` when starting MLflow                     | Another server holds the port. Use `--port 5011` and set `MLFLOW_TRACKING_URI` in `.env` (guide `02a_mlflow_server`).                                                  |
-| An error about connecting to the Docker daemon                    | Open Docker Desktop and wait until it is running (guide `02b_docker_pgvector`).                                                                                        |
-| The Chroma folder seems corrupted or stale                        | Stop the kernel and delete `data/chroma/`; the next notebook rebuilds it (2-4 minutes on CPU).                                                                         |
-| `the input length exceeds the context length` when embedding      | The text is longer than the embedding model's 2048-token window: split it into chunks (`lec_02c`).                                                                     |
-| A search returns the same text several times                      | The collection was filled more than once: delete `data/chroma/` and ingest with the count check of `lec_02d`.                                                          |
-| `expecting embedding with dimension of 768, got 1024` from Chroma | The index was built with another embedding model: delete `data/chroma/` and ingest again (`lec_02d`).                                                                  |
-| `docker compose up` says `port is already allocated`              | Another database uses port 5433: set `PG_PORT=5434` in `.env` (guide `02b_docker_pgvector`).                                                                           |
-| `429 Too Many Requests` from Wikipedia                            | Too many requests at once; `fetch_wikipedia_pages` waits and retries, and cached pages need no network. Run the cell again later.                                      |
-| Greek text costs many more tokens than English                    | Expected: tokenizers are trained mostly on English (lecture 1a).                                                                                                       |
+| Symptom                                                                                      | Fix                                                                                                                                                                                                                                                 |
+| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Cannot reach Ollama at http://localhost:11434`                                              | Ollama is not running: open the Ollama app, or `sudo systemctl start ollama` on Linux (guide `01c_ollama`).                                                                                                                                         |
+| `could not connect to ollama server` in a terminal                                           | Same cause and fix as the line above.                                                                                                                                                                                                               |
+| `ollama serve` says `bind: address already in use`                                           | Ollama is already running in the background; nothing to fix (guide `01c_ollama`, section 2).                                                                                                                                                        |
+| `These models are not pulled yet`                                                            | Run the `ollama pull ...` lines the message prints, in a terminal.                                                                                                                                                                                  |
+| `No MLflow server at http://127.0.0.1:5010`                                                  | Start it from `mlflow_server/` (guide `02a_mlflow_server`). It stops when you close its terminal and after every restart.                                                                                                                           |
+| First answer takes 10-30 s                                                                   | Normal: the model is loading into memory. Later calls are faster. `ollama ps` shows what is loaded.                                                                                                                                                 |
+| Answers are slow (< 5 tokens/s)                                                              | Another model may be loaded too (`ollama ps`); close other heavy apps; check your tier with `llmfit plan` (guide `01b_llmfit`); stay on `TIER = "cpu"`.                                                                                             |
+| The answer starts with `<think>` and is very long                                            | Thinking mode is on. The notebooks pass `think=False` / `reasoning=False`; copy that argument.                                                                                                                                                      |
+| `uv: command not found` after installing                                                     | Reopen the terminal; on Windows check PATH (guide `01a_git_uv`).                                                                                                                                                                                    |
+| `llmfit: command not found`                                                                  | Use `uvx llmfit`, or after `uv tool install llmfit` run `uv tool update-shell` and reopen the terminal (guide `01b_llmfit`).                                                                                                                        |
+| `GLIBC_2.39' not found (required by llmfit)` on Linux                                        | Your Linux is older than llmfit's standard build needs: install its static build (section "llmfit on older Linux" below).                                                                                                                           |
+| `JSONDecodeError` in the llmfit cells of `lec_01b` on Linux                                  | Usually the same cause as the line above: llmfit failed and printed nothing (section "llmfit on older Linux" below).                                                                                                                                |
+| `UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff` reading a CSV saved in PowerShell | Windows PowerShell's `>` saved the file as UTF-16. Read it with `pd.read_csv(path, encoding="utf-16")`, or save it as UTF-8: replace `> llmfit_chat_perfect.csv` with `\| Set-Content -Encoding utf8 llmfit_chat_perfect.csv` (guide `01b_llmfit`). |
+| `irm https://ollama.com/install.ps1 \| iex` fails on Windows                                 | Download the installer from [ollama.com/download](https://ollama.com/download) and run it: it installs the same Ollama (guide `01c_ollama`, section 1).                                                                                             |
+| PowerShell refuses to run the uv installer                                                   | The command in guide `01a_git_uv` includes `-ExecutionPolicy ByPass`; run PowerShell as your user, not as administrator.                                                                                                                            |
+| `` No `pyproject.toml` found `` from `uv sync` or `uv run`                                   | The terminal is in the wrong folder: `cd` into `teach-llm-system` (guide `01a_git_uv`).                                                                                                                                                             |
+| `uv sync` fails on a package build                                                           | Update uv (`uv self update`), delete `.venv/`, run `uv sync` again. Report the package name to the instructor.                                                                                                                                      |
+| `ModuleNotFoundError: llm_course`                                                            | The notebook is not using `.venv/`: in VS Code click the kernel name (top right of the notebook) and select `teach-llm-system` (guide `01a_git_uv`, section 6).                                                                                     |
+| `ModuleNotFoundError` after a `git pull`                                                     | The course added a package: run `uv sync`, then restart the kernel.                                                                                                                                                                                 |
+| `ModuleNotFoundError` in an optional notebook                                                | Run its `uv sync --group ...` line (guide `01a_git_uv`, "Optional packages"); a plain `uv sync` removes those packages.                                                                                                                             |
+| `git pull` says local changes would be overwritten                                           | You changed a course file, often just by running a notebook. Keep your work in a renamed copy, then `git restore .` and pull again (guide `01a_git_uv`, section 2).                                                                                 |
+| A cell about `HF_TOKEN` fails with 401                                                       | The model is gated: accept its license on huggingface.co, or use an ungated model (guide `01d_env_hugging_face`).                                                                                                                                   |
+| A change to `.env` has no effect                                                             | Restart the kernel and run the cells again. Still ignored: the same variable is set in the terminal, which wins over `.env` (guide `01d_env_hugging_face`, section 3).                                                                              |
+| `Address already in use` when starting MLflow                                                | Another server holds the port. Use `--port 5011` and set `MLFLOW_TRACKING_URI` in `.env` (guide `02a_mlflow_server`).                                                                                                                               |
+| An error about connecting to the Docker daemon                                               | Open Docker Desktop and wait until it is running (guide `02b_docker_pgvector`).                                                                                                                                                                     |
+| The Chroma folder seems corrupted or stale                                                   | Stop the kernel and delete `data/chroma/`; the next notebook rebuilds it (2-4 minutes on CPU).                                                                                                                                                      |
+| `the input length exceeds the context length` when embedding                                 | The text is longer than the embedding model's 2048-token window: split it into chunks (`lec_02c`).                                                                                                                                                  |
+| A search returns the same text several times                                                 | The collection was filled more than once: delete `data/chroma/` and ingest with the count check of `lec_02d`.                                                                                                                                       |
+| `expecting embedding with dimension of 768, got 1024` from Chroma                            | The index was built with another embedding model: delete `data/chroma/` and ingest again (`lec_02d`).                                                                                                                                               |
+| `docker compose up` says `port is already allocated`                                         | Another database uses port 5433: set `PG_PORT=5434` in `.env` (guide `02b_docker_pgvector`).                                                                                                                                                        |
+| `429 Too Many Requests` from Wikipedia                                                       | Too many requests at once; `fetch_wikipedia_pages` waits and retries, and cached pages need no network. Run the cell again later.                                                                                                                   |
+| Greek text costs many more tokens than English                                               | Expected: tokenizers are trained mostly on English (lecture 1a).                                                                                                                                                                                    |
+
+## llmfit on older Linux: `GLIBC_2.39 not found`
+
+On a Linux whose C library (glibc) is older than version 2.39, for example Ubuntu 22.04
+or Debian 12, llmfit 1.1.16 stops before doing anything:
+
+```text
+llmfit: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.39' not found (required by llmfit)
+```
+
+In `lec_01b` the same problem appears as `JSONDecodeError: Expecting value` in the cells
+that run llmfit, because llmfit printed nothing. `ldd --version` shows your glibc
+version. Windows and macOS are not affected.
+
+**Cause.** llmfit is a compiled program packaged as a Python wheel. Its standard Linux
+build is labelled for glibc 2.17 and newer but actually needs 2.39, so `uv` chooses it
+and it fails.
+
+**The fix used on the instructor's machine: llmfit's static build.** llmfit also
+publishes a Linux build compiled against musl, a small C library, and linked statically:
+everything it needs is inside the program, so it runs whatever glibc the system has.
+`--python-platform` tells `uv` to install that build instead (on an ARM computer, use
+`aarch64-unknown-linux-musl`):
+
+```bash
+uv tool install llmfit --python-platform x86_64-unknown-linux-musl
+llmfit --version
+```
+
+It replaces an `llmfit` installed before. `uvx` resolves its own copy and still picks
+the standard build, so give it the same option:
+
+```bash
+uvx --python-platform x86_64-unknown-linux-musl llmfit system
+```
+
+In `lec_01b`, make the same change in the two cells that run llmfit: replace
+`["uvx", "llmfit", ...` with
+`["uvx", "--python-platform", "x86_64-unknown-linux-musl", "llmfit", ...`.
 
 ## Where to look next
 

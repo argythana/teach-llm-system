@@ -138,15 +138,8 @@ A provider runs a model with an **engine**, llmfit's `Runtime` column:
 llmfit recommend --use-case chat --runtime llamacpp -n 5 --license apache-2.0,mit --min-fit perfect --csv > llmfit_chat_perfect.csv
 ```
 
-In Windows PowerShell, save the file with `Set-Content` instead of `>`:
-
-```powershell
-llmfit recommend --use-case chat --runtime llamacpp -n 5 --license apache-2.0,mit --min-fit perfect --csv | Set-Content -Encoding utf8 llmfit_chat_perfect.csv
-```
-
-Windows PowerShell's `>` writes text in UTF-16, an encoding `pd.read_csv` does not read
-by default (`UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff`);
-`Set-Content -Encoding utf8` writes the UTF-8 that pandas expects.
+On Windows, if `pd.read_csv` cannot read the file (`UnicodeDecodeError`), see
+[troubleshooting](../../troubleshooting.md).
 
 - `--use-case chat`: only instruction-following chat models. Run it again with
   `--use-case general` for models labelled like Qwen3. It takes one use case per run:

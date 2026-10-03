@@ -14,6 +14,10 @@ ollama --version
 
 ![PowerShell: the install command typed (1), and ollama --version answering with the version (2)](screenshots/01c_powershell_install_ollama.png)
 
+The other way works too: download the installer from <https://ollama.com/download> and
+run it. It installs the same Ollama; then continue in PowerShell with
+`ollama --version`.
+
 **macOS:** download the app from <https://ollama.com/download> and open it once.
 
 **Linux:** `curl -fsSL https://ollama.com/install.sh | sh`
@@ -64,9 +68,10 @@ Source: [GitHub](https://github.com/ollama/ollama); documentation:
   The script downloads the official installer, checks its signature, and installs Ollama
   for your user only, so it needs no administrator rights. It also makes `ollama`
   available in that same window, which is why `ollama --version` works right after it.
-  Ollama then starts automatically and shows an icon in the system tray. Instead of the
-  script, you can also download the installer from <https://ollama.com/download> and run
-  it.
+  Ollama then starts automatically and shows an icon in the system tray. Downloading the
+  installer from <https://ollama.com/download> and running it works too, and gives the
+  same result: use it if the command fails, for example on a network that blocks
+  scripts.
 - **macOS:** download the app from <https://ollama.com/download>, open it once, and it
   shows an icon in the menu bar. (`brew install ollama` also works, but installs only
   the command-line server; see section 2.)
