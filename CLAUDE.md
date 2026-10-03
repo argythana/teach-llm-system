@@ -84,6 +84,14 @@ OS, step by step, no explanation, the slow downloads marked "leave it running". 
 study material. A quick start never uses a command that the detailed sections do not
 explain.
 
+The pictures in `infra_tools/screenshots/` are drawings, not captures: HTML pages in
+`tools/guide_illustrations/`, rendered and compressed by
+`uv run python tools/draw_guide_illustrations.py` (needs Firefox). The PNGs are
+committed; rerun the script only after editing a page. Image descriptions carry no
+backticks, because mdformat deletes backticked words there.
+`uv run python tools/build_guide_pdfs.py` builds a PDF handout next to every guide
+(needs pandoc and xelatex); the PDFs are gitignored, never committed.
+
 ## Environment
 
 - Python **>= 3.12** (`.python-version` = 3.12; students have it from the Python course;
