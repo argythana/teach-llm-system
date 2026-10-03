@@ -2,21 +2,40 @@
 
 ## Quick start
 
-In a terminal, from any folder (open a new terminal if `uv sync` from guide `01a_git_uv`
-is still running):
+Open a new terminal, in any folder; leave `uv sync` from guide `01a_git_uv` running in
+its own window.
 
-```bash
+**Windows:** use the Applications Menu, type "Powershell" and select "Windows
+PowerShell". This time you do not need "Run as administrator".
+
+![Start menu search: "powershell" typed (1), Windows PowerShell as the best match (2)](screenshots/01a_windows_search_powershell.png)
+
+**macOS / Linux:** open the Terminal.
+
+Install llmfit, the same command on every system:
+
+```powershell
 uv tool install llmfit
-llmfit system
+```
+
+![PowerShell: uv tool install llmfit typed (1), and the reply Installed 1 executable: llmfit (2)](screenshots/01b_powershell_install_llmfit.png)
+
+Then ask it about the two course models:
+
+```powershell
 llmfit plan "Qwen/Qwen3-1.7B" --quant Q4_K_M --context 8192
 llmfit plan "Qwen/Qwen3-8B" --quant Q4_K_M --context 8192
 ```
 
-If the terminal does not find `llmfit`, run `uv tool update-shell`, open a new terminal,
-and repeat the `llmfit` lines.
+![PowerShell, llmfit plan for Qwen3-8B: the free VRAM of the GPU (1) and the minimum VRAM the model needs (2)](screenshots/01b_powershell_llmfit_plan.png)
 
-Your tier: `gpu` if the `Minimum Hardware: VRAM` of Qwen3-8B (6.4 GB) is at most the
-free VRAM that `llmfit system` shows; `cpu` otherwise.
+Your tier: `gpu` if the `Minimum Hardware: VRAM` of Qwen3-8B (2 in the picture, 6.4 GB)
+is at most the free VRAM of your GPU (1); `cpu` otherwise, and also when no `GPU` line
+appears.
+
+If the terminal does not find `llmfit` (PowerShell:
+`The term 'llmfit' is not recognized`), run `uv tool update-shell`, open a new terminal,
+and repeat the `llmfit` lines.
 
 The sections below explain every step; they are part of the study material. If a step
 fails, look up the message in [troubleshooting](../../troubleshooting.md).
@@ -51,8 +70,12 @@ llmfit system
 ```
 
 Now `llmfit` is a command of its own, in every terminal and every folder, until you run
-`uv tool uninstall llmfit`. Update it with `uv tool upgrade llmfit`. If the terminal
-says `llmfit: command not found`, run `uv tool update-shell` and reopen the terminal.
+`uv tool uninstall llmfit`. Update it with `uv tool upgrade llmfit`. `uv` keeps the
+program in a folder of your user, `C:\Users\<you>\.local\bin` on Windows and
+`~/.local/bin` on macOS and Linux, and the terminal finds it only if that folder is on
+its `PATH`, the list of folders it searches for commands. If the terminal says
+`llmfit: command not found` (PowerShell: `The term 'llmfit' is not recognized`), run
+`uv tool update-shell`, which adds the folder, and reopen the terminal.
 
 Lecture 1b calls `uvx llmfit` from Python, which also uses your installed copy.
 
@@ -115,6 +138,16 @@ A provider runs a model with an **engine**, llmfit's `Runtime` column:
 llmfit recommend --use-case chat --runtime llamacpp -n 5 --license apache-2.0,mit --min-fit perfect --csv > llmfit_chat_perfect.csv
 ```
 
+In Windows PowerShell, save the file with `Set-Content` instead of `>`:
+
+```powershell
+llmfit recommend --use-case chat --runtime llamacpp -n 5 --license apache-2.0,mit --min-fit perfect --csv | Set-Content -Encoding utf8 llmfit_chat_perfect.csv
+```
+
+Windows PowerShell's `>` writes text in UTF-16, an encoding `pd.read_csv` does not read
+by default (`UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff`);
+`Set-Content -Encoding utf8` writes the UTF-8 that pandas expects.
+
 - `--use-case chat`: only instruction-following chat models. Run it again with
   `--use-case general` for models labelled like Qwen3. It takes one use case per run:
   `--use-case chat,general` gives no error but switches the filter off, and the list
@@ -126,8 +159,9 @@ llmfit recommend --use-case chat --runtime llamacpp -n 5 --license apache-2.0,mi
   table).
 - `--min-fit perfect`: only models that fit with room to spare. `--min-fit good` also
   keeps `Good`; the default keeps `Marginal` too.
-- `--csv > llmfit_chat.csv`: a table instead of JSON, saved as `llmfit_chat.csv` in the
-  current folder. Open it in VS Code or a spreadsheet, or with `pd.read_csv`.
+- `--csv > llmfit_chat_perfect.csv`: a table instead of JSON, saved as
+  `llmfit_chat_perfect.csv` in the current folder. Open it in VS Code or a spreadsheet,
+  or with `pd.read_csv`.
 
 ## Reading the output
 
@@ -155,9 +189,10 @@ llmfit system                                                 # your GPU and its
   quantization).
 - `--context 8192`: the prompt length the course needs.
 
-`plan` needs no model provider, and it compares with the VRAM that is free right now: if
-a provider already holds a model in memory (with Ollama, `ollama ps` lists it), unload
-it first. Then compare:
+`plan` needs no model provider. It first prints what `llmfit system` prints, so the
+`GPU` line with its free VRAM is at the top of its output (the picture in the Quick
+start). The free VRAM is measured right now: if a provider already holds a model in
+memory (with Ollama, `ollama ps` lists it), unload it first. Then compare:
 
 - **`Minimum Hardware: VRAM` of Qwen3-8B (6.4 GB) is at most the free VRAM that
   `llmfit system` shows:** choose the `gpu` tier. In one example run, a laptop GPU with
@@ -205,8 +240,19 @@ requirement. `qwen3.5:2b` is the one to test for the next edition of the course.
 
 ### Verify the table yourself
 
-Estimated speeds, from llmfit (macOS/Linux; in PowerShell use
-`foreach ($m in "Qwen/Qwen3-1.7B", ...) { uvx llmfit plan $m --quant Q4_K_M --context 8192 | Select-String "^Model:|^  (GPU|CPU offload|CPU-only):|est speed" }`):
+Estimated speeds, from llmfit. In Windows PowerShell:
+
+```powershell
+$models = "Qwen/Qwen3-1.7B", "Qwen/Qwen3-8B", "Qwen/Qwen3.5-2B",
+  "meta-llama/Llama-3.2-1B-Instruct", "meta-llama/Llama-3.2-3B-Instruct",
+  "google/gemma-3-1b-it", "google/gemma-4-E2B-it", "microsoft/Phi-4-mini-instruct",
+  "ibm-granite/granite-4.0-micro", "HuggingFaceTB/SmolLM3-3B"
+foreach ($m in $models) {
+  uvx llmfit plan $m --quant Q4_K_M --context 8192 | Select-String "^Model:|^  (GPU|CPU offload|CPU-only):|est speed"
+}
+```
+
+In the macOS or Linux Terminal:
 
 ```bash
 for m in Qwen/Qwen3-1.7B Qwen/Qwen3-8B Qwen/Qwen3.5-2B \

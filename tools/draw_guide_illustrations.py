@@ -7,7 +7,7 @@
 
 The pictures in `lecture_*/infra_tools/screenshots/` are drawings, not captures: each
 one is a small HTML page (tools/guide_illustrations/*.py) that imitates a Windows,
-VS Code or Hugging Face screen, with green circles on what the student must click.
+PowerShell, VS Code or Hugging Face screen, with green circles on what the student must click.
 This script renders every page with headless Firefox at double resolution and saves
 it as a palette PNG, about a third of the size of the raw capture.
 
@@ -30,10 +30,10 @@ from PIL import Image
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from guide_illustrations import hf_token, vscode_kernel, windows  # noqa: E402
+from guide_illustrations import hf_token, powershell, vscode_kernel, windows  # noqa: E402
 
 OUTPUT_DIR = REPO / "lecture_01_ollama_models_prompts_langchain/infra_tools/screenshots"
-MODULES = (windows, vscode_kernel, hf_token)
+MODULES = (windows, vscode_kernel, hf_token, powershell)
 PAGE_WIDTH = 1000  # CSS pixels; every page sets `zoom: 2`, so the PNG is twice as wide
 SCALE = 2
 

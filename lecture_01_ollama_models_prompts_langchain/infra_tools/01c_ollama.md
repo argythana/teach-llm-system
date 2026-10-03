@@ -2,15 +2,26 @@
 
 ## Quick start
 
-Install Ollama:
+Install Ollama.
 
-- **Windows:** download the installer from <https://ollama.com/download> and run it.
-- **macOS:** download the app from <https://ollama.com/download> and open it once.
-- **Linux:** `curl -fsSL https://ollama.com/install.sh | sh`
+**Windows:** open PowerShell as in guide `01b_llmfit` (Applications Menu, type
+"Powershell", select "Windows PowerShell"; no administrator needed) and run:
 
-Open a new terminal. Then, on every system, from any folder:
+```powershell
+irm https://ollama.com/install.ps1 | iex
+ollama --version
+```
 
-```bash
+![PowerShell: the install command typed (1), and ollama --version answering with the version (2)](screenshots/01c_powershell_install_ollama.png)
+
+**macOS:** download the app from <https://ollama.com/download> and open it once.
+
+**Linux:** `curl -fsSL https://ollama.com/install.sh | sh`
+
+Open a new terminal (on Windows, PowerShell again). Then, on every system, from any
+folder:
+
+```powershell
 ollama --version
 ollama pull qwen3:1.7b          # a few minutes; leave it running
 ollama pull qwen3:0.6b
@@ -19,12 +30,14 @@ ollama list
 ollama run qwen3:1.7b --verbose --think=false "Say hello in one sentence."
 ```
 
+![PowerShell, ollama run with --verbose: the answer, then the timings; eval rate is your speed](screenshots/01c_powershell_ollama_run.png)
+
 Only on the `gpu` tier (guide `01b_llmfit`):
 
-```bash
+```powershell
 ollama pull qwen3:8b
 ollama run qwen3:8b --verbose --think=false "Say hello in one sentence."
-ollama ps                       # if you should show high GPU usage %
+ollama ps                       # should show 100% GPU
 ```
 
 The sections below explain every step; they are part of the study material. If a step
@@ -44,8 +57,16 @@ Source: [GitHub](https://github.com/ollama/ollama); documentation:
 
 ## 1. Install
 
-- **Windows:** download the installer from <https://ollama.com/download> and run it.
-  Ollama starts automatically and shows an icon in the system tray.
+- **Windows:** in PowerShell, `irm https://ollama.com/install.ps1 | iex`, the command
+  that Ollama's [Windows download page](https://ollama.com/download/windows) gives.
+  `irm` (Invoke-RestMethod) downloads Ollama's install script, and `iex`
+  (Invoke-Expression) runs it; the same pattern installed `uv` in guide `01a_git_uv`.
+  The script downloads the official installer, checks its signature, and installs Ollama
+  for your user only, so it needs no administrator rights. It also makes `ollama`
+  available in that same window, which is why `ollama --version` works right after it.
+  Ollama then starts automatically and shows an icon in the system tray. Instead of the
+  script, you can also download the installer from <https://ollama.com/download> and run
+  it.
 - **macOS:** download the app from <https://ollama.com/download>, open it once, and it
   shows an icon in the menu bar. (`brew install ollama` also works, but installs only
   the command-line server; see section 2.)
@@ -113,11 +134,11 @@ The first answer takes a few seconds while the model loads into memory. Qwen3 "t
 aloud before answering unless told not to; `--think=false` does in the terminal what
 `think=False` does in the notebooks.
 
-`--verbose` adds timing lines after the answer. `eval rate` is your measured speed in
-tokens/s, the real number behind llmfit's estimate (guide `01b_llmfit`); the course
-needs 10 or more. On the `gpu` tier, run the same line with `qwen3:8b`, then
-`ollama ps`: `100% GPU` confirms the tier, while a split such as `30%/70% CPU/GPU` means
-the model did not fit and the `cpu` tier is the better choice.
+`--verbose` adds timing lines after the answer (the last picture of the Quick start).
+`eval rate` is your measured speed in tokens/s, the real number behind llmfit's estimate
+(guide `01b_llmfit`); the course needs 10 or more. On the `gpu` tier, run the same line
+with `qwen3:8b`, then `ollama ps`: `100% GPU` confirms the tier, while a split such as
+`30%/70% CPU/GPU` means the model did not fit and the `cpu` tier is the better choice.
 
 Without the quoted question, `ollama run qwen3:1.7b` opens an interactive chat in the
 terminal; type `/bye` to leave it.
