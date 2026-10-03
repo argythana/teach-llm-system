@@ -2,10 +2,17 @@
 
 A short course, 3 lectures of two 75-minute sessions each, for graduates of the
 [Python for Data Science course](https://github.com/argythana/uoa_py_course) at the
-University of Athens. You know Python, pandas, scikit-learn, and MLflow; you have never
-built anything with a language model. By the end you will have built, on your own laptop
-and with no API key, a question-answering assistant over your own course notes and
-measured how good it is.
+University of Athens.
+
+## About the course
+
+This is a new official course of the
+[Business Information Systems](https://bis-analytics.econ.uoa.gr/) postgraduate program
+of the University of Athens, offered as part of its Research Seminars Series.
+
+You know Python, pandas, scikit-learn, and MLflow; you have never built anything with a
+language model. By the end you will have built, on your own laptop and with no API key,
+a question-answering assistant over your own course notes and measured how good it is.
 
 ## What you will build
 
