@@ -2,12 +2,22 @@
 
 ## Quick start
 
-Open a terminal: PowerShell on Windows, Terminal on macOS and Linux.
+**Windows:** use the Applications Menu, type "Powershell" and select "Run as
+Administrator".
 
-**Windows:**
+![Start menu search: "powershell" typed (1), Windows PowerShell as the best match (2)](screenshots/01a_windows_search_powershell.png)
+
+![Start menu search: "Run as administrator" circled in the right-hand panel](screenshots/01a_windows_run_as_administrator.png)
+
+## Install `Git`
 
 ```powershell
 winget install --id Git.Git -e
+```
+
+### Install `uv`
+
+```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
@@ -25,21 +35,43 @@ sudo apt install git
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Close the terminal and open a new one. Then, on every system:
+Close the terminal and open a new one. Then verify the installations finished, on every
+system:
 
 ```bash
 git --version
 uv --version
+```
+
+### Clone the lecture files in your prefered directory
+
+Go to the folder that you want the course to be located and open a terminal in that
+directory. In Windows you could use the file explorer and in the address bar, you could
+type: `powershell`.
+
+![File Explorer: powershell typed in the address bar, then Enter](screenshots/01a_windows_explorer_powershell.png)
+
+Then, in the terminal:
+
+```bash
 git clone https://github.com/argythana/teach-llm-system.git
 cd teach-llm-system
 uv sync                 # a few minutes; leave it running
 ```
 
-When `uv sync` has finished:
+### Open the notebooks in VS Code
 
-```bash
-uv run jupyter lab
-```
+When `uv sync` has finished, open VS Code (section 6 if it is not installed yet):
+
+1. **File → Open Folder...** and choose the `teach-llm-system` folder.
+1. In the Explorer panel on the left, open `lecture_01_ollama_models_prompts_langchain`,
+   then `reading_material`, then `lec_01a_uv_ollama_first_call_tokens.ipynb`.
+1. Click **Select Kernel** (top right of the notebook) → **Python Environments...** →
+   the `teach-llm-system` entry, marked **Recommended**.
+
+![VS Code: Select Kernel at the top right of the notebook (1), then the teach-llm-system entry in the list (2)](screenshots/01a_vscode_select_kernel.png)
+
+VS Code asks the first time you run a notebook and remembers the choice.
 
 The sections below explain every step; they are part of the study material. If a step
 fails, look up the message in [troubleshooting](../../troubleshooting.md).
@@ -49,7 +81,8 @@ fails, look up the message in [troubleshooting](../../troubleshooting.md).
 Two programs come first. **git** downloads the course and later fetches the instructor's
 updates. **`uv`** builds the Python environment the course needs. This guide goes in
 order: install git, download the course, install `uv`, see how `uv` creates virtual
-environments, then let `uv sync` build the course environment.
+environments, let `uv sync` build the course environment, then open the notebooks in VS
+Code.
 
 ## Where to type the commands
 
@@ -114,9 +147,9 @@ When the instructor pushes new material, run `git pull` inside this folder, then
 
 Running a notebook changes its file (the outputs are saved in it), and `git pull`
 refuses to overwrite a course file you changed. Keep your own experiments in a copy
-(**File → Save Notebook As...** with a new name); git leaves new files alone. To throw
-away your changes to the course files before pulling, run `git restore .` (it does not
-touch your copies or your `.env`).
+(**File → Save As...** with a new name); git leaves new files alone. To throw away your
+changes to the course files before pulling, run `git restore .` (it does not touch your
+copies or your `.env`).
 
 Without git: download the repository as a ZIP from GitHub (green **Code** button) and
 unzip it. You will have to download it again for every update.
@@ -211,39 +244,54 @@ The whole workflow, next to what you did in the Python course:
 | `python -m venv course_venv`      | `uv venv --python 3.12` (done by `uv sync`)             |
 | `pip install -r requirements.txt` | `uv sync` (creates `.venv/` and installs)               |
 | `pip install some-package`        | `uv add some-package`                                   |
-| activate, then `jupyter lab`      | `uv run jupyter lab`                                    |
+| activate, then `jupyter lab`      | VS Code with the course kernel (section 6)              |
 | `pip install` a command-line tool | `uvx llmfit` or `uv tool install llmfit` (last section) |
 
 ## 6. Open the notebooks with the right interpreter
 
-The notebooks run in [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/)
-([source on GitHub](https://github.com/jupyterlab/jupyterlab)), which `uv sync`
-installed.
+The notebooks are opened in [VS Code](https://code.visualstudio.com/), an editor that
+runs
+[Jupyter notebooks](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) in
+the same window as the course files and a terminal.
 
-`.venv/` holds the Python interpreter that has the course packages. Which interpreter a
-notebook uses depends on how you open it:
+**Install once:**
 
-- **JupyterLab from the terminal (recommended).** Run, from the `teach-llm-system`
-  folder:
+- **VS Code** from [code.visualstudio.com](https://code.visualstudio.com/). On Windows
+  this also works:
 
-  ```bash
-  uv run jupyter lab
+  ```powershell
+  winget install --id Microsoft.VisualStudioCode -e
   ```
 
-  `uv run <command>` runs the command inside `.venv/`, so JupyterLab and its kernel
-  already use the right interpreter. Use `uv run` for every tool in this course
-  (`uv run jupyter lab`, `uv run mlflow server ...`). JupyterLab runs as long as this
-  terminal stays open: leave it open while you work, and stop it with `Ctrl+C` (or
-  **File → Shut Down** in JupyterLab) when you finish.
+- **Two extensions**, both by Microsoft:
+  [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) and
+  [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter). In
+  VS Code, open the Extensions panel (**View → Extensions**), search each name, and
+  click **Install**.
 
-- **VS Code.** Open the `teach-llm-system` folder, open a notebook, and click **Select
-  Kernel** (top right) → **Python Environments** → the entry that points to
-  `teach-llm-system/.venv`. VS Code usually proposes it first. Without this step the
-  notebook runs on whatever Python VS Code found last, and the first `import` fails.
+**Open the course folder.** **File → Open Folder...** and choose `teach-llm-system`
+itself, not a lecture folder inside it: VS Code looks for `.venv/` in the folder you
+open. Then open a notebook from the Explorer panel on the left.
 
-- **A terminal session.** Activating the environment as in the Python course also works:
-  `source .venv/bin/activate` (macOS/Linux) or `.venv\Scripts\activate` (Windows), then
-  `jupyter lab`.
+**Select the interpreter, the first time you run a notebook.** A notebook runs on a
+**kernel**: the Python process that executes its cells. `.venv/` holds the Python
+interpreter that has the course packages, so the kernel must be that one:
+
+1. Click **Select Kernel** at the top right of the notebook (running a cell opens the
+   same list).
+1. Choose **Python Environments...**.
+1. Choose the entry named after the course folder, `teach-llm-system (3.12.x)`, which VS
+   Code marks **Recommended** (the picture in the quick start shows this list).
+
+`uv` gives `.venv/` the name of the folder it was created in, and VS Code lists the
+environment under that name; older versions of VS Code show `.venv` instead. In both
+cases the path next to the name is the reliable sign: `.venv\Scripts\python.exe` on
+Windows, `.venv/bin/python` on macOS and Linux.
+
+VS Code remembers the choice for that notebook, and the button then shows
+`teach-llm-system (3.12.x)` instead of **Select Kernel**. Without this step the notebook
+runs on whatever Python VS Code found last, and the first `import` fails. If the entry
+is not in the list, `uv sync` has not finished or you opened a different folder.
 
 To check, run this in a notebook cell; the path must contain `teach-llm-system/.venv`:
 
@@ -252,6 +300,10 @@ import sys
 
 print(sys.executable)
 ```
+
+The kernel choice applies to notebooks only. A command typed in a terminal uses `.venv/`
+when it starts with `uv run`: `uv run <command>` runs the command inside `.venv/`. Use
+it for every tool of the course environment (`uv run mlflow server ...` in lecture 2).
 
 ## Optional packages
 
@@ -285,8 +337,8 @@ Some programs are **command-line tools** you run in a terminal, not packages you
 in three ways, and the difference is where the tool lives:
 
 - **`uv run <tool>`**: the tool is a package of the course environment, installed in
-  `.venv/` by `uv sync`. `jupyter` and `mlflow` are used this way, because the notebooks
-  also import them.
+  `.venv/` by `uv sync`. `mlflow` is used this way, because the notebooks also import
+  it.
 - **`uvx <tool>`**: runs the tool without installing it.
 - **`uv tool install <tool>`**: installs the tool once, for your user, in its own
   environment outside any project.
