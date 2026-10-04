@@ -360,8 +360,8 @@ Good to know:
 - **Neither touches the course.** Both work from any folder and change nothing in
   `.venv/`, `pyproject.toml` or `uv.lock`. For the same reason, a notebook cannot
   `import` a tool installed this way.
-- **After `uv tool install`, `uvx` uses the installed copy.** Commands written as
-  `uvx llmfit ...` in the course keep working.
+- **The course installs llmfit with `uv tool install`.** Lecture 1b runs the installed
+  `llmfit` from Python, so `uvx llmfit` is not enough there.
 - **`llmfit: command not found` after `uv tool install`:** the tool went into
   `~/.local/bin` (Windows: `C:\Users\<you>\.local\bin`), the folder the uv installer
   also uses, and that folder must be on your PATH. Run `uv tool update-shell` and reopen

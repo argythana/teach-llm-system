@@ -59,8 +59,8 @@ notebook, and it is not part of the course environment: `uv sync` does not insta
 install it as a Python package if our use case were a project whose own code runs
 llmfit: `uv add llmfit` would record it in `pyproject.toml` and `uv.lock`, so everyone
 runs the same version with `uv run llmfit`. The package only carries the program; it has
-no functions to `import`. This course only needs llmfit to choose a tier, and lecture 1b
-calls it through `uvx`, so it stays out of the course environment.
+no functions to `import`. This course only needs llmfit to choose a tier, so it stays
+out of the course environment.
 
 ## Install it once, with `uv tool install`
 
@@ -77,7 +77,8 @@ its `PATH`, the list of folders it searches for commands. If the terminal says
 `llmfit: command not found` (PowerShell: `The term 'llmfit' is not recognized`), run
 `uv tool update-shell`, which adds the folder, and reopen the terminal.
 
-Lecture 1b calls `uvx llmfit` from Python, which also uses your installed copy.
+Lecture 1b runs this installed `llmfit` from Python, so install it before that notebook.
+If VS Code was open during the install, restart it so the notebook finds the command.
 
 ## The basic CLI commands
 
@@ -241,7 +242,7 @@ $models = "Qwen/Qwen3-1.7B", "Qwen/Qwen3-8B", "Qwen/Qwen3.5-2B",
   "google/gemma-3-1b-it", "google/gemma-4-E2B-it", "microsoft/Phi-4-mini-instruct",
   "ibm-granite/granite-4.0-micro", "HuggingFaceTB/SmolLM3-3B"
 foreach ($m in $models) {
-  uvx llmfit plan $m --quant Q4_K_M --context 8192 | Select-String "^Model:|^  (GPU|CPU offload|CPU-only):|est speed"
+  llmfit plan $m --quant Q4_K_M --context 8192 | Select-String "^Model:|^  (GPU|CPU offload|CPU-only):|est speed"
 }
 ```
 
@@ -252,7 +253,7 @@ for m in Qwen/Qwen3-1.7B Qwen/Qwen3-8B Qwen/Qwen3.5-2B \
          meta-llama/Llama-3.2-1B-Instruct meta-llama/Llama-3.2-3B-Instruct \
          google/gemma-3-1b-it google/gemma-4-E2B-it microsoft/Phi-4-mini-instruct \
          ibm-granite/granite-4.0-micro HuggingFaceTB/SmolLM3-3B; do
-  uvx llmfit plan "$m" --quant Q4_K_M --context 8192 | grep -E "^Model:|^  (GPU|CPU offload|CPU-only):|est speed"
+  llmfit plan "$m" --quant Q4_K_M --context 8192 | grep -E "^Model:|^  (GPU|CPU offload|CPU-only):|est speed"
 done
 ```
 

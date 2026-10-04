@@ -15,7 +15,8 @@ The guides named below are in each lecture's `infra_tools/` folder:
 | Answers are slow (< 5 tokens/s)                                                              | Another model may be loaded too (`ollama ps`); close other heavy apps; check your tier with `llmfit plan` (guide `01b_llmfit`); stay on `TIER = "cpu"`.                                                                                             |
 | The answer starts with `<think>` and is very long                                            | Thinking mode is on. The notebooks pass `think=False` / `reasoning=False`; copy that argument.                                                                                                                                                      |
 | `uv: command not found` after installing                                                     | Reopen the terminal; on Windows check PATH (guide `01a_git_uv`).                                                                                                                                                                                    |
-| `llmfit: command not found`                                                                  | Use `uvx llmfit`, or after `uv tool install llmfit` run `uv tool update-shell` and reopen the terminal (guide `01b_llmfit`).                                                                                                                        |
+| `llmfit: command not found`                                                                  | After `uv tool install llmfit`, run `uv tool update-shell` and reopen the terminal (guide `01b_llmfit`).                                                                                                                                            |
+| `FileNotFoundError: ... 'llmfit'` (Windows: `[WinError 2]`) in `lec_01b`                     | llmfit is not installed, or VS Code was open when you installed it: run `uv tool install llmfit` (guide `01b_llmfit`), restart VS Code, run the cells again.                                                                                        |
 | `GLIBC_2.39' not found (required by llmfit)` on Linux                                        | Your Linux is older than llmfit's standard build needs: install its static build (section "llmfit on older Linux" below).                                                                                                                           |
 | `JSONDecodeError` in the llmfit cells of `lec_01b` on Linux                                  | Usually the same cause as the line above: llmfit failed and printed nothing (section "llmfit on older Linux" below).                                                                                                                                |
 | `UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff` reading a CSV saved in PowerShell | Windows PowerShell's `>` saved the file as UTF-16. Read it with `pd.read_csv(path, encoding="utf-16")`, or save it as UTF-8: replace `> llmfit_chat_perfect.csv` with `\| Set-Content -Encoding utf8 llmfit_chat_perfect.csv` (guide `01b_llmfit`). |
@@ -67,16 +68,8 @@ uv tool install llmfit --python-platform x86_64-unknown-linux-musl
 llmfit --version
 ```
 
-It replaces an `llmfit` installed before. `uvx` resolves its own copy and still picks
-the standard build, so give it the same option:
-
-```bash
-uvx --python-platform x86_64-unknown-linux-musl llmfit system
-```
-
-In `lec_01b`, make the same change in the two cells that run llmfit: replace
-`["uvx", "llmfit", ...` with
-`["uvx", "--python-platform", "x86_64-unknown-linux-musl", "llmfit", ...`.
+It replaces an `llmfit` installed before. `lec_01b` runs this installed `llmfit`, so its
+cells need no change: restart the kernel and run them again.
 
 ## Where to look next
 
