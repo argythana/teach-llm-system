@@ -21,8 +21,10 @@ import shutil
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Any, AsyncGenerator, Callable, Literal
+from collections.abc import AsyncGenerator, Callable
+from typing import Any, Literal
 
+from mlflow.assistant.config import ProviderConfig
 from mlflow.assistant.providers.base import (
     AssistantProvider,
     CLINotInstalledError,
@@ -31,6 +33,7 @@ from mlflow.assistant.providers.base import (
 )
 from mlflow.assistant.providers.claude_code import _build_system_prompt
 from mlflow.assistant.types import (
+    ContentBlock,
     Event,
     Message,
     TextBlock,
@@ -142,7 +145,7 @@ class CopilotProvider(AssistantProvider):
     def _build_command(
         self,
         copilot_path: str,
-        config,
+        config: ProviderConfig,
         session_id: str | None,
         cwd: Path | None,
         usage_file: str,
@@ -209,7 +212,7 @@ class CopilotProvider(AssistantProvider):
         cmd.extend(["-p", user_message])
         copilot_session_id = session_id
         final_text = ""
-        process = None
+        process: asyncio.subprocess.Process | None = None
         try:
             process = await asyncio.create_subprocess_exec(
                 *cmd,
@@ -239,7 +242,7 @@ class CopilotProvider(AssistantProvider):
                     )
                     kind = event.get("type", "")
                     if kind == "assistant.message":
-                        blocks: list = []
+                        blocks: list[ContentBlock] = []
                         if data.get("content"):
                             blocks.append(TextBlock(text=data["content"]))
                             final_text = data["content"]
@@ -322,7 +325,7 @@ class CopilotProvider(AssistantProvider):
             return None
         tokens = stats.get("tokenDetails") or {}
 
-        def count(key):
+        def count(key: str) -> int:
             return int((tokens.get(key) or {}).get("tokenCount") or 0)
 
         prompt = count("input") + count("cache_read") + count("cache_write")
@@ -345,10 +348,12 @@ def install() -> None:
     original_build = providers._build_providers
     original_precedence = providers._default_provider_precedence
 
-    def build_with_copilot():
+    def build_with_copilot() -> list[AssistantProvider]:
         return [CopilotProvider(), *original_build()]
 
-    def precedence_with_copilot(include_gateway: bool = True):
+    def precedence_with_copilot(
+        include_gateway: bool = True,
+    ) -> list[AssistantProvider]:
         return [
             CopilotProvider(),
             *original_precedence(include_gateway=include_gateway),
@@ -356,4 +361,4 @@ def install() -> None:
 
     providers._build_providers = build_with_copilot
     providers._default_provider_precedence = precedence_with_copilot
-    providers._copilot_installed = True
+    setattr(providers, "_copilot_installed", True)

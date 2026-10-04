@@ -5,6 +5,19 @@ chain -> measure.
 """
 
 import re
+from collections.abc import Iterable, Sequence
+from pathlib import Path
+from typing import TYPE_CHECKING
+
+# Imported for real, not only for type checking: LangChain reads the annotations of
+# format_context when a chain wraps it, so they must be evaluated objects.
+from langchain_core.documents import Document
+from langchain_core.language_models import BaseChatModel
+from langchain_core.runnables import Runnable
+
+# langchain_chroma takes seconds to import, so build_chroma_index loads it when called.
+if TYPE_CHECKING:
+    from langchain_chroma import Chroma
 
 _THINK = re.compile(r"<think>.*?</think>\s*", flags=re.DOTALL)
 _HEADING = re.compile(r"^#{1,6} +(.+)$")
@@ -18,12 +31,13 @@ HEADINGS_FIRST = ["\n## ", "\n### ", "\n\n", "\n", " ", ""]
 LECTURE_KINDS = ["lecture", "guide"]
 
 
-def _headings(text):
+def _headings(text: str) -> list[tuple[int, str]]:
     """Return ``[(offset, heading)]`` for the Markdown headings of ``text``.
 
     Lines inside fenced code blocks are skipped: there ``#`` starts a comment.
     """
-    found, offset, in_code = [], 0, False
+    found: list[tuple[int, str]] = []
+    offset, in_code = 0, False
     for line in text.splitlines(keepends=True):
         stripped = line.strip()
         # A fence line opens or closes a block; ```{ }``` inline on one line does not.
@@ -37,7 +51,12 @@ def _headings(text):
     return found
 
 
-def split_documents(docs, chunk_size=800, chunk_overlap=100, min_chars=80):
+def split_documents(
+    docs: Iterable[Document],
+    chunk_size: int = 800,
+    chunk_overlap: int = 100,
+    min_chars: int = 80,
+) -> list[Document]:
     """Split Markdown Documents into overlapping chunks, keeping their metadata.
 
     The splitter cuts at headings first, then paragraphs, lines and words (lec_02c).
@@ -54,7 +73,7 @@ def split_documents(docs, chunk_size=800, chunk_overlap=100, min_chars=80):
         chunk_overlap=chunk_overlap,
         add_start_index=True,
     )
-    chunks = []
+    chunks: list[Document] = []
     for doc in docs:
         headings = _headings(doc.page_content)
         for chunk in splitter.split_documents([doc]):
@@ -67,13 +86,13 @@ def split_documents(docs, chunk_size=800, chunk_overlap=100, min_chars=80):
 
 
 def build_chroma_index(
-    chunks,
-    collection_name,
-    persist_dir,
-    embed_model="nomic-embed-text",
-    ollama_host="http://localhost:11434",
-    batch_size=256,
-):
+    chunks: list[Document],
+    collection_name: str,
+    persist_dir: str | Path,
+    embed_model: str = "nomic-embed-text",
+    ollama_host: str = "http://localhost:11434",
+    batch_size: int = 256,
+) -> "Chroma":
     """Return a persistent Chroma vector store holding ``chunks``.
 
     Idempotent: a collection that already holds exactly ``len(chunks)`` chunks is reused;
@@ -81,8 +100,6 @@ def build_chroma_index(
     stable while the file is unchanged. After changing the embedding model, delete
     ``persist_dir``: the count cannot see that change.
     """
-    from pathlib import Path
-
     from langchain_chroma import Chroma
     from langchain_ollama import OllamaEmbeddings
 
@@ -112,7 +129,7 @@ def build_chroma_index(
     return store
 
 
-def format_context(docs):
+def format_context(docs: Iterable[Document]) -> str:
     """Turn retrieved Documents into the text block the prompt receives."""
     return "\n\n".join(
         f"[source: {d.metadata.get('source', '?')}]\n{d.page_content}" for d in docs
@@ -126,7 +143,11 @@ DEFAULT_RAG_PROMPT = (
 )
 
 
-def make_rag_chain(retriever, llm, prompt_template=None):
+def make_rag_chain(
+    retriever: Runnable[str, list[Document]],
+    llm: BaseChatModel,
+    prompt_template: str | None = None,
+) -> Runnable[str, str]:
     """Build ``question -> retrieve -> prompt -> llm -> text`` as one LangChain Runnable."""
     from langchain_core.output_parsers import StrOutputParser
     from langchain_core.prompts import ChatPromptTemplate
@@ -141,7 +162,7 @@ def make_rag_chain(retriever, llm, prompt_template=None):
     )
 
 
-def source_rank(docs, expected_source):
+def source_rank(docs: Iterable[Document], expected_source: str) -> int | None:
     """Position (1 = first) of the first Document from ``expected_source``, or None."""
     for position, doc in enumerate(docs, start=1):
         if doc.metadata.get("source") == expected_source:
@@ -149,7 +170,9 @@ def source_rank(docs, expected_source):
     return None
 
 
-def hit_rate_and_mrr(ranks, ks=(1, 2, 4, 8)):
+def hit_rate_and_mrr(
+    ranks: Sequence[int | None], ks: Iterable[int] = (1, 2, 4, 8)
+) -> dict[str, float]:
     """Summarise ``source_rank`` results: hit rate at each k, and the MRR."""
     n = len(ranks)
     summary = {f"hit@{k}": sum(r is not None and r <= k for r in ranks) / n for k in ks}
@@ -157,6 +180,6 @@ def hit_rate_and_mrr(ranks, ks=(1, 2, 4, 8)):
     return summary
 
 
-def strip_think(text):
+def strip_think(text: str) -> str:
     """Remove a leaked ``<think>...</think>`` block from a reasoning model's answer."""
     return _THINK.sub("", text).strip()

@@ -7,9 +7,16 @@ metadata (lec_02d); ``load_eval_set`` reads the evaluation set (lec_02d).
 ``fetch_wikipedia_pages`` is the optional, larger corpus for lec_02f.
 """
 
+from __future__ import annotations
+
 import json
 import re
+from collections.abc import Container, Iterable
 from pathlib import Path
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:  # imported inside the functions at run time, to keep imports light
+    from langchain_core.documents import Document
 
 _DATA_IMAGE = re.compile(
     r"!\[[^\]]*\]\(data:image[^)]*\)|<img[^>]*src=\"data:[^\"]*\"[^>]*>"
@@ -20,14 +27,14 @@ _WIKI_SOURCE = re.compile(r"Source: (\S+) \(revision (\d+)\)")
 _EXPORT_NOTE = re.compile(r"\A<!-- source:.*?-->\s*", flags=re.DOTALL)
 
 
-def notebook_to_markdown(path):
+def notebook_to_markdown(path: str | Path) -> str:
     """Return a notebook's markdown and code cells as one Markdown string.
 
     Markdown cells are copied verbatim (embedded base64 images are replaced by
     ``[image]``); code cells become fenced ``python`` blocks; outputs are dropped.
     """
     nb = json.loads(Path(path).read_text(encoding="utf-8"))
-    parts = []
+    parts: list[str] = []
     for cell in nb.get("cells", []):
         source = "".join(cell.get("source", [])).rstrip()
         if not source:
@@ -41,7 +48,7 @@ def notebook_to_markdown(path):
     return "\n\n".join(parts) + "\n"
 
 
-def kind_of(filename):
+def kind_of(filename: str | Path) -> str:
     """Classify a corpus file by the uoa_py_course naming convention."""
     name = Path(filename).name
     if name.startswith("goals_"):
@@ -57,7 +64,10 @@ def kind_of(filename):
     return "lecture"
 
 
-def load_corpus(corpus_dir="corpus/uoa_py_course", lectures=None):
+def load_corpus(
+    corpus_dir: str | Path = "corpus/uoa_py_course",
+    lectures: Container[int] | None = None,
+) -> list[Document]:
     """Load the exported course notes as LangChain Documents.
 
     ``lectures`` limits the load, e.g. ``[10, 11, 12, 13]``. Each Document carries
@@ -66,7 +76,7 @@ def load_corpus(corpus_dir="corpus/uoa_py_course", lectures=None):
     from langchain_core.documents import Document
 
     corpus_dir = Path(corpus_dir)
-    docs = []
+    docs: list[Document] = []
     for path in sorted(corpus_dir.rglob("*.md")):
         match = _LECTURE_DIR.search(path.parent.name)
         lecture = int(match.group(1)) if match else 0
@@ -90,13 +100,16 @@ def load_corpus(corpus_dir="corpus/uoa_py_course", lectures=None):
     return docs
 
 
-def load_sections(corpus_dir="corpus/uoa_py_course", lectures=(10, 11, 12, 13)):
+def load_sections(
+    corpus_dir: str | Path = "corpus/uoa_py_course",
+    lectures: Iterable[int] = (10, 11, 12, 13),
+) -> list[dict[str, str]]:
     """Split the course notes at their ``## `` headings, as lec_02b does by hand.
 
     Returns a list of dicts ``{"source", "heading", "text"}``, one per section.
     """
     corpus_dir = Path(corpus_dir)
-    sections = []
+    sections: list[dict[str, str]] = []
     for lecture in lectures:
         for path in sorted((corpus_dir / f"lecture_{lecture:02d}").glob("*.md")):
             text = path.read_text(encoding="utf-8")
@@ -115,13 +128,17 @@ def load_sections(corpus_dir="corpus/uoa_py_course", lectures=(10, 11, 12, 13)):
     return sections
 
 
-def load_eval_set(path="corpus/eval/qa_eval_set.jsonl"):
+def load_eval_set(
+    path: str | Path = "corpus/eval/qa_eval_set.jsonl",
+) -> list[dict[str, Any]]:
     """Read the evaluation set (lec_02d): one JSON object per line."""
     lines = Path(path).read_text(encoding="utf-8").splitlines()
     return [json.loads(line) for line in lines if line.strip()]
 
 
-def fetch_wikipedia_pages(titles, out_dir="data/wikipedia", lang="en"):
+def fetch_wikipedia_pages(
+    titles: Iterable[str], out_dir: str | Path = "data/wikipedia", lang: str = "en"
+) -> list[Document]:
     """Download Wikipedia articles as plain text and return them as Documents.
 
     Uses the MediaWiki API directly (no extra library). Text is CC BY-SA 4.0;
@@ -139,7 +156,7 @@ def fetch_wikipedia_pages(titles, out_dir="data/wikipedia", lang="en"):
     headers = {
         "User-Agent": "teach-llm-system/0.1 (https://github.com/argythana/teach-llm-system)"
     }
-    docs = []
+    docs: list[Document] = []
     for title in titles:
         path = out_dir / (re.sub(r"[^A-Za-z0-9_-]+", "_", title) + ".md")
         if not path.exists():
@@ -150,8 +167,8 @@ def fetch_wikipedia_pages(titles, out_dir="data/wikipedia", lang="en"):
                     params={
                         "action": "query",
                         "prop": "extracts|info",
-                        "explaintext": 1,
-                        "redirects": 1,
+                        "explaintext": "1",
+                        "redirects": "1",
                         "format": "json",
                         "titles": title,
                     },

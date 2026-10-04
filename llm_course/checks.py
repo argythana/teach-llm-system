@@ -5,11 +5,13 @@ cryptic connection error two cells later is the most common way a beginner loses
 minutes; these checks name the fix instead.
 """
 
+from collections.abc import Sequence
+
 OLLAMA_GUIDE = "lecture_01_ollama_models_prompts_langchain/infra_tools/01c_ollama.md"
 MLFLOW_GUIDE = "lecture_02_embeddings_rag_vector_store/infra_tools/02a_mlflow_server.md"
 
 
-def check_ollama(host, models):
+def check_ollama(host: str, models: Sequence[str]) -> None:
     """Raise RuntimeError unless Ollama answers at ``host`` and every model is pulled.
 
     ``models`` is a list of tags such as ``["qwen3:1.7b", "nomic-embed-text"]``.
@@ -29,7 +31,7 @@ def check_ollama(host, models):
         ) from None
 
     # "qwen3:1.7b" is listed as "qwen3:1.7b"; a bare "nomic-embed-text" as "nomic-embed-text:latest".
-    def is_pulled(tag):
+    def is_pulled(tag: str) -> bool:
         return tag in installed or f"{tag}:latest" in installed
 
     missing = [m for m in models if not is_pulled(m)]
@@ -43,7 +45,7 @@ def check_ollama(host, models):
     print(f"Ollama OK at {host}; models ready: {', '.join(models)}")
 
 
-def check_mlflow(tracking_uri):
+def check_mlflow(tracking_uri: str) -> None:
     """Raise RuntimeError unless an MLflow tracking server answers at ``tracking_uri``."""
     import requests
 
