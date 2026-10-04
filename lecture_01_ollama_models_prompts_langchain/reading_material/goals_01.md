@@ -23,7 +23,7 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
   metadata, and read the quantization variants and sizes of a GGUF repository. *(lec_01b
   §2-4)* <!-- G6 -->
 - Use `llmfit` to check hardware fit and Ollama to pull a model from the Hub; write a
-  five-line decision record. *(lec_01b §5-8)* <!-- G7 -->
+  short decision record. *(lec_01b §5-8)* <!-- G7 -->
 - Write a prompt as a versioned Python function, use the system, user and assistant
   roles, and resend history for a multi-turn conversation. *(lec_01c §1-2)* <!-- G8 -->
 - Use few-shot examples and JSON-schema structured output to get answers a program can
