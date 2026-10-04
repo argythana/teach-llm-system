@@ -65,7 +65,7 @@ When `uv sync` has finished, open VS Code (section 6 if it is not installed yet)
 
 1. **File → Open Folder...** and choose the `teach-llm-system` folder.
 1. In the Explorer panel on the left, open `lecture_01_ollama_models_prompts_langchain`,
-   then `reading_material`, then `lec_01a_uv_ollama_first_call_tokens.ipynb`.
+   then `reading_material`, then `lec_01a_first_call_tokens_context.ipynb`.
 1. Click **Select Kernel** (top right of the notebook) → **Python Environments...** →
    the `teach-llm-system` entry, marked **Recommended**.
 
@@ -212,6 +212,15 @@ need to run it for this course**: the next step does it for you.
 
 ## 5. Create the course environment with `uv sync`
 
+A notebook that runs on one laptop can fail on another: a package is missing, or it has
+another version that behaves differently. The virtual environment of the Python course
+solved half of this. The other half stayed open: a `requirements.txt` usually lists only
+the packages you asked for, while the packages *they* need, their **dependencies**, and
+often the exact versions are whatever pip finds that day. `uv` closes the gap with a
+**lock file**,
+[`uv.lock`](https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile): the exact
+version of every package, dependencies included.
+
 The instructor has already decided the environment and pushed the decision to git, in
 three files in the repository:
 
@@ -321,8 +330,19 @@ every time you sync while you still need them.
 
 ## Never use pip in this project
 
-`pip install` inside `.venv/` bypasses `uv.lock`, so your environment silently differs
-from everyone else's. If a notebook fails with `ModuleNotFoundError`:
+`pip install` still works, and that is the trap: it bypasses `uv.lock`, so your
+environment silently differs from everyone else's. In the comment below, **PATH** is the
+list of folders where the terminal looks for programs:
+
+```bash
+# WRONG: installs into whatever Python is first on PATH, invisible to uv.lock
+pip install ollama
+
+# RIGHT: adds the package to pyproject.toml and uv.lock, then installs it
+uv add ollama
+```
+
+If a notebook fails with `ModuleNotFoundError`:
 
 - **A course package:** run `uv sync` (the instructor may have added a package in the
   last `git pull`), or the `uv sync --group ...` line above for an optional notebook.

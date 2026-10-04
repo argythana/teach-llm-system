@@ -99,8 +99,11 @@ shows it) and in `ls` (`ls -a` shows it); VS Code's file panel always shows it.
 
 The configuration cell at the top of every notebook runs `load_dotenv(REPO / ".env")`.
 It copies each line of `.env` into an **environment variable**: a named value the
-operating system keeps for a running program, outside its code. The `huggingface_hub`
-library then finds `HF_TOKEN` by itself; your code never names the token.
+operating system keeps for a running program, outside its code. The cell then reads each
+setting back, for example
+`OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")`: the value from
+`.env`, or the default after the comma when `.env` does not set it. The
+`huggingface_hub` library finds `HF_TOKEN` by itself; your code never names the token.
 
 - **Without a `.env` file** the notebooks still run; only the cells that need the token
   complain.

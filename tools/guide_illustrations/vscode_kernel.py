@@ -95,7 +95,7 @@ SIDE = "".join(
         tree(1, "›&nbsp; practice_exercises"),
         tree(1, "⌄&nbsp; reading_material"),
         tree(2, "&nbsp;&nbsp; goals_01.md"),
-        tree(2, "&nbsp;&nbsp; lec_01a_uv_ollama_firs…", on=True),
+        tree(2, "&nbsp;&nbsp; lec_01a_first_call_to…", on=True),
         tree(2, "&nbsp;&nbsp; lec_01b_choosing_a_mo…"),
         tree(2, "&nbsp;&nbsp; lec_01c_prompts_roles_…"),
         tree(0, "›&nbsp; lecture_02_embeddings_rag_ve…"),
@@ -121,13 +121,13 @@ BODY = f"""
         {SIDE}
       </div>
       <div class="editor">
-        <div class="tabs"><div class="tab"><div class="nb"></div>lec_01a_uv_ollama_first_call_tokens.ipynb
+        <div class="tabs"><div class="tab"><div class="nb"></div>lec_01a_first_call_tokens_context.ipynb
           <span>✕</span></div></div>
         <div class="bar"><span>＋ Code</span><span>＋ Markdown</span><span>▷ Run All</span>
           <span>☰ Outline</span><span>···</span>
           <div class="kernel"><i></i>Select Kernel</div></div>
         <div class="cells">
-          <h1>Lecture 01a: Your laptop as an LLM server</h1>
+          <h1>Lecture 01a: Talking to a local model</h1>
           <p><b>Status: Mandatory reading.</b></p>
           <p>In the Python course you trained models yourself: <span class="mono">fit</span>,
             <span class="mono">predict</span>, a metric. A <b>large language model (LLM)</b> is
@@ -141,7 +141,7 @@ BODY = f"""
       </div>
     </div>
     <div class="status"><span>⑂ main</span><span>⊗ 0 ⚠ 0</span>
-      <span style="margin-left:auto">Cell 1 of 58</span></div>
+      <span style="margin-left:auto">Cell 1 of 35</span></div>
   </div>
   <div class="pick">
     <div class="ttl"><span>←</span>Select a Python Environment</div>

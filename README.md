@@ -30,14 +30,14 @@ decision loop at the end.
 
 ## Sessions
 
-| Lecture | Session | Notebooks (`reading_material/`)                                                                                                                                                    |
-| ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1       | 1       | `lec_01a` your laptop as an LLM server: uv, Ollama, tokens, context, temperature · `lec_01b` choosing a model: requirements first, then the Hugging Face Hub, quantization, llmfit |
-| 1       | 2       | `lec_01c` prompts as code and structured output · `lec_01d` LangChain chains                                                                                                       |
-| 2       | 3       | `lec_02a` embeddings and cosine similarity · `lec_02b` a hand-built RAG, traced with MLflow                                                                                        |
-| 2       | 4       | `lec_02c` chunking · `lec_02d` Chroma, filters, the LangChain RAG chain, and measuring retrieval                                                                                   |
-| 3       | 5       | `lec_03a` an evaluation set and deterministic scorers · `lec_03b` LLM-as-judge and comparing variants                                                                              |
-| 3       | 6       | `lec_03c` tools and agents · `lec_03d` an agentic RAG loop with LangGraph; what it takes                                                                                           |
+| Lecture | Session | Notebooks (`reading_material/`)                                                                                                                                            |
+| ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1       | 1       | `lec_01a` talking to a local model: Ollama, tokens, context, temperature · `lec_01b` choosing a model: requirements first, then the Hugging Face Hub, quantization, llmfit |
+| 1       | 2       | `lec_01c` prompts as code and structured output · `lec_01d` LangChain chains                                                                                               |
+| 2       | 3       | `lec_02a` embeddings and cosine similarity · `lec_02b` a hand-built RAG, traced with MLflow                                                                                |
+| 2       | 4       | `lec_02c` chunking · `lec_02d` Chroma, filters, the LangChain RAG chain, and measuring retrieval                                                                           |
+| 3       | 5       | `lec_03a` an evaluation set and deterministic scorers · `lec_03b` LLM-as-judge and comparing variants                                                                      |
+| 3       | 6       | `lec_03c` tools and agents · `lec_03d` an agentic RAG loop with LangGraph; what it takes                                                                                   |
 
 Letters `e` and `f` in each lecture are optional career-track notebooks: running a model
 with `transformers`, hosted inference, pgvector with Docker, a Wikipedia-scale corpus,
@@ -69,7 +69,7 @@ if you do not. When something fails, look up the message in
 [troubleshooting](troubleshooting.md).
 
 After `01c_ollama`, open the first notebook in VS Code (guide `01a_git_uv`):
-`lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_uv_ollama_first_call_tokens.ipynb`.
+`lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb`.
 
 Hardware: any laptop with 8 GB of RAM runs the default `cpu` tier (`qwen3:1.7b`). Every
 notebook starts with a configuration cell where a GPU owner can switch to the `gpu`

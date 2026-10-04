@@ -8,7 +8,7 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 
 - Set up the course environment with `uv sync` and run the notebooks in VS Code with
   that environment as the kernel; explain why `pip install` is not used in a `uv`
-  project. *(lec_01a §1)* <!-- G1 -->
+  project. *(guide `01a_git_uv`)* <!-- G1 -->
 - Run a local model through Ollama from Python, read tokens in, tokens out and tokens
   per second from the response, and tell whether the model runs on CPU or GPU. *(lec_01a
   §2)* <!-- G2 -->
@@ -48,8 +48,8 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 
 ### Required notebooks
 
-- `lec_01a_uv_ollama_first_call_tokens.ipynb`: uv and the lock file, Ollama as a local
-  server and its API, local versus hosted, the first call and its reply, tokens, context
+- `lec_01a_first_call_tokens_context.ipynb`: Ollama as a local model server and its
+  Python client, local versus hosted, the first call and its reply, tokens, context
   window, temperature.
 - `lec_01b_choosing_a_model_requirements_hf_hub.ipynb`: requirements table, Hub API,
   model cards, licenses and open weights, quantization, llmfit, comparing candidates,
@@ -70,7 +70,8 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
   OpenAI-compatible API, and the one-line swap to a hosted model, weighed against a
   local one. Career-track value: how production systems mix local and hosted models.
 - Guides in `infra_tools/` (`01a_git_uv` to `01d_env_hugging_face`): git and uv, llmfit,
-  Ollama, the `.env` settings file and a Hugging Face token.
+  Ollama (the server, its address and its API), the `.env` settings file and a Hugging
+  Face token.
 
 ## Practice
 

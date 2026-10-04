@@ -49,9 +49,17 @@ fails, look up the message in [troubleshooting](../../troubleshooting.md).
 
 ## Overview
 
-**Ollama** runs open language models on your own computer and exposes them through a
-local web server (`http://localhost:11434`), the same way `mlflow server` exposed
-experiment tracking in the Python course. Nothing you type leaves your laptop.
+**Ollama** runs open language models on your own computer. Nothing you type leaves your
+laptop.
+
+A model is a large file of numbers, up to several gigabytes. To answer, a program must
+load it into memory, which takes seconds, keep it there, and run the computation on the
+CPU or the GPU. Loading it inside every notebook would repeat that wait and hold one
+copy per notebook. Ollama solves this with a **server**: a program that keeps running in
+the background, holds the model in memory, and waits for requests at an address,
+`http://localhost:11434` (section "What `http://localhost:11434` means"). Your code is
+the **client**: it sends a request and gets a response back. `mlflow server` in the
+Python course worked the same way.
 
 Ollama is a **system-native application**: it installs like a browser or an editor, not
 like a Python package, so `uv sync` does not install it.\
@@ -148,6 +156,34 @@ with `qwen3:8b`, then `ollama ps`: `100% GPU` confirms the tier, while a split s
 Without the quoted question, `ollama run qwen3:1.7b` opens an interactive chat in the
 terminal; type `/bye` to leave it.
 
+## What `http://localhost:11434` means
+
+This is the address where Ollama's server waits for requests. The notebooks keep it in
+the setting `OLLAMA_HOST`, and each part has a job:
+
+| Part        | Name     | What it means                                                                                                                                                        |
+| ----------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `http://`   | **HTTP** | the [protocol](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview) browsers use for web pages: the rules for sending a request and getting a response |
+| `localhost` | **host** | which computer: every computer's name for itself (`127.0.0.1` in numbers), so nothing leaves the machine                                                             |
+| `11434`     | **port** | which server on that computer: each server listens on its own number; 11434 is Ollama's default                                                                      |
+
+`mlflow server` in lecture 13 of the Python course was the same idea, at
+`http://127.0.0.1:5000`. This course's MLflow listens on port 5010 (guide
+`02a_mlflow_server`), so the two never collide.
+
+An **API** (application programming interface) is the set of requests a server
+understands, each at its own path after the address
+([Ollama's API](https://docs.ollama.com/api/introduction)). Try two in a browser:
+
+- <http://localhost:11434> answers `Ollama is running` (the check of section 2).
+- <http://localhost:11434/api/tags> returns the pulled models as **JSON**, a text format
+  for data that `lec_01c` uses for structured output.
+
+The `ollama` command and the notebooks send these same requests for you. Ollama also
+understands the request format of OpenAI's API, at `http://localhost:11434/v1`
+([docs](https://docs.ollama.com/api/openai-compatibility)); the optional `lec_01f` uses
+it.
+
 ## The Ollama application and the `ollama` Python package
 
 Two different things share the name:
@@ -164,6 +200,16 @@ The command line and the Python package talk to the same server: a model pulled 
 `ollama pull` in a terminal is immediately available to `ollama.Client(...).chat(...)`
 in a notebook. If the application is not running, the package can do nothing, which is
 what the `Cannot reach Ollama` message means.
+
+The package turns each Python call into one request to the API, and the JSON reply into
+a Python object whose fields you read with a dot, like `df.shape`:
+
+| Python call                       | Request it sends                       |
+| --------------------------------- | -------------------------------------- |
+| `ollama.Client(host=OLLAMA_HOST)` | none; it stores the address            |
+| `client.list()`                   | `/api/tags`: the models on disk        |
+| `client.ps()`                     | `/api/ps`: the models loaded in memory |
+| `client.chat(...)`                | `/api/chat`: a conversation            |
 
 Where the course uses the Python package: lecture 1 talks to the server directly with it
 (`lec_01a` to `lec_01c`: `client.chat`, `client.list`, `client.ps`, structured output
