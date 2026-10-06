@@ -5176,7 +5176,6 @@ dependencies = [
     { name = "requests" },
     { name = "tokenizers" },
     { name = "transformers" },
-    { name = "waitress", marker = "sys_platform == 'win32'" },
 ]
 
 [package.dev-dependencies]
@@ -5223,7 +5222,6 @@ requires-dist = [
     { name = "requests", specifier = ">=2.34.2" },
     { name = "tokenizers", specifier = ">=0.23.2" },
     { name = "transformers", specifier = ">=5.17.0" },
-    { name = "waitress", marker = "sys_platform == 'win32'", specifier = ">=3.0.2" },
 ]
 
 [package.metadata.requires-dev]
