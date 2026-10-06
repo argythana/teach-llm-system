@@ -33,7 +33,8 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 - Build a LangChain chain (prompt template, chat model, output parser), read the prompt
   it renders, run it with `invoke` and `batch`, and use structured output inside it;
   explain what the framework adds over the plain client, what it costs, and when the
-  plain client is enough. *(lec_01d §1-3, §5)* <!-- G10 -->
+  plain client is enough, and why this course chose LangChain. *(lec_01d §1-3, §5-6)*
+      <!-- G10 -->
 
 ### Optional / Career track
 
