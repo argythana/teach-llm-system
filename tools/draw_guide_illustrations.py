@@ -7,7 +7,9 @@
 
 The pictures in `lecture_*/infra_tools/screenshots/` are drawings, not captures: each
 one is a small HTML page (tools/guide_illustrations/*.py) that imitates a Windows,
-PowerShell, VS Code or Hugging Face screen, with green circles on what the student must click.
+PowerShell, VS Code, Hugging Face, MLflow or Docker Desktop screen, with green circles on
+what the student must click. A picture goes to the lecture its name starts with:
+`02a_...` to `lecture_02_*/infra_tools/screenshots/`.
 This script renders every page with headless Firefox at double resolution and saves
 it as a palette PNG, about a third of the size of the raw capture.
 
@@ -30,12 +32,33 @@ from PIL import Image
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from guide_illustrations import hf_token, powershell, vscode_kernel, windows  # noqa: E402
+from guide_illustrations import (  # noqa: E402
+    docker_desktop,
+    hf_token,
+    mlflow_ui,
+    powershell,
+    vscode_kernel,
+    vscode_terminal,
+    windows,
+)
 
-OUTPUT_DIR = REPO / "lecture_01_ollama_models_prompts_langchain/infra_tools/screenshots"
-MODULES = (windows, vscode_kernel, hf_token, powershell)
+MODULES = (
+    windows,
+    vscode_kernel,
+    hf_token,
+    powershell,
+    vscode_terminal,
+    mlflow_ui,
+    docker_desktop,
+)
 PAGE_WIDTH = 1000  # CSS pixels; every page sets `zoom: 2`, so the PNG is twice as wide
 SCALE = 2
+
+
+def output_dir(name):
+    """The screenshots folder of the lecture a picture's name starts with ("02a_..." -> lecture 2)."""
+    (infra_tools,) = REPO.glob(f"lecture_{name[:2]}_*/infra_tools")
+    return infra_tools / "screenshots"
 
 
 def pages():
@@ -97,7 +120,6 @@ def main():
     if firefox is None:
         sys.exit("Firefox is not on PATH; it renders the pages.")
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         workdir = Path(tmp)
         profile = workdir / "profile"
@@ -107,7 +129,8 @@ def main():
             'user_pref("layout.css.devPixelsPerPx", "2.0");\n', encoding="utf-8"
         )
         for name, html, height in selected:
-            png = OUTPUT_DIR / f"{name}.png"
+            png = output_dir(name) / f"{name}.png"
+            png.parent.mkdir(exist_ok=True)
             render(firefox, html, height, png, workdir)
             compress(png)
             print(f"{png.relative_to(REPO)}  {png.stat().st_size // 1024} KB")

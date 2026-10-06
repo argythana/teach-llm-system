@@ -2,14 +2,26 @@
 
 ## Quick start
 
-Open a new terminal, move into the `teach-llm-system` folder, and run:
+**Windows:** open the `teach-llm-system` folder in VS Code and choose **Terminal → New
+Terminal**. The terminal opens in that folder.
+
+![VS Code: the Terminal menu (1), then New Terminal (2)](screenshots/02a_vscode_new_terminal.png)
+
+**macOS / Linux:** the same in VS Code, or any terminal in the `teach-llm-system`
+folder.
+
+Then, on every system:
 
 ```bash
 cd mlflow_server
 uv run mlflow server --host 127.0.0.1 --port 5010
 ```
 
+![VS Code terminal: cd mlflow_server (1), the server command (2), and Uvicorn running on http://127.0.0.1:5010 (3); the server keeps running there](screenshots/02a_vscode_mlflow_server.png)
+
 Leave this terminal open. In a browser, open <http://127.0.0.1:5010>.
+
+![MLflow in the browser: the address 127.0.0.1:5010 (1) and the llm-course-02-rag experiment under Recent Experiments (2)](screenshots/02a_browser_mlflow_home.png)
 
 The sections below explain every step; they are part of the study material. If a step
 fails, look up the message in [troubleshooting](../../troubleshooting.md).
@@ -24,7 +36,10 @@ MLflow: [source on GitHub](https://github.com/mlflow/mlflow),
 [documentation](https://mlflow.org/docs/latest/).
 
 At <http://127.0.0.1:5010>, the **Traces** tab of an experiment is where the course's
-model calls appear.
+model calls appear. The experiment `llm-course-02-rag` exists once `lec_02b` has run;
+open it from **Recent Experiments** on the home page (2 in the picture above).
+
+![The llm-course-02-rag experiment: Traces in the left menu (1), and one row per model call; click a row (2) to open its trace](screenshots/02a_browser_mlflow_traces.png)
 
 ## It runs only while its terminal is open
 
@@ -65,7 +80,12 @@ Restart the kernel of any open notebook. The configuration cell reads
 `MLFLOW_TRACKING_URI` and falls back to port `5010` when `.env` does not set it. For one
 notebook only, uncomment the `MLFLOW_URI` line of its configuration cell instead.
 
-## Windows
+## What the terminal shows
 
-On Windows `mlflow server` uses the [`waitress`](https://github.com/Pylons/waitress) web
-server, which `uv sync` installs there automatically. The command is the same.
+The command is the same on Windows, macOS and Linux. On the first start MLflow creates
+its database, so the terminal prints a few `Creating initial MLflow database tables`
+lines and a note about the security settings. The line to wait for is
+`Uvicorn running on http://127.0.0.1:5010` (3 in the terminal picture): the server is
+ready. [Uvicorn](https://uvicorn.dev/) is the web server MLflow runs on. Nothing returns
+you to the prompt, because the server keeps running in that terminal until you press
+`Ctrl+C`.

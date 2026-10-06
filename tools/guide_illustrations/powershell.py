@@ -1,9 +1,9 @@
-"""PowerShell illustrations for guides 01b (llmfit) and 01c (Ollama) on Windows.
+"""PowerShell illustrations for guides 01b (llmfit), 01c (Ollama) and 02b (Docker) on Windows.
 
 Each page is a Windows PowerShell window: the command the student types, the output
 it prints, and green circles on what to type and what to read. The outputs copy the
-real ones of llmfit 1.1.16, uv, Ollama's install.ps1 and `ollama run --verbose`, with
-example hardware and timings.
+real ones of llmfit 1.1.16, uv, Ollama's install.ps1, `ollama run --verbose` and
+Docker Compose v2, with example hardware and timings.
 """
 
 CSS = """
@@ -35,6 +35,7 @@ body { width: 1000px; overflow: hidden; position: relative; background: #dfe6f0;
          border-radius: 50%; background: #12a150; color: #fff; font-weight: 700;
          font-size: 14px; display: flex; align-items: center; justify-content: center;
          z-index: 11; border: 2px solid #fff; font-family: "Noto Sans", sans-serif; }
+.small { font-size: 9.6px; }
 .note { color: #7ee2a8; font-weight: 600; font-size: 12px; margin-left: 58px;
         font-family: "Noto Sans", sans-serif; }
 """
@@ -154,9 +155,37 @@ OLLAMA_RUN = window(
     380,
 )
 
+COURSE = r"PS C:\Users\you\courses\teach-llm-system&gt; "
+
+COMPOSE_UP = window(
+    [
+        COURSE
+        + circled(
+            '<span class="cmd">docker</span> compose up -d', "1", "margin-left:14px"
+        ),
+        "[+] Running 3/3",
+        " ✔ Network teach-llm-system_default          Created    0.1s",
+        ' ✔ Volume "teach-llm-system_pgvector-data"   Created    0.0s',
+        " ✔ Container llm-course-pgvector             Started    0.7s",
+        COURSE
+        + circled(
+            '<span class="cmd">docker</span> compose ps', "2", "margin-left:14px"
+        ),
+        '<span class="small">NAME                  IMAGE                    COMMAND                  SERVICE    CREATED          STATUS                       PORTS</span>',
+        '<span class="small">llm-course-pgvector   pgvector/pgvector:pg17   "docker-entrypoint.s…"   pgvector   12 seconds ago   </span>'
+        + circled(
+            '<span class="small">Up 11 seconds (healthy)</span>', "3", "margin-left:2px"
+        )
+        + '<span class="small" style="margin-left:50px">0.0.0.0:5433-&gt;5432/tcp</span>',
+        CURSOR.replace(PROMPT, COURSE),
+    ],
+    340,
+)
+
 PAGES = {
     "01b_powershell_install_llmfit": INSTALL_LLMFIT,
     "01b_powershell_llmfit_plan": LLMFIT_PLAN,
     "01c_powershell_install_ollama": INSTALL_OLLAMA,
     "01c_powershell_ollama_run": OLLAMA_RUN,
+    "02b_powershell_compose_up": COMPOSE_UP,
 }
