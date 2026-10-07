@@ -62,6 +62,8 @@ def main():
     args = parser.parse_args()
 
     os.environ["COURSE_TIER"] = args.tier
+    # MLflow >= 3.17 logs a hint on import when a coding agent runs it; keep it out of outputs.
+    os.environ["MLFLOW_DISABLE_AGENT_HINT"] = "1"
     # The same settings file the notebooks' configuration cell reads.
     load_dotenv(REPO / ".env")
     todo = list(notebooks(args.lecture, args.optional))
