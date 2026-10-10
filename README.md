@@ -68,7 +68,7 @@ may run the quick starts of `01a_git_uv` to `01c_ollama` before class; nothing i
 if you do not. When something fails, look up the message in
 [troubleshooting](troubleshooting.md).
 
-After `01c_ollama`, open the first notebook in VS Code (guide `01a_git_uv`):
+After finishing all instructions for lecture 1, open the first notebook:
 `lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb`.
 
 Hardware: a laptop with 8 GB of RAM and about 5 GB of free disk space should run the
