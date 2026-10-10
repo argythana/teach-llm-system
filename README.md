@@ -2,17 +2,18 @@
 
 A short course, 3 lectures of two 75-minute sessions each, for graduates of the
 [Python for Data Science course](https://github.com/argythana/uoa_py_course) at the
-University of Athens.
+National and Kapodistrian University of Athens.
 
 ## About the course
 
-This is a new official course of the
+This is an official course of the
 [Business Information Systems](https://bis-analytics.econ.uoa.gr/) postgraduate program
-of the University of Athens, offered as part of its Research Seminars Series.
+of the same university, offered as part of its Research Seminars Series.
 
 You know Python, pandas, scikit-learn, and MLflow; you have never built anything with a
-language model. By the end you will have built, on your own laptop and with no API key,
-a question-answering assistant over your own course notes and measured how good it is.
+language model. By the end you will have built, on your own laptop, with a model that
+runs locally and no paid service, a question-answering assistant over the notes of the
+Python course you took, and measured how good it is.
 
 ## What you will build
 
@@ -23,10 +24,9 @@ question ──► retriever (Chroma) ──► prompt ──► local model (Ol
                                                  MLflow: traces, evaluation, comparison
 ```
 
-The stack is the one used in industry today, in its open-source form: **Ollama** serves
-the model, **LangChain** connects the parts, **Chroma** stores the embeddings,
-**MLflow** records what happened and scores the answers, and **LangGraph** adds a
-decision loop at the end.
+The stack is a common open-source one used in industry: **Ollama** serves the model,
+**LangChain** connects the parts, **Chroma** stores the embeddings, **MLflow** records
+what happened and scores the answers, and **LangGraph** adds a decision loop at the end.
 
 ## Sessions
 
@@ -40,18 +40,18 @@ decision loop at the end.
 | 3       | 6       | `lec_03c` tools and agents · `lec_03d` an agentic RAG loop with LangGraph; what it takes                                                                                   |
 
 Letters `e` and `f` in each lecture are optional career-track notebooks: running a model
-with `transformers`, hosted inference, pgvector with Docker, a Wikipedia-scale corpus,
+with `transformers`, hosted inference, `pgvector` with Docker, a Wikipedia-scale corpus,
 judging the judge, and DSPy prompt optimization. Each lecture has `goals_NN.md` (what
 you should be able to do) and `practice_exercises/` with solutions. The course ends with
-a [final assignment](final_assignment/).
+a [final assignment](final_assignment/README.md).
 
 ## Setup, together in class
 
 Setting up the tools is part of the course, not homework: we run it together in class,
 one guide at a time. Each lecture keeps its guides in an `infra_tools/` folder, next to
 `reading_material/` and `practice_exercises/`. Each guide starts with a **Quick start**,
-the commands for your system without explanation; the rest of the guide explains them
-and is study material.
+the commands for your system without explanation; the rest of the guide explains them in
+detail and is study material.
 
 | When                          | Guide                                                                                                    | You end with                             |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
@@ -71,21 +71,22 @@ if you do not. When something fails, look up the message in
 After `01c_ollama`, open the first notebook in VS Code (guide `01a_git_uv`):
 `lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb`.
 
-Hardware: any laptop with 8 GB of RAM runs the default `cpu` tier (`qwen3:1.7b`). Every
-notebook starts with a configuration cell where a GPU owner can switch to the `gpu`
-tier. Windows, macOS and Linux are all fine; no Docker is needed for the mandatory path.
+Hardware: a laptop with 8 GB of RAM and about 5 GB of free disk space should run the
+default `cpu` tier (`qwen3:1.7b`). Every notebook starts with a configuration cell where
+a GPU owner can switch to the `gpu` tier. The course is tested on Linux and Windows, and
+macOS should work; no Docker is needed for the mandatory path.
 
 ## The corpus
 
 `corpus/uoa_py_course/` holds the Python course's own notebooks exported to Markdown. It
 is the dataset of this course: you will ask questions you already know the answers to,
-which is the only way to judge whether a retrieval system is telling the truth. See
-`corpus/LICENSE_NOTE.md`.
+so you can check each answer, and the passages it came from, yourself. Lecture 3 then
+automates that check with an evaluation set. See `corpus/LICENSE_NOTE.md`.
 
 ## How this course was built
 
 The course was designed and written with an AI coding assistant. `ai_collaboration_log/`
-holds the curated transcripts of every session, the instructor's reflections on the
+holds the curated transcripts of selected sessions, the instructor's reflections on the
 collaboration, and an automated evaluation of the assistant's replies that uses the same
 MLflow tooling lecture 3 teaches.
 
@@ -100,4 +101,4 @@ Code, including notebook code cells, is licensed under the [MIT License](LICENSE
 (Markdown files and notebook text cells) is licensed under
 [CC BY 4.0](LICENSE-CC-BY-4.0.txt). Parts of the prose are adapted from
 [teach-mlflow](https://github.com/argythana/teach-mlflow) by Thanasis Argyriou, licensed
-under CC BY 4.0, with changes.
+under CC BY 4.0.
