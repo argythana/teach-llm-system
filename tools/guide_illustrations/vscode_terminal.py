@@ -128,10 +128,10 @@ SIDE = f"""<div class="side">
   <div class="root">⌄ TEACH-LLM-SYSTEM</div>
   {tree(0, "›&nbsp; .venv")}
   {tree(0, "›&nbsp; corpus")}
+  {tree(0, "›&nbsp; course_helpers")}
   {tree(0, "›&nbsp; data")}
   {tree(0, "›&nbsp; lecture_01_ollama_models_pro…")}
   {tree(0, "›&nbsp; lecture_02_embeddings_rag_ve…")}
-  {tree(0, "›&nbsp; llm_course")}
   {tree(0, "›&nbsp; mlflow_server")}
   {tree(0, "&nbsp;&nbsp; .env")}
   {tree(0, "&nbsp;&nbsp; pyproject.toml")}

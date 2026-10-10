@@ -71,7 +71,7 @@ def remove() -> None:
 def verify() -> None:
     import mlflow.assistant.providers as providers
 
-    from llm_course.mlflow_copilot_provider import install
+    from course_helpers.mlflow_copilot_provider import install
 
     install()
     names = [p.name for p in providers.list_providers()]

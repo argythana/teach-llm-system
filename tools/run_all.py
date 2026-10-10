@@ -88,7 +88,7 @@ def main():
     load_dotenv(REPO / ".env")
     todo = list(notebooks(args.lecture, args.optional))
     if not args.skip_preflight:
-        from llm_course.checks import check_mlflow, check_ollama
+        from course_helpers.checks import check_mlflow, check_ollama
 
         check_ollama(
             os.environ.get("OLLAMA_HOST", "http://localhost:11434"), MODELS[args.tier]

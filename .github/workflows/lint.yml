@@ -40,7 +40,7 @@ jobs:
           uv run ruff check .
           uv run ruff format --check .
       - name: Import smoke test (Windows wheels included)
-        run: uv run python -c "import llm_course, chromadb, langchain_ollama, langgraph, mlflow, transformers, huggingface_hub; print('ok')"
+        run: uv run python -c "import course_helpers, chromadb, langchain_ollama, langgraph, mlflow, transformers, huggingface_hub; print('ok')"
       - name: Corpus manifest is consistent
         run: uv run python tools/export_corpus.py --check
       - name: Pre-commit hooks (Linux only)

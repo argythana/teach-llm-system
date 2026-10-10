@@ -90,6 +90,7 @@ SIDE = "".join(
     (
         tree(0, "›&nbsp; .venv"),
         tree(0, "›&nbsp; corpus"),
+        tree(0, "›&nbsp; course_helpers"),
         tree(0, "⌄&nbsp; lecture_01_ollama_models_pro…"),
         tree(1, "›&nbsp; infra_tools"),
         tree(1, "›&nbsp; practice_exercises"),
@@ -99,7 +100,6 @@ SIDE = "".join(
         tree(2, "&nbsp;&nbsp; lec_01b_choosing_a_mo…"),
         tree(2, "&nbsp;&nbsp; lec_01c_prompts_roles_…"),
         tree(0, "›&nbsp; lecture_02_embeddings_rag_ve…"),
-        tree(0, "›&nbsp; llm_course"),
         tree(0, "&nbsp;&nbsp; pyproject.toml"),
         tree(0, "&nbsp;&nbsp; README.md"),
         tree(0, "&nbsp;&nbsp; uv.lock"),

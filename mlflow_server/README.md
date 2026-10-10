@@ -59,12 +59,12 @@ it finds installed, Claude Code before Codex, which is why the panel first opene
 Claude on this machine without any configuration.
 
 This repository adds a **GitHub Copilot CLI** provider
-(`llm_course/mlflow_copilot_provider.py`), built like MLflow's own Claude Code provider:
-one non-interactive `copilot -p` run per turn, resumed on the next turn, with MLflow's
-skills available to it. It uses only the official CLI and the instructor's Copilot
-subscription (GitHub Education), one premium request per turn, and never the Azure
-OpenAI deployment that the instructor's Codex is configured with. Two commands wire it
-in:
+(`course_helpers/mlflow_copilot_provider.py`), built like MLflow's own Claude Code
+provider: one non-interactive `copilot -p` run per turn, resumed on the next turn, with
+MLflow's skills available to it. It uses only the official CLI and the instructor's
+Copilot subscription (GitHub Education), one premium request per turn, and never the
+Azure OpenAI deployment that the instructor's Codex is configured with. Two commands
+wire it in:
 
 ```bash
 uv run python tools/install_copilot_provider.py         # once: ~/.mlflow/assistant/config.json (Copilot selected,
@@ -73,10 +73,10 @@ uv run python tools/install_copilot_provider.py         # once: ~/.mlflow/assist
 cd mlflow_server && uv run python ../tools/mlflow_server.py --host 127.0.0.1 --port 5010
 ```
 
-The launcher is `mlflow server` with one change: uvicorn loads `llm_course.mlflow_app`,
-which registers the provider before the Assistant API enumerates providers. A plain
-`mlflow server` still works for everything else and shows the built-in providers only.
-The other providers stay in the menu; switch there, or edit
+The launcher is `mlflow server` with one change: uvicorn loads
+`course_helpers.mlflow_app`, which registers the provider before the Assistant API
+enumerates providers. A plain `mlflow server` still works for everything else and shows
+the built-in providers only. The other providers stay in the menu; switch there, or edit
 `~/.mlflow/assistant/config.json` (`selected`, `model`).
 `tools/install_copilot_provider.py --remove` undoes the config entry.
 

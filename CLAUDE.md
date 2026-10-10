@@ -67,7 +67,7 @@ Every teaching notebook, in this order:
    variables in the terminal is explained in guide `01d_env_hugging_face` but never the
    course's pattern.
 1. A "Rebuild inputs" cell when the notebook depends on earlier work, calling
-   `llm_course` helpers so a student who missed a session can continue.
+   `course_helpers` helpers so a student who missed a session can continue.
 1. Numbered sections `## 1.` ...: Markdown motivates, code demonstrates, Markdown reads
    the output back.
 1. `## Recap` bullets and a pointer to the next notebook.
@@ -109,8 +109,8 @@ backticks, because mdformat deletes backticked words there.
   dependencies, `uv run <tool>`; commit `uv.lock` with `pyproject.toml`. Optional group:
   `career-track` (pgvector packages, dspy, torch from the CPU index), installed with
   `uv sync --group career-track`.
-- `llm_course/` is a tiny functions-only package installed by `uv sync`; every helper
-  was first written live in a notebook and then promoted.
+- `course_helpers/` is a tiny functions-only package installed by `uv sync`; every
+  helper was first written live in a notebook and then promoted.
 
 ## Runtime prerequisites (system installs, not pip packages)
 
@@ -129,7 +129,7 @@ backticks, because mdformat deletes backticked words there.
 - Optional: Docker for pgvector (`docker-compose.yml`), a Hugging Face read token in
   `.env`.
 - Instructor only: the MLflow Assistant runs on the GitHub Copilot CLI through
-  `tools/mlflow_server.py` (registers `llm_course/mlflow_copilot_provider.py`) after
+  `tools/mlflow_server.py` (registers `course_helpers/mlflow_copilot_provider.py`) after
   `tools/install_copilot_provider.py` wrote `~/.mlflow/assistant/config.json`. Never use
   the instructor's Azure OpenAI deployment for this project.
 

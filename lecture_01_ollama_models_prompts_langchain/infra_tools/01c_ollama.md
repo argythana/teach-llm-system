@@ -213,7 +213,7 @@ a Python object whose fields you read with a dot, like `df.shape`:
 
 Where the course uses the Python package: lecture 1 talks to the server directly with it
 (`lec_01a` to `lec_01c`: `client.chat`, `client.list`, `client.ps`, structured output
-with `format=`), and `llm_course.checks.check_ollama` uses it in every configuration
+with `format=`), and `course_helpers.checks.check_ollama` uses it in every configuration
 cell. From `lec_01d` on, LangChain's `langchain-ollama` package talks to the same server
 on your behalf, and in lecture 3 MLflow's judge does too; the application stays the one
 thing that runs the models.

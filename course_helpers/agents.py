@@ -22,7 +22,7 @@ from langchain_core.tools import BaseTool, tool
 from mlflow.entities import SpanType, Trace
 from mlflow.genai.scorers import scorer
 
-from llm_course.rag import DEFAULT_RAG_PROMPT, format_context
+from course_helpers.rag import DEFAULT_RAG_PROMPT, format_context
 
 # The Python course has lectures 1 to 13 (corpus/uoa_py_course/lecture_01 ... _13).
 FIRST_LECTURE, LAST_LECTURE = 1, 13
@@ -49,7 +49,7 @@ def make_course_tools(
 ) -> list[BaseTool]:
     """Return the course's tools: ``count_mentions``, ``list_notebooks``, ``search_notes``.
 
-    ``documents`` are the notes from ``llm_course.corpus.load_corpus``; ``retriever``
+    ``documents`` are the notes from ``course_helpers.corpus.load_corpus``; ``retriever``
     (for example ``store.as_retriever(...)``, lec_02d) adds ``search_notes``. Every tool
     only reads the notes: no files written, no network, no shell (lec_03c section 7).
     """

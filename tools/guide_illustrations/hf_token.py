@@ -210,9 +210,9 @@ def tree(indent: int, text: str, on: bool = False) -> str:
 VS_SIDE = "".join(
     (
         tree(0, "›&nbsp; .venv"),
+        tree(0, "›&nbsp; course_helpers"),
         tree(0, "›&nbsp; lecture_01_ollama_models_pro…"),
         tree(0, "›&nbsp; lecture_02_embeddings_rag_ve…"),
-        tree(0, "›&nbsp; llm_course"),
         f'<div class="tree on" style="padding:6px 0 6px 36px;margin:12px 0">{circled(".env", "1", "padding-right:60px", "right")}</div>',
         tree(0, "&nbsp;&nbsp;&nbsp; .env.example"),
         tree(0, "&nbsp;&nbsp;&nbsp; .gitignore"),

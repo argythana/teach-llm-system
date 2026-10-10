@@ -6,7 +6,7 @@
     uv run python tools/export_corpus.py --check                        # verify corpus matches manifest
 
 Standard library only, so it also runs before `uv sync`. Notebook cells become
-Markdown (see llm_course.corpus.notebook_to_markdown); .py and .txt files are fenced.
+Markdown (see course_helpers.corpus.notebook_to_markdown); .py and .txt files are fenced.
 """
 
 import argparse
@@ -21,7 +21,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
-from llm_course.corpus import notebook_to_markdown  # noqa: E402
+from course_helpers.corpus import notebook_to_markdown  # noqa: E402
 
 SOURCE_REPO = "https://github.com/argythana/uoa_py_course"
 OUT_DIR = REPO / "corpus" / "uoa_py_course"

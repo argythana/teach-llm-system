@@ -4,8 +4,8 @@
     cd mlflow_server
     uv run python ../tools/mlflow_server.py --host 127.0.0.1 --port 5010   # same flags as `mlflow server`
 
-This is `mlflow server` with one change: uvicorn loads `llm_course.mlflow_app:app`, which
-registers the Copilot provider (see llm_course/mlflow_copilot_provider.py) before
+This is `mlflow server` with one change: uvicorn loads `course_helpers.mlflow_app:app`, which
+registers the Copilot provider (see course_helpers/mlflow_copilot_provider.py) before
 creating MLflow's FastAPI application. The Assistant panel then lists "GitHub Copilot CLI"
 next to Claude Code, Codex CLI and Ollama, and uses it when it is the selected provider in
 `~/.mlflow/assistant/config.json` (see tools/install_copilot_provider.py).
@@ -18,7 +18,7 @@ import sys
 
 import mlflow.server as mlflow_server
 
-COURSE_APP = "llm_course.mlflow_app:app"
+COURSE_APP = "course_helpers.mlflow_app:app"
 
 _original_build_uvicorn_command = mlflow_server._build_uvicorn_command
 

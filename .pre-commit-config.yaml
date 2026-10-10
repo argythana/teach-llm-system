@@ -60,10 +60,10 @@ repos:
         files: "\\.ipynb$"
         require_serial: true
       - id: "ruff-check-py"
-        name: "ruff format + check (llm_course/, tools/)"
+        name: "ruff format + check (course_helpers/, tools/)"
         entry: bash -c 'uv run ruff format "$@" && uv run ruff check --fix "$@"' --
         language: system
-        files: "^(llm_course|tools)/.*\\.py$"
+        files: "^(course_helpers|tools)/.*\\.py$"
         require_serial: true
       - id: "wrap-notebook-markdown"
         name: "wrap + justify (notebook markdown cells)"

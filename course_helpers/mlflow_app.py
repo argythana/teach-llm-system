@@ -5,7 +5,7 @@
 before the Assistant API enumerates providers. Nothing else differs from `mlflow server`.
 """
 
-from llm_course.mlflow_copilot_provider import install
+from course_helpers.mlflow_copilot_provider import install
 
 install()
 
