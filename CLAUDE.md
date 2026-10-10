@@ -40,6 +40,15 @@ them.
   with a count check, use `exist_ok=True`, never `pip install` in a cell.
 - **Write for a public reader on unknown hardware.** No "your 8 GB GPU"; timings are "in
   one example run" numbers. Offer the cpu/gpu tier choice, never bake in this machine.
+- **Run-independent wording (IMPORTANT: this has broken the notebooks several times).**
+  Model answers, scores, rankings, retrieved chunks, token counts, timings and ports
+  change between runs, machines, and Ollama or model versions. Markdown, code comments
+  and printed strings must stay true on any run: describe what to look for in the output
+  ("compare what each answer says `axis` does"), not what one run printed; quote a value
+  only as "in one example run"; when a behaviour may or may not happen (a question that
+  retrieval sometimes misses), say so and, where it matters, show a contrasting example
+  that does not depend on luck. Double-check every cell that reads an output back after
+  each `--inplace` re-run.
 - **Add an example only when it teaches something new.** A second example must contrast.
 - **Link facts on first mention** (model cards on `ollama.com`/`huggingface.co`, library
   docs) and audit the links before shipping.
@@ -143,7 +152,9 @@ are the instructor's own text; draft them, do not finalise them.
 
 - `uv run python tools/run_all.py [--lecture N] [--optional] [--inplace]` executes the
   notebooks in order with their own folder as cwd (preflight checks Ollama and MLflow).
-  Use `--inplace` to refresh committed outputs before a commit.
+  Use `--inplace` to refresh committed outputs before a commit, then re-read every
+  Markdown cell, comment and printed string that describes an output against the new
+  outputs (run-independent wording, above).
 - `uv run prek run --all-files` runs the hooks (gitleaks, ruff on notebooks, mdformat,
   markdown wrap/justify). CI (`.github/workflows/lint.yml`) lints and import-smokes on
   Linux and Windows; it does not execute notebooks.
