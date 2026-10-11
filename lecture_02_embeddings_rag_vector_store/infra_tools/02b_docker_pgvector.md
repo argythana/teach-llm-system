@@ -17,7 +17,7 @@ Then, in a terminal, from the `teach-llm-system` folder (on Windows, VS Code's
 ```bash
 docker compose up -d
 docker compose ps               # wait until STATUS shows "healthy"
-uv sync --group pgvector
+uv sync --group career-track
 ```
 
 ![PowerShell: docker compose up -d (1), docker compose ps (2), and STATUS Up 11 seconds (healthy) (3)](screenshots/02b_powershell_compose_up.png)
@@ -99,11 +99,12 @@ database and tells `lec_02e` where to find it. Run `docker compose up -d` again.
 From the `teach-llm-system` folder:
 
 ```bash
-uv sync --group pgvector
+uv sync --group career-track
 ```
 
-A later plain `uv sync` removes these packages again (lecture 1, guide `01a_git_uv`,
-"Optional packages").
+This installs the optional group of all career-track notebooks, with the PostgreSQL
+client of `lec_02e`. A later plain `uv sync` removes these packages again (lecture 1,
+guide `01a_git_uv`, "Optional packages").
 
 ## 4. Stop it
 

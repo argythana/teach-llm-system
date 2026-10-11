@@ -316,12 +316,12 @@ it for every tool of the course environment (`uv run mlflow server ...` in lectu
 
 ## Optional packages
 
-Two career-track notebooks need extra packages that most students will not install. From
-the `teach-llm-system` folder:
+Three career-track notebooks, `lec_01e`, `lec_02e` and `lec_03f`, need extra packages
+that most students will not install. They sit in one optional group, `career-track`.
+From the `teach-llm-system` folder:
 
 ```bash
-uv sync --group pgvector          # lec_02e, needs Docker too
-uv sync --group transformers-run  # lec_01e, downloads PyTorch (~200 MB)
+uv sync --group career-track  # downloads PyTorch (~200 MB); lec_02e needs Docker too
 ```
 
 `uv sync` makes `.venv/` match exactly what you ask for, so a later plain `uv sync` (for
@@ -345,7 +345,7 @@ uv add ollama
 If a notebook fails with `ModuleNotFoundError`:
 
 - **A course package:** run `uv sync` (the instructor may have added a package in the
-  last `git pull`), or the `uv sync --group ...` line above for an optional notebook.
+  last `git pull`), or `uv sync --group career-track` (above) for an optional notebook.
 - **A package for your own experiment:** `uv add <package>`, not pip. It also writes the
   package into `pyproject.toml` and `uv.lock`, which are course files, so the next
   `git pull` may refuse to run until you undo that with `git restore .`.

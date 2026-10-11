@@ -106,8 +106,9 @@ backticks, because mdformat deletes backticked words there.
 - Python **>= 3.12** (`.python-version` = 3.12; students have it from the Python course;
   `dspy` caps below 3.15). This diverges from teach-mlflow's 3.14 on purpose.
 - **`uv` only. Never pip.** `uv sync` to install, `uv add` / `uv remove` to change
-  dependencies, `uv run <tool>`; commit `uv.lock` with `pyproject.toml`. Optional
-  groups: `pgvector`, `dspy`, `transformers-run` (torch from the CPU index).
+  dependencies, `uv run <tool>`; commit `uv.lock` with `pyproject.toml`. Optional group:
+  `career-track` (pgvector packages, dspy, torch from the CPU index), installed with
+  `uv sync --group career-track`.
 - `llm_course/` is a tiny functions-only package installed by `uv sync`; every helper
   was first written live in a notebook and then promoted.
 

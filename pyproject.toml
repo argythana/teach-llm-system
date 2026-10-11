@@ -25,11 +25,18 @@ dependencies = [
     "plotly>=7.1.0",
     "python-dotenv>=1.2.3",
     "requests>=2.34.2",
+    "scikit-learn>=1.9.1",
     "tokenizers>=0.23.2",
     "transformers>=5.17.0",
 ]
 
 [dependency-groups]
+career-track = [
+    "dspy>=3.3.1",
+    "langchain-postgres>=0.0.17",
+    "psycopg[binary]>=3.3.5",
+    "torch>=2.14.0",
+]
 dev = [
     "mdformat>=1.0.0",
     "mdformat-gfm>=1.0.0",
@@ -37,16 +44,6 @@ dev = [
     "nbformat>=5.11.1",
     "prek>=0.5.3",
     "ruff>=0.16.7",
-]
-dspy = [
-    "dspy>=3.3.1",
-]
-pgvector = [
-    "langchain-postgres>=0.0.17",
-    "psycopg[binary]>=3.3.5",
-]
-transformers-run = [
-    "torch>=2.14.0",
 ]
 
 [tool.uv]
