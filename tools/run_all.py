@@ -47,6 +47,24 @@ def notebooks(lecture=None, optional=False):
         yield path
 
 
+WIDGET = "application/vnd.jupyter.widget-view+json"
+
+
+def strip_progress_widgets(path):
+    """Drop widget outputs (mlflow.genai.evaluate's tqdm bar), saved as a frozen "0%" line.
+
+    Live runs keep the bar; TQDM_DISABLE does not reach tqdm's notebook widget.
+    """
+    import nbformat
+
+    nb = nbformat.read(path, as_version=4)
+    for cell in nb.cells:
+        if cell.cell_type == "code":
+            cell.outputs = [o for o in cell.outputs if WIDGET not in o.get("data", {})]
+    nb.metadata.pop("widgets", None)
+    nbformat.write(nb, path)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -101,6 +119,9 @@ def main():
             cmd += ["--output-dir", str(out_dir)]
         started = time.time()
         result = subprocess.run(cmd, cwd=path.parent)
+        if result.returncode == 0:
+            executed = path if args.inplace else out_dir / path.name
+            strip_progress_widgets(executed)
         status = "ok" if result.returncode == 0 else "FAILED"
         print(
             f"{status:6} {path.parents[1].name}/{path.name}  ({time.time() - started:.0f}s)"
