@@ -92,8 +92,13 @@ HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxx
 VS Code.
 
 Leave the other lines as they are; a later guide tells you when one of them needs a
-change. A name that starts with a dot hides the file in the macOS Finder (`Cmd+Shift+.`
-shows it) and in `ls` (`ls -a` shows it); VS Code's file panel always shows it.
+change. One of them, `MLFLOW_DISABLE_TELEMETRY=true`, stops MLflow from sending usage
+statistics to its developers; it also avoids a hang in MLflow 3.17 when lecture 3
+evaluates answers. Keep it, and keep `LITELLM_LOCAL_MODEL_COST_MAP=True`, which stops a
+public price list from being downloaded in the optional `lec_03f` (guide
+`03a_dspy_optional_group`). A name that starts with a dot hides the file in the macOS
+Finder (`Cmd+Shift+.` shows it) and in `ls` (`ls -a` shows it); VS Code's file panel
+always shows it.
 
 ### How the notebooks read it
 

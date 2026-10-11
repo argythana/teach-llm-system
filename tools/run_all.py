@@ -64,6 +64,8 @@ def main():
     os.environ["COURSE_TIER"] = args.tier
     # MLflow >= 3.17 logs a hint on import when a coding agent runs it; keep it out of outputs.
     os.environ["MLFLOW_DISABLE_AGENT_HINT"] = "1"
+    # MLflow 3.17's usage telemetry can deadlock when evaluate starts scorers in parallel.
+    os.environ["MLFLOW_DISABLE_TELEMETRY"] = "true"
     # The same settings file the notebooks' configuration cell reads.
     load_dotenv(REPO / ".env")
     todo = list(notebooks(args.lecture, args.optional))

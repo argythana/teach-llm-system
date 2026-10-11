@@ -247,6 +247,7 @@ VSCODE = f"""
           <span class="note" style="margin-left:70px">← example only: paste your own token here</span></div>
         <div class="ln"><b>4</b><span><span class="key">OLLAMA_HOST</span>=http://localhost:11434</span></div>
         <div class="ln"><b>5</b><span><span class="key">MLFLOW_TRACKING_URI</span>=http://127.0.0.1:5010</span></div>
+        <div class="ln"><b>6</b><span><span class="key">MLFLOW_DISABLE_TELEMETRY</span>=true</span></div>
       </div>
     </div>
   </div>
