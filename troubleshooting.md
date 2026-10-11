@@ -2,7 +2,8 @@
 
 The guides named below are in each lecture's `infra_tools/` folder:
 [lecture 1](lecture_01_ollama_models_prompts_langchain/infra_tools/),
-[lecture 2](lecture_02_embeddings_rag_vector_store/infra_tools/).
+[lecture 2](lecture_02_embeddings_rag_vector_store/infra_tools/),
+[lecture 3](lecture_03_evaluation_judges_agents/infra_tools/).
 
 | Symptom                                                                                      | Fix                                                                                                                                                                                                                                                 |
 | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -123,8 +123,9 @@ backticks, because mdformat deletes backticked words there.
   `llm-course-03-eval`. Lecture 1's configuration cell still carries `MLFLOW_URI` and
   `EXPERIMENT`, unused, because the cell is identical everywhere. Notebooks call
   `mlflow.tracing.disable_notebook_display()` so trace iframes do not end up in
-  committed outputs. The LLM judge uses MLflow's native `ollama:/` provider, which only
-  talks to the default local port.
+  committed outputs. The LLM judge uses MLflow's native `ollama:/` provider: the
+  built-in judges (`Correctness`, `Guidelines`) only talk to the default local port,
+  while `make_judge` takes `base_url` and `inference_params`.
 - Optional: Docker for pgvector (`docker-compose.yml`), a Hugging Face read token in
   `.env`.
 - Instructor only: the MLflow Assistant runs on the GitHub Copilot CLI through

@@ -61,6 +61,7 @@ detail and is study material.
 | Session 1, before `lec_01b`   | [`01d_env_hugging_face`](lecture_01_ollama_models_prompts_langchain/infra_tools/01d_env_hugging_face.md) | your settings file with a read token     |
 | Session 3, before `lec_02b`   | [`02a_mlflow_server`](lecture_02_embeddings_rag_vector_store/infra_tools/02a_mlflow_server.md)           | the tracking server running              |
 | Only for `lec_02e` (optional) | [`02b_docker_pgvector`](lecture_02_embeddings_rag_vector_store/infra_tools/02b_docker_pgvector.md)       | a PostgreSQL vector database             |
+| Only for `lec_03f` (optional) | [`03a_dspy_optional_group`](lecture_03_evaluation_judges_agents/infra_tools/03a_dspy_optional_group.md)  | the DSPy packages                        |
 
 `uv sync` and the model downloads take several minutes when a whole class downloads at
 once, so we start them first and talk while they run. If your connection is slow, you
