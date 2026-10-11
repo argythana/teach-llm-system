@@ -36,7 +36,7 @@ STOPWORDS = frozenset(
 )
 
 
-def to_eval_records(eval_set: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
+def build_eval_records_from(eval_set: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     """Turn evaluation-set rows into MLflow records: ``inputs`` and ``expectations``.
 
     ``inputs`` holds the keyword arguments of the ``predict_fn`` (here ``question``);
@@ -69,7 +69,7 @@ def is_refusal(text: str) -> bool:
     return any(phrase in text for phrase in REFUSAL_PHRASES)
 
 
-def fact_keywords(fact: str) -> list[str]:
+def extract_keywords_from(fact: str) -> list[str]:
     """The words of ``fact`` that carry meaning: lower case, stopwords dropped."""
     words = re.findall(r"[a-z0-9_]+", fact.lower())
     return [w for w in words if len(w) > 1 and w not in STOPWORDS]
@@ -85,7 +85,7 @@ def keyword_coverage(answer: str, facts: Sequence[str]) -> float:
     text = answer.lower()
     found = 0
     for fact in facts:
-        keywords = fact_keywords(fact)
+        keywords = extract_keywords_from(fact)
         if keywords and sum(k in text for k in keywords) >= len(keywords) / 2:
             found += 1
     return found / len(facts)
@@ -292,7 +292,7 @@ def model_with_window(client: Any, model: str, num_ctx: int) -> str:
 # --- Checking the judge against hand labels (promoted from lec_03e) ----------------
 
 
-def judge_labelled(
+def run_judge_on(
     judge: Any, labelled: pd.DataFrame, records_by_id: dict[str, dict[str, Any]]
 ) -> list[str]:
     """One verdict of ``judge`` per row of ``labelled``, as text, in row order.
@@ -313,7 +313,9 @@ def judge_labelled(
     return verdicts
 
 
-def judge_agreement(labels: Sequence[str], verdicts: Sequence[str]) -> pd.Series:
+def measure_agreement_between(
+    labels: Sequence[str], verdicts: Sequence[str]
+) -> pd.Series:
     """How a judge's ``"yes"``/``"no"`` verdicts compare with hand labels.
 
     - ``agreement``: share of answers where verdict and label are the same;

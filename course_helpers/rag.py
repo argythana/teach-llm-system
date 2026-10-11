@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 # Imported for real, not only for type checking: LangChain reads the annotations of
-# format_context when a chain wraps it, so they must be evaluated objects.
+# format_context_from when a chain wraps it, so they must be evaluated objects.
 from langchain_core.documents import Document
 from langchain_core.language_models import BaseChatModel
 from langchain_core.runnables import Runnable
@@ -129,7 +129,7 @@ def build_chroma_index(
     return store
 
 
-def format_context(docs: Iterable[Document]) -> str:
+def format_context_from(docs: Iterable[Document]) -> str:
     """Turn retrieved Documents into the text block the prompt receives."""
     return "\n\n".join(
         f"[source: {d.metadata.get('source', '?')}]\n{d.page_content}" for d in docs
@@ -155,14 +155,14 @@ def make_rag_chain(
 
     prompt = ChatPromptTemplate.from_template(prompt_template or DEFAULT_RAG_PROMPT)
     return (
-        {"context": retriever | format_context, "question": RunnablePassthrough()}
+        {"context": retriever | format_context_from, "question": RunnablePassthrough()}
         | prompt
         | llm
         | StrOutputParser()
     )
 
 
-def source_rank(docs: Iterable[Document], expected_source: str) -> int | None:
+def find_source_rank_in(docs: Iterable[Document], expected_source: str) -> int | None:
     """Position (1 = first) of the first Document from ``expected_source``, or None."""
     for position, doc in enumerate(docs, start=1):
         if doc.metadata.get("source") == expected_source:
@@ -173,7 +173,7 @@ def source_rank(docs: Iterable[Document], expected_source: str) -> int | None:
 def hit_rate_and_mrr(
     ranks: Sequence[int | None], ks: Iterable[int] = (1, 2, 4, 8)
 ) -> dict[str, float]:
-    """Summarise ``source_rank`` results: hit rate at each k, and the MRR."""
+    """Summarise ``find_source_rank_in`` results: hit rate at each k, and the MRR."""
     n = len(ranks)
     summary = {f"hit@{k}": sum(r is not None and r <= k for r in ranks) / n for k in ks}
     summary["MRR"] = sum(1 / r for r in ranks if r) / n

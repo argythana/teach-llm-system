@@ -22,13 +22,13 @@ from langchain_core.tools import BaseTool, tool
 from mlflow.entities import SpanType, Trace
 from mlflow.genai.scorers import scorer
 
-from course_helpers.rag import DEFAULT_RAG_PROMPT, format_context
+from course_helpers.rag import DEFAULT_RAG_PROMPT, format_context_from
 
 # The Python course has lectures 1 to 13 (corpus/uoa_py_course/lecture_01 ... _13).
 FIRST_LECTURE, LAST_LECTURE = 1, 13
 
 
-def lecture_notebooks(documents: Iterable[Document], lecture: int) -> list[str]:
+def find_notebooks_of(documents: Iterable[Document], lecture: int) -> list[str]:
     """File names of the lecture notebooks (``lec_...``) of one lecture, sorted.
 
     Exercises and solutions are left out. A lecture that does not exist gives an
@@ -78,7 +78,7 @@ def make_course_tools(
                 "error": f"There is no lecture {lecture}; "
                 f"the lectures are {FIRST_LECTURE} to {LAST_LECTURE}."
             }
-        names = lecture_notebooks(documents, lecture)
+        names = find_notebooks_of(documents, lecture)
         return {"lecture": lecture, "count": len(names), "notebooks": names}
 
     tools: list[BaseTool] = [count_mentions, list_notebooks]
@@ -90,7 +90,7 @@ def make_course_tools(
 
             Use it for questions about what the notes explain or how to do something.
             """
-            return format_context(retriever.invoke(query))
+            return format_context_from(retriever.invoke(query))
 
         tools.append(search_notes)
     return tools
@@ -236,7 +236,7 @@ def make_agentic_rag(
     def grade(state: dict[str, Any]) -> dict[str, Any]:
         verdict = grade_chain.invoke(
             {
-                "context": format_context(state["documents"]),
+                "context": format_context_from(state["documents"]),
                 "question": state["question"],
             }
         )
@@ -245,7 +245,7 @@ def make_agentic_rag(
     def answer(state: dict[str, Any]) -> dict[str, Any]:
         text = answer_chain.invoke(
             {
-                "context": format_context(state["documents"]),
+                "context": format_context_from(state["documents"]),
                 "question": state["question"],
             }
         )
