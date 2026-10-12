@@ -76,10 +76,9 @@ def verify() -> None:
     install()
     names = [p.name for p in providers.list_providers()]
     default = providers.resolve_default_provider()
-    print("providers seen by tools/mlflow_server.py:", names)
-    print(
-        "runtime default when nothing is selected:", default.name if default else None
-    )
+    print(f"providers seen by tools/mlflow_server.py: {names}")
+    default_name = default.name if default else None
+    print(f"runtime default when nothing is selected: {default_name}")
     if not shutil.which("copilot"):
         print(
             "WARNING: the `copilot` command is not on PATH; install it with: npm install -g @github/copilot"
@@ -102,7 +101,8 @@ def main():
         return
     skills = install_skills()
     print(f"installed {len(skills)} MLflow skills into {COPILOT_SKILLS_DIR}")
-    print("wrote", write_config(args.model), f"(copilot selected, model {args.model})")
+    config_path = write_config(args.model)
+    print(f"wrote {config_path} (copilot selected, model {args.model})")
     verify()
 
 

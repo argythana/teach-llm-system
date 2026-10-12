@@ -129,7 +129,8 @@ def main():
         if result.returncode != 0:
             failures.append(path)
     if failures:
-        print("\nFailed:\n" + "\n".join(str(p.relative_to(REPO)) for p in failures))
+        failed_paths = "\n".join(str(p.relative_to(REPO)) for p in failures)
+        print(f"\nFailed:\n{failed_paths}")
         sys.exit(1)
 
 
