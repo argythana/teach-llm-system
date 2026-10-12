@@ -26,7 +26,7 @@ Open a new terminal (on Windows, PowerShell again). Then, on every system, from 
 folder:
 
 ```powershell
-ollama --version
+ollama --version                # 0.34 or newer; section 5 updates an older one
 ollama pull qwen3:1.7b          # a few minutes; leave it running
 ollama pull qwen3:0.6b
 ollama pull nomic-embed-text
@@ -156,6 +156,23 @@ with `qwen3:8b`, then `ollama ps`: `100% GPU` confirms the tier, while a split s
 Without the quoted question, `ollama run qwen3:1.7b` opens an interactive chat in the
 terminal; type `/bye` to leave it.
 
+## 5. Keep Ollama up to date
+
+The course was tested with Ollama 0.34 and 0.40; `ollama --version` shows yours. Older
+versions can behave differently: with 0.13, the first embedding cell of `lec_02c` fails
+with `the input length exceeds the context length` instead of cutting the text. To
+update:
+
+- **Windows and macOS, the app:** Ollama downloads updates by itself. Click the tray or
+  menu bar icon, then **Restart to update**. Running the installer from
+  <https://ollama.com/download> again works too.
+- **macOS with Homebrew:** `brew upgrade ollama`, then `brew services restart ollama`.
+- **Linux:** run the install command of section 1 again. It asks for your password
+  (`sudo`), replaces the program, and keeps your models.
+
+Then check `ollama --version` again ([FAQ](https://docs.ollama.com/faq), "How can I
+upgrade Ollama?").
+
 ## What `http://localhost:11434` means
 
 This is the address where Ollama's server waits for requests. The notebooks keep it in
@@ -223,20 +240,21 @@ thing that runs the models.
 Type these in a terminal, from any folder, not in a notebook cell. The notebooks do the
 same things through the Python package.
 
-| Command                                   | What it does                                               |
-| ----------------------------------------- | ---------------------------------------------------------- |
-| `ollama list`                             | the models you pulled, with their size on disk             |
-| `ollama ps`                               | which models are loaded now and whether on CPU or GPU      |
-| `ollama stop qwen3:1.7b`                  | unload a model from memory now, instead of after 5 minutes |
-| `ollama show qwen3:1.7b`                  | context length, quantization, chat template                |
-| `ollama rm <model>`                       | delete a model from disk                                   |
-| `ollama pull hf.co/<user>/<repo>:<quant>` | run a GGUF model straight from Hugging Face (lecture 1b)   |
+| Command                                   | What it does                                                                                         |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ollama list`                             | the models you pulled, with their size on disk                                                       |
+| `ollama ps`                               | which models are loaded now and whether on CPU or GPU                                                |
+| `ollama stop qwen3:1.7b`                  | unload a model from memory now, instead of after 5 minutes                                           |
+| `ollama show qwen3:1.7b`                  | context length, quantization, capabilities (thinking, tools); add `--template` for the chat template |
+| `ollama rm <model>`                       | delete a model from disk                                                                             |
+| `ollama pull hf.co/<user>/<repo>:<quant>` | run a GGUF model straight from Hugging Face (lecture 1b)                                             |
 
 ## If Ollama is not running
 
 The notebooks' first cell raises `Cannot reach Ollama at http://localhost:11434`, and in
 a terminal `ollama list` prints
-`Error: ollama server not responding - could not connect to ollama server`. Start it:
+`Error: could not connect to ollama server, run 'ollama serve' to start it`. Despite the
+hint, start the background application or service:
 
 - **Windows / macOS app:** open Ollama from the Start menu or Applications.
 - **macOS with Homebrew:** `brew services start ollama`.
