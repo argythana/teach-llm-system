@@ -1,6 +1,6 @@
-"""Browser illustrations for guide 02a: the MLflow UI at http://127.0.0.1:5010.
+"""Browser illustrations for guide 03a: the MLflow UI at http://127.0.0.1:5010.
 
-The layout copies MLflow 3.16's GenAI view: the home page with Recent Experiments, and
+The layout copies MLflow 3.17's GenAI view: the home page with Recent Experiments, and
 an experiment's Traces page. The trace rows are questions the course notebooks ask.
 """
 
@@ -85,7 +85,7 @@ def browser(url: str, nav: str, page: str, height: int) -> tuple[str, int]:
   <div class="navbar"><span>←</span><span>→</span><span>⟳</span>
     <div class="url">{url}</div></div>
   <div class="app"><div class="nav">
-    <div class="brand">ml<b>flow</b></div><div class="ver">3.16.0</div>
+    <div class="brand">ml<b>flow</b></div><div class="ver">3.17.0</div>
     <div class="mode"><span class="on">GenAI</span><span>Model training</span></div>
     {nav}</div>
     <div class="page">{page}</div></div>
@@ -111,7 +111,7 @@ HOME_PAGE = f"""<h1>Welcome to MLflow</h1>
 <h2>Recent Experiments</h2>
 <table>
   <tr><th>Name</th><th>Time created</th><th>Last modified</th><th>Description</th></tr>
-  <tr><td class="link">{circled("llm-course-02-rag", "2", "margin-left:12px")}</td>
+  <tr><td class="link">{circled("llm-course-03-eval", "2", "margin-left:12px")}</td>
       <td>10/06/2026, 16:52:10</td><td>10/06/2026, 16:58:41</td><td>-</td></tr>
   <tr><td class="link">Default</td><td>10/06/2026, 16:44:24</td>
       <td>10/06/2026, 16:44:24</td><td>-</td></tr>
@@ -124,7 +124,7 @@ HOME = browser(
     480,
 )
 
-TRACES_NAV = f"""<div class="expbox">← llm-course-02-rag</div>
+TRACES_NAV = f"""<div class="expbox">← llm-course-03-eval</div>
 {item("Overview")}
 <div class="group">Observability</div>
 {circled(item("Traces", on=True), "1", "display:block;margin:4px 40px 4px 14px")}
@@ -136,18 +136,18 @@ TRACES_NAV = f"""<div class="expbox">← llm-course-02-rag</div>
 ROWS = [
     (
         "2 minutes ago",
-        '"Which lecture covers data leakage?"',
-        '"The note that mentions data leakage is from **source: lecture_12/…',
+        '{"question": "What is the difference…',
+        '{"answer": "The difference between a list and a tuple is…',
     ),
     (
         "2 minutes ago",
-        '{"question": "How do I automatically try every combination…',
-        '[{"source": "lecture_13/lec_13_exercises.md", …',
+        '"What is the difference between a list and a tuple?"',
+        '"The difference between a list and a tuple is that a list is…',
     ),
     (
-        "3 minutes ago",
-        '{"question": "What does GridSearchCV do?", "k": 3}',
-        '"The `GridSearchCV` is a method in scikit-learn that…',
+        "4 minutes ago",
+        '{"question": "What is the naive assumption in Naive Bayes?"}',
+        '"The naive assumption in Naive Bayes is that the features…',
     ),
 ]
 
@@ -156,7 +156,7 @@ TRACE_ROWS = "".join(
     for time, inp, out in ROWS[1:]
 )
 
-TRACES_PAGE = f"""<div class="crumbs">Experiments › llm-course-02-rag ›</div>
+TRACES_PAGE = f"""<div class="crumbs">Experiments › llm-course-03-eval ›</div>
 <h1>Traces</h1>
 <div class="tools"><span class="search">Search traces by id, input, or output</span>
   <span>Filter</span><span>Columns</span></div>
@@ -175,6 +175,6 @@ TRACES = browser(
 )
 
 PAGES = {
-    "02a_browser_mlflow_home": HOME,
-    "02a_browser_mlflow_traces": TRACES,
+    "03a_browser_mlflow_home": HOME,
+    "03a_browser_mlflow_traces": TRACES,
 }

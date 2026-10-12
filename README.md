@@ -34,16 +34,16 @@ what happened and scores the answers, and **LangGraph** adds a decision loop at 
 | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1       | 1       | `lec_01a` talking to a local model: Ollama, tokens, context, temperature · `lec_01b` choosing a model: requirements first, then the Hugging Face Hub, quantization, llmfit |
 | 1       | 2       | `lec_01c` prompts as code and structured output · `lec_01d` LangChain chains                                                                                               |
-| 2       | 3       | `lec_02a` embeddings and cosine similarity · `lec_02b` a hand-built RAG, traced with MLflow                                                                                |
-| 2       | 4       | `lec_02c` chunking · `lec_02d` Chroma, filters, the LangChain RAG chain, and measuring retrieval                                                                           |
-| 3       | 5       | `lec_03a` an evaluation set and deterministic scorers · `lec_03b` LLM-as-judge and comparing variants                                                                      |
-| 3       | 6       | `lec_03c` tools and agents · `lec_03d` an agentic RAG loop with LangGraph; what it takes                                                                                   |
+| 2       | 3       | `lec_02a` embeddings and cosine similarity · `lec_02b` a hand-built RAG, step by step                                                                                      |
+| 2       | 4       | `lec_02c` chunking · `lec_02d` Chroma, filters, the LangChain RAG chain, measuring retrieval, and query rewriting                                                          |
+| 3       | 5       | `lec_03a` tracing and deterministic scorers · `lec_03b` LLM-as-judge and comparing variants                                                                                |
+| 3       | 6       | `lec_03c` judging the judge · `lec_03d` tools and agents, and when an agent is worth it                                                                                    |
 
 Letters `e` and `f` in each lecture are optional career-track notebooks: running a model
 with `transformers`, hosted inference, `pgvector` with Docker, a Wikipedia-scale corpus,
-judging the judge, and DSPy prompt optimization. Each lecture has `goals_NN.md` (what
-you should be able to do) and `practice_exercises/` with solutions. The course ends with
-a [final assignment](final_assignment/README.md).
+an agentic RAG loop with LangGraph, and DSPy prompt optimization. Each lecture has
+`goals_NN.md` (what you should be able to do) and `practice_exercises/` with solutions.
+The course ends with a [final assignment](final_assignment/README.md).
 
 ## Setup, together in class
 
@@ -59,9 +59,9 @@ detail and is study material.
 | Session 1, start              | [`01b_llmfit`](lecture_01_ollama_models_prompts_langchain/infra_tools/01b_llmfit.md)                     | your tier: `cpu` or `gpu`                |
 | Session 1, start              | [`01c_ollama`](lecture_01_ollama_models_prompts_langchain/infra_tools/01c_ollama.md)                     | Ollama running, the course models pulled |
 | Session 1, before `lec_01b`   | [`01d_env_hugging_face`](lecture_01_ollama_models_prompts_langchain/infra_tools/01d_env_hugging_face.md) | your settings file with a read token     |
-| Session 3, before `lec_02b`   | [`02a_mlflow_server`](lecture_02_embeddings_rag_vector_store/infra_tools/02a_mlflow_server.md)           | the tracking server running              |
-| Only for `lec_02e` (optional) | [`02b_docker_pgvector`](lecture_02_embeddings_rag_vector_store/infra_tools/02b_docker_pgvector.md)       | a PostgreSQL vector database             |
-| Only for `lec_03f` (optional) | [`03a_dspy_optional_group`](lecture_03_evaluation_judges_agents/infra_tools/03a_dspy_optional_group.md)  | the DSPy packages                        |
+| Session 5, start              | [`03a_mlflow_server`](lecture_03_evaluation_judges_agents/infra_tools/03a_mlflow_server.md)              | the tracking server running              |
+| Only for `lec_02e` (optional) | [`02a_docker_pgvector`](lecture_02_embeddings_rag_vector_store/infra_tools/02a_docker_pgvector.md)       | a PostgreSQL vector database             |
+| Only for `lec_03f` (optional) | [`03b_dspy_optional_group`](lecture_03_evaluation_judges_agents/infra_tools/03b_dspy_optional_group.md)  | the DSPy packages                        |
 
 `uv sync` and the model downloads take several minutes when a whole class downloads at
 once, so we start them first and talk while they run. If your connection is slow, you

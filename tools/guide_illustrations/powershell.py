@@ -1,4 +1,4 @@
-"""PowerShell illustrations for guides 01b (llmfit), 01c (Ollama) and 02b (Docker) on Windows.
+"""PowerShell illustrations for guides 01b (llmfit), 01c (Ollama) and 02a (Docker) on Windows.
 
 Each page is a Windows PowerShell window: the command the student types, the output
 it prints, and green circles on what to type and what to read. The outputs copy the
@@ -187,5 +187,5 @@ PAGES = {
     "01b_powershell_llmfit_plan": LLMFIT_PLAN,
     "01c_powershell_install_ollama": INSTALL_OLLAMA,
     "01c_powershell_ollama_run": OLLAMA_RUN,
-    "02b_powershell_compose_up": COMPOSE_UP,
+    "02a_powershell_compose_up": COMPOSE_UP,
 }

@@ -116,12 +116,12 @@ backticks, because mdformat deletes backticked words there.
 
 - **Ollama** at `http://localhost:11434` with `qwen3:1.7b` and `nomic-embed-text`
   (`qwen3:8b` for the gpu tier). Thinking is off per call (`think=False`,
-  `reasoning=False`) except where deciding is the point (lec_03c).
+  `reasoning=False`) except where deciding is the point (lec_03d).
 - **MLflow tracking server** started from `mlflow_server/`:
-  `uv run mlflow server --host 127.0.0.1 --port 5010`. MLflow enters in lecture 2
-  (`lec_02b` introduces tracing); experiments are named `llm-course-02-rag` and
-  `llm-course-03-eval`. Lecture 1's configuration cell still carries `MLFLOW_URI` and
-  `EXPERIMENT`, unused, because the cell is identical everywhere. Notebooks call
+  `uv run mlflow server --host 127.0.0.1 --port 5010`. MLflow enters in lecture 3
+  (`lec_03a` introduces tracing); its experiment is `llm-course-03-eval`. The
+  configuration cells of lectures 1 and 2 still carry `MLFLOW_URI` and `EXPERIMENT`,
+  unused, because the cell is identical everywhere. Notebooks call
   `mlflow.tracing.disable_notebook_display()` so trace iframes do not end up in
   committed outputs. The LLM judge uses MLflow's native `ollama:/` provider: the
   built-in judges (`Correctness`, `Guidelines`) only talk to the default local port,

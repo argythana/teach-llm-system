@@ -1,4 +1,4 @@
-"""Docker Desktop illustration for guide 02b: the app is open and its engine is running."""
+"""Docker Desktop illustration for guide 02a: the app is open and its engine is running."""
 
 CSS = """
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -86,4 +86,4 @@ BODY = f"""<body style="height:440px"><div class="win">
     <span style="margin-left:auto">RAM 1.62 GB · CPU 0.20%</span></div>
 </div></body>"""
 
-PAGES = {"02b_docker_desktop_engine_running": (BODY, 440)}
+PAGES = {"02a_docker_desktop_engine_running": (BODY, 440)}

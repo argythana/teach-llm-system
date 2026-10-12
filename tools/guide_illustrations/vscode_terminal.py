@@ -1,4 +1,4 @@
-"""VS Code illustrations for guide 02a: open a terminal, start the MLflow server in it.
+"""VS Code illustrations for guide 03a: open a terminal, start the MLflow server in it.
 
 The terminal output copies a real `mlflow server` start (MLflow 3.16, uvicorn) on its
 first run, with example timestamps; the paths are those of the other Windows pictures.
@@ -95,7 +95,7 @@ def window(menu: str, side: str, editor: str, panel: str, height: int) -> str:
     <div class="activity"><i class="on"></i><i></i><i></i><i></i><i></i></div>
     {side}
     <div class="editor">
-      <div class="tabs"><div class="tab"><div class="nb"></div>lec_02b_hand_built_rag_traced.ipynb
+      <div class="tabs"><div class="tab"><div class="nb"></div>lec_03a_tracing_and_deterministic_scorers.ipynb
         <span>✕</span></div></div>
       {editor}
       <div style="flex:1"></div>
@@ -132,6 +132,7 @@ SIDE = f"""<div class="side">
   {tree(0, "›&nbsp; data")}
   {tree(0, "›&nbsp; lecture_01_ollama_models_pro…")}
   {tree(0, "›&nbsp; lecture_02_embeddings_rag_ve…")}
+  {tree(0, "›&nbsp; lecture_03_evaluation_judge…")}
   {tree(0, "›&nbsp; mlflow_server")}
   {tree(0, "&nbsp;&nbsp; .env")}
   {tree(0, "&nbsp;&nbsp; pyproject.toml")}
@@ -139,7 +140,7 @@ SIDE = f"""<div class="side">
 </div>"""
 
 EDITOR = """<div class="cells">
-  <h1>Lecture 02b: A hand-built RAG, traced</h1>
+  <h1>Lecture 03a: Tracing and deterministic scorers</h1>
   <p><b>Status: Mandatory reading.</b></p>
 </div>"""
 
@@ -193,6 +194,6 @@ MLFLOW_SERVER = (
 )
 
 PAGES = {
-    "02a_vscode_new_terminal": NEW_TERMINAL,
-    "02a_vscode_mlflow_server": MLFLOW_SERVER,
+    "03a_vscode_new_terminal": NEW_TERMINAL,
+    "03a_vscode_mlflow_server": MLFLOW_SERVER,
 }

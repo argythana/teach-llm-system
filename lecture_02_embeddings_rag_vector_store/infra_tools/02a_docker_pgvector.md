@@ -1,4 +1,4 @@
-# 02b Docker and pgvector: a PostgreSQL vector database
+# 02a Docker and pgvector: a PostgreSQL vector database
 
 **Status: Optional / career-track.**
 
@@ -9,10 +9,10 @@ Only the career-track notebook `lec_02e` needs this.
 Install Docker Desktop from <https://www.docker.com/products/docker-desktop/> and open
 it. Wait until it says **Engine running**.
 
-![Docker Desktop: Engine running at the bottom left (1); the docker commands work only while it runs](screenshots/02b_docker_desktop_engine_running.png)
+![Docker Desktop: Engine running at the bottom left (1); the docker commands work only while it runs](screenshots/02a_docker_desktop_engine_running.png)
 
 Then, in a terminal, from the `teach-llm-system` folder (on Windows, VS Code's
-**Terminal → New Terminal**, guide `02a_mlflow_server`):
+**Terminal → New Terminal**, guide `01a_git_uv`):
 
 ```bash
 docker compose up -d
@@ -20,7 +20,7 @@ docker compose ps               # wait until STATUS shows "healthy"
 uv sync --group career-track
 ```
 
-![PowerShell: docker compose up -d (1), docker compose ps (2), and STATUS Up 11 seconds (healthy) (3)](screenshots/02b_powershell_compose_up.png)
+![PowerShell: docker compose up -d (1), docker compose ps (2), and STATUS Up 11 seconds (healthy) (3)](screenshots/02a_powershell_compose_up.png)
 
 When you are done:
 

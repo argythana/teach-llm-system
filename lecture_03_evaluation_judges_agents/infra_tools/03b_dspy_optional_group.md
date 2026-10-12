@@ -1,4 +1,4 @@
-# 03a DSPy: install the optional career-track group
+# 03b DSPy: install the optional career-track group
 
 **Status: Optional / career-track.**
 
@@ -7,7 +7,7 @@
 Only the career-track notebook `lec_03f` needs this.
 
 **Windows:** open the `teach-llm-system` folder in VS Code and choose **Terminal → New
-Terminal** (guide `02a_mlflow_server`). The terminal opens in that folder.
+Terminal** (guide `03a_mlflow_server`). The terminal opens in that folder.
 
 **macOS / Linux:** the same in VS Code, or any terminal in the `teach-llm-system`
 folder.
@@ -48,7 +48,7 @@ Checked on 12 October 2026:
 | ------------------------------- | ---------------- | -------------------------------------------------------- |
 | DSPy                            | 3.3.1            | `uv tree --group career-track --package dspy --depth 0`  |
 | PyTorch, CPU build              | 2.14.0           | `uv tree --group career-track --package torch --depth 0` |
-| `langchain-postgres`, `psycopg` | 0.0.17 and 3.3.5 | guide `02b_docker_pgvector`                              |
+| `langchain-postgres`, `psycopg` | 0.0.17 and 3.3.5 | guide `02a_docker_pgvector`                              |
 
 All four are pinned in `uv.lock`, like the course's other packages, and installed only
 with `--group career-track` (section 1). **Your versions may behave differently.**

@@ -1,6 +1,6 @@
 """Environment checks that fail early with a friendly message.
 
-``check_ollama`` was written in lec_01a, ``check_mlflow`` is used from lec_02b on. A
+``check_ollama`` was written in lec_01a, ``check_mlflow`` is used from lec_03a on. A
 cryptic connection error two cells later is the most common way a beginner loses ten
 minutes; these checks name the fix instead.
 """
@@ -8,7 +8,7 @@ minutes; these checks name the fix instead.
 from collections.abc import Sequence
 
 OLLAMA_GUIDE = "lecture_01_ollama_models_prompts_langchain/infra_tools/01c_ollama.md"
-MLFLOW_GUIDE = "lecture_02_embeddings_rag_vector_store/infra_tools/02a_mlflow_server.md"
+MLFLOW_GUIDE = "lecture_03_evaluation_judges_agents/infra_tools/03a_mlflow_server.md"
 
 
 def check_ollama(host: str, models: Sequence[str]) -> None:

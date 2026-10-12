@@ -114,7 +114,7 @@ change. One of them, `MLFLOW_DISABLE_TELEMETRY=true`, stops MLflow from sending 
 statistics to its developers; it also avoids a hang in MLflow 3.17 when lecture 3
 evaluates answers. Keep it, and keep `LITELLM_LOCAL_MODEL_COST_MAP=True`, which stops a
 public price list from being downloaded in the optional `lec_03f` (guide
-`03a_dspy_optional_group`). A name that starts with a dot hides the file in the macOS
+`03b_dspy_optional_group`). A name that starts with a dot hides the file in the macOS
 Finder (`Cmd+Shift+.` shows it) and in `ls` (`ls -a` shows it); VS Code's file panel
 always shows it.
 

@@ -1,11 +1,11 @@
-# 02a MLflow server: start the tracking server
+# 03a MLflow server: start the tracking server
 
 ## Quick start
 
 **Windows:** open the `teach-llm-system` folder in VS Code and choose **Terminal → New
 Terminal**. The terminal opens in that folder.
 
-![VS Code: the Terminal menu (1), then New Terminal (2)](screenshots/02a_vscode_new_terminal.png)
+![VS Code: the Terminal menu (1), then New Terminal (2)](screenshots/03a_vscode_new_terminal.png)
 
 **macOS / Linux:** the same in VS Code, or any terminal in the `teach-llm-system`
 folder.
@@ -17,18 +17,18 @@ cd mlflow_server
 uv run mlflow server --host 127.0.0.1 --port 5010
 ```
 
-![VS Code terminal: cd mlflow_server (1), the server command (2), and Uvicorn running on http://127.0.0.1:5010 (3); the server keeps running there](screenshots/02a_vscode_mlflow_server.png)
+![VS Code terminal: cd mlflow_server (1), the server command (2), and Uvicorn running on http://127.0.0.1:5010 (3); the server keeps running there](screenshots/03a_vscode_mlflow_server.png)
 
 Leave this terminal open. In a browser, open <http://127.0.0.1:5010>.
 
-![MLflow in the browser: the address 127.0.0.1:5010 (1) and the llm-course-02-rag experiment under Recent Experiments (2)](screenshots/02a_browser_mlflow_home.png)
+![MLflow in the browser: the address 127.0.0.1:5010 (1) and the llm-course-03-eval experiment under Recent Experiments (2)](screenshots/03a_browser_mlflow_home.png)
 
 The sections below explain every step; they are part of the study material. If a step
 fails, look up the message in [troubleshooting](../../troubleshooting.md).
 
 ## Overview
 
-From lecture 2 (`lec_02b`) on, the notebooks record every model call as a **trace** in
+From lecture 3 (`lec_03a`) on, the notebooks record every model call as a **trace** in
 MLflow, the tool you met in lecture 13 of the Python course. Before opening such a
 notebook, start the server with the quick start above: in a **separate terminal**, from
 the `mlflow_server/` folder, so its database and artifacts always land in one place.
@@ -36,10 +36,10 @@ MLflow: [source on GitHub](https://github.com/mlflow/mlflow),
 [documentation](https://mlflow.org/docs/latest/).
 
 At <http://127.0.0.1:5010>, the **Traces** tab of an experiment is where the course's
-model calls appear. The experiment `llm-course-02-rag` exists once `lec_02b` has run;
+model calls appear. The experiment `llm-course-03-eval` exists once `lec_03a` has run;
 open it from **Recent Experiments** on the home page (2 in the picture above).
 
-![The llm-course-02-rag experiment: Traces in the left menu (1), and one row per model call; click a row (2) to open its trace](screenshots/02a_browser_mlflow_traces.png)
+![The llm-course-03-eval experiment: Traces in the left menu (1), and one row per model call; click a row (2) to open its trace](screenshots/03a_browser_mlflow_traces.png)
 
 ## Tested versions
 

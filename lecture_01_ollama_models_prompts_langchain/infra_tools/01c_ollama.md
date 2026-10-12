@@ -211,7 +211,7 @@ the setting `OLLAMA_HOST`, and each part has a job:
 
 `mlflow server` in lecture 13 of the Python course was the same idea, at
 `http://127.0.0.1:5000`. This course's MLflow listens on port 5010 (guide
-`02a_mlflow_server`), so the two never collide.
+`03a_mlflow_server`), so the two never collide.
 
 An **API** (application programming interface) is the set of requests a server
 understands, each at its own path after the address

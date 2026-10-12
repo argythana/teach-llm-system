@@ -332,7 +332,7 @@ print(sys.executable)
 
 The kernel choice applies to notebooks only. A command typed in a terminal uses `.venv/`
 when it starts with `uv run`: `uv run <command>` runs the command inside `.venv/`. Use
-it for every tool of the course environment (`uv run mlflow server ...` in lecture 2).
+it for every tool of the course environment (`uv run mlflow server ...` in lecture 3).
 
 ## Optional packages
 
