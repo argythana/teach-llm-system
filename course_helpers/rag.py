@@ -143,19 +143,42 @@ DEFAULT_RAG_PROMPT = (
 )
 
 
+# lec_02d section 7: the model rewrites the student's question into a search query in
+# the notes' words, so the search finds notes that use a term the student did not know.
+REWRITE_PROMPT = (
+    "Rewrite the question below as a short search query for the notes of a Python course, "
+    "with the technical terms the notes would use. Reply with the query only."
+    "\n\nQuestion: {question}"
+)
+
+
+def make_query_rewriter(llm: BaseChatModel) -> Runnable[str, str]:
+    """Build ``question -> search query in the notes' words`` (lec_02d section 7)."""
+    from langchain_core.output_parsers import StrOutputParser
+    from langchain_core.prompts import ChatPromptTemplate
+
+    return ChatPromptTemplate.from_template(REWRITE_PROMPT) | llm | StrOutputParser()
+
+
 def make_rag_chain(
     retriever: Runnable[str, list[Document]],
     llm: BaseChatModel,
     prompt_template: str | None = None,
+    rewriter: Runnable[str, str] | None = None,
 ) -> Runnable[str, str]:
-    """Build ``question -> retrieve -> prompt -> llm -> text`` as one LangChain Runnable."""
+    """Build ``question -> retrieve -> prompt -> llm -> text`` as one LangChain Runnable.
+
+    With a ``rewriter`` (``make_query_rewriter``), the search runs on the rewritten
+    query, while the prompt still receives the student's own question.
+    """
     from langchain_core.output_parsers import StrOutputParser
     from langchain_core.prompts import ChatPromptTemplate
     from langchain_core.runnables import RunnablePassthrough
 
     prompt = ChatPromptTemplate.from_template(prompt_template or DEFAULT_RAG_PROMPT)
+    search = retriever if rewriter is None else rewriter | retriever
     return (
-        {"context": retriever | format_context_from, "question": RunnablePassthrough()}
+        {"context": search | format_context_from, "question": RunnablePassthrough()}
         | prompt
         | llm
         | StrOutputParser()
