@@ -52,6 +52,24 @@ that queries it, `huggingface_hub`, is installed by `uv sync`:
 [source on GitHub](https://github.com/huggingface/huggingface_hub),
 [documentation](https://huggingface.co/docs/huggingface_hub/index).
 
+## Tested versions
+
+Checked on 12 October 2026:
+
+| Tool                   | Version                     | Check yours                                   |
+| ---------------------- | --------------------------- | --------------------------------------------- |
+| `python-dotenv`        | 1.2.3, pinned in `uv.lock`  | `uv tree --package python-dotenv --depth 0`   |
+| `huggingface_hub`      | 1.33.0, pinned in `uv.lock` | `uv tree --package huggingface-hub --depth 0` |
+| huggingface.co website | not versioned               |                                               |
+
+**Your versions may behave differently.** Commands, messages, defaults and results
+change from one version to the next, so a newer or older version may not match this
+guide exactly. If something differs, compare your version with the table first, then
+look in [troubleshooting](../../troubleshooting.md). The Python packages are pinned in
+`uv.lock`: `uv sync` installs exactly these versions, and they change only when the
+course updates them (guide `01a_git_uv`, section 5). The Hugging Face website is not
+pinned: its token pages can look different from the steps and pictures here.
+
 ## 1. Create the token
 
 1. Log in at <https://huggingface.co> (create an account if you deleted yours).

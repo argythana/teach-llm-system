@@ -49,6 +49,25 @@ which starts a set of containers from one file, at
 [source and documentation on GitHub](https://github.com/pgvector/pgvector);
 [PostgreSQL documentation](https://www.postgresql.org/docs/).
 
+## Tested versions
+
+Checked on 12 October 2026:
+
+| Tool                            | Version                                                    | Check yours                                                           |
+| ------------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------------- |
+| Docker Engine                   | 29.9                                                       | `docker --version`                                                    |
+| Docker Compose                  | 2.39                                                       | `docker compose version`                                              |
+| Database image                  | `pgvector/pgvector:pg17`, with PostgreSQL 17.11            | `docker image ls pgvector/pgvector`                                   |
+| `langchain-postgres`, `psycopg` | 0.0.17 and 3.3.5, pinned in `uv.lock` (career-track group) | `uv tree --group career-track --package langchain-postgres --depth 0` |
+
+**Your versions may behave differently.** Commands, messages, defaults and results
+change from one version to the next, so a newer or older version may not match this
+guide exactly. If something differs, compare your version with the table first, then
+look in [troubleshooting](../../troubleshooting.md). Docker is installed outside the
+project and updates on its own schedule. The image tag `pg17` moves to newer builds of
+PostgreSQL 17 and pgvector, so a computer that downloads it later gets a newer build
+than the one tested. The Python packages are pinned in `uv.lock`.
+
 ## 1. Install Docker Desktop
 
 Download from <https://www.docker.com/products/docker-desktop/> (Windows, macOS, Linux).

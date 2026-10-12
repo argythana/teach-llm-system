@@ -84,6 +84,26 @@ order: install git, download the course, install `uv`, see how `uv` creates virt
 environments, let `uv sync` build the course environment, then open the notebooks in VS
 Code.
 
+## Tested versions
+
+Checked on 12 October 2026:
+
+| Tool            | Version                                                     | Check yours                                             |
+| --------------- | ----------------------------------------------------------- | ------------------------------------------------------- |
+| git             | 2.43                                                        | `git --version`                                         |
+| uv              | 0.12.3                                                      | `uv --version`                                          |
+| Python          | 3.12, from `.python-version`                                | `uv run python --version`                               |
+| VS Code         | 1.141, with the Python 2026.8 and Jupyter 2025.9 extensions | Help → About (macOS: Code → About); the Extensions view |
+| Python packages | pinned in `uv.lock`                                         | `uv tree --package mlflow --depth 0`, for any package   |
+
+**Your versions may behave differently.** Commands, messages, defaults and results
+change from one version to the next, so a newer or older version may not match this
+guide exactly. If something differs, compare your version with the table first, then
+look in [troubleshooting](../../troubleshooting.md). git, uv and VS Code are installed
+outside the project and update on their own schedule. The Python packages do not drift:
+`uv sync` installs exactly the versions in `uv.lock` (section 5), which change only when
+the course updates them.
+
 ## Where to type the commands
 
 Every command in these guides goes in a **terminal**, never in a notebook cell. Only the

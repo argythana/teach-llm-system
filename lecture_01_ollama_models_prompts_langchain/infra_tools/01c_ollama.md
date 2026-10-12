@@ -67,6 +67,31 @@ Source: [GitHub](https://github.com/ollama/ollama); documentation:
 [docs.ollama.com](https://docs.ollama.com/); the catalogue of models:
 [ollama.com/library](https://ollama.com/library).
 
+## Tested versions
+
+Checked on 12 October 2026:
+
+| Tool                    | Version                    | Check yours                                    |
+| ----------------------- | -------------------------- | ---------------------------------------------- |
+| Ollama                  | 0.40.3; 0.34.0 also tested | `ollama --version`                             |
+| `qwen3:1.7b`            | ID `8f68893c685c`          | `ollama list`, column `ID`                     |
+| `qwen3:0.6b`            | ID `7df6b6e09427`          | `ollama list`                                  |
+| `qwen3:8b`              | ID `500a1f067a9f`          | `ollama list`                                  |
+| `nomic-embed-text`      | ID `0a109f422b47`          | `ollama list`                                  |
+| `ollama` Python package | 0.6.2, pinned in `uv.lock` | `uv tree --package ollama --depth 0`           |
+| `langchain-ollama`      | 1.1.0, pinned in `uv.lock` | `uv tree --package langchain-ollama --depth 0` |
+
+**Your versions may behave differently.** Commands, messages, defaults and results
+change from one version to the next, so a newer or older version may not match this
+guide exactly. If something differs, compare your version with the table first, then
+look in [troubleshooting](../../troubleshooting.md). Ollama is installed outside the
+project and updates on its own schedule (section 5), and an old one can break a
+notebook. A model name such as `qwen3:1.7b` is a tag that its publisher can move to new
+weights: pulling it again then downloads a different model, with different answers, and
+the `ID` column of `ollama list` changes. The Python packages are pinned in `uv.lock`:
+`uv sync` installs exactly these versions, and they change only when the course updates
+them (guide `01a_git_uv`, section 5).
+
 ## 1. Install
 
 - **Windows:** in PowerShell, `irm https://ollama.com/install.ps1 | iex`, the command
@@ -158,10 +183,10 @@ terminal; type `/bye` to leave it.
 
 ## 5. Keep Ollama up to date
 
-The course was tested with Ollama 0.34 and 0.40; `ollama --version` shows yours. Older
-versions can behave differently: with 0.13, the first embedding cell of `lec_02c` fails
-with `the input length exceeds the context length` instead of cutting the text. To
-update:
+The course was tested with the versions in "Tested versions" above; `ollama --version`
+shows yours. Older versions can behave differently: with 0.13, the first embedding cell
+of `lec_02c` fails with `the input length exceeds the context length` instead of cutting
+the text. To update:
 
 - **Windows and macOS, the app:** Ollama downloads updates by itself. Click the tray or
   menu bar icon, then **Restart to update**. Running the installer from

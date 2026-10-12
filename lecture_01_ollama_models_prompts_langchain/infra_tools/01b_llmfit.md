@@ -62,6 +62,21 @@ runs the same version with `uv run llmfit`. The package only carries the program
 no functions to `import`. This course only needs llmfit to choose a tier, so it stays
 out of the course environment.
 
+## Tested versions
+
+Checked on 12 October 2026:
+
+| Tool   | Version | Check yours        |
+| ------ | ------- | ------------------ |
+| llmfit | 1.1.16  | `llmfit --version` |
+
+**Your versions may behave differently.** Commands, messages, defaults and results
+change from one version to the next, so a newer or older version may not match this
+guide exactly. If something differs, compare your version with the table first, then
+look in [troubleshooting](../../troubleshooting.md). llmfit's list of models and its
+scores change between versions, so your tables may name other models or show other
+numbers than this guide. `uv tool upgrade llmfit` updates it (next section).
+
 ## Install it once, with `uv tool install`
 
 ```bash

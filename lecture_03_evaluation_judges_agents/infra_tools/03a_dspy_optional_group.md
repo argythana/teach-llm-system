@@ -40,6 +40,24 @@ notebooks do not need it. It sits in the optional **dependency group** `career-t
 `pyproject.toml`, with the packages of `lec_01e` and `lec_02e` (lecture 1, guide
 `01a_git_uv`, "Optional packages").
 
+## Tested versions
+
+Checked on 12 October 2026:
+
+| Tool                            | Version          | Check yours                                              |
+| ------------------------------- | ---------------- | -------------------------------------------------------- |
+| DSPy                            | 3.3.1            | `uv tree --group career-track --package dspy --depth 0`  |
+| PyTorch, CPU build              | 2.14.0           | `uv tree --group career-track --package torch --depth 0` |
+| `langchain-postgres`, `psycopg` | 0.0.17 and 3.3.5 | guide `02b_docker_pgvector`                              |
+
+All four are pinned in `uv.lock`, like the course's other packages, and installed only
+with `--group career-track` (section 1). **Your versions may behave differently.**
+Commands, messages, defaults and results change from one version to the next, so a newer
+or older version may not match this guide exactly. If something differs, compare your
+version with the table first, then look in [troubleshooting](../../troubleshooting.md).
+DSPy changes quickly: the names and options of its optimizers, and the prompts they
+write, can differ in newer versions.
+
 ## 1. The optional group of this project
 
 `pyproject.toml` lists the course packages under `dependencies` and two groups under

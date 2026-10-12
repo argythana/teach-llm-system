@@ -41,6 +41,23 @@ open it from **Recent Experiments** on the home page (2 in the picture above).
 
 ![The llm-course-02-rag experiment: Traces in the left menu (1), and one row per model call; click a row (2) to open its trace](screenshots/02a_browser_mlflow_traces.png)
 
+## Tested versions
+
+Checked on 12 October 2026:
+
+| Tool   | Version                     | Check yours               |
+| ------ | --------------------------- | ------------------------- |
+| MLflow | 3.17.0, pinned in `uv.lock` | `uv run mlflow --version` |
+
+**Your versions may behave differently.** Commands, messages, defaults and results
+change from one version to the next, so a newer or older version may not match this
+guide exactly. If something differs, compare your version with the table first, then
+look in [troubleshooting](../../troubleshooting.md). The Python packages are pinned in
+`uv.lock`: `uv sync` installs exactly these versions, and they change only when the
+course updates them (guide `01a_git_uv`, section 5). The MLflow UI, its messages and
+some fixes in this course are specific to 3.17, such as the telemetry setting in
+troubleshooting.
+
 ## It runs only while its terminal is open
 
 Unlike Ollama (lecture 1, guide `01c_ollama`), the MLflow server is **not** a background
