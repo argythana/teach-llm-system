@@ -7,7 +7,7 @@
     uv run python tools/run_all.py --inplace          # refresh the committed outputs
     uv run python tools/run_all.py --tier gpu         # run with the GPU tier (COURSE_TIER env var)
 
-Preflight checks Ollama, the models, and (from lecture 2 on) the MLflow server, then
+Preflight checks Ollama, the models, and (from lecture 3 on) the MLflow server, then
 runs each notebook with its own folder as the working directory via
 `jupyter nbconvert --execute`.
 Executed copies go to _executed/ (gitignored) unless --inplace.
@@ -93,8 +93,8 @@ def main():
         check_ollama(
             os.environ.get("OLLAMA_HOST", "http://localhost:11434"), MODELS[args.tier]
         )
-        # Lecture 1 does not use MLflow; tracing starts in lec_02b.
-        if any(int(NOTEBOOK.match(path.name).group(1)) >= 2 for path in todo):
+        # Lectures 1 and 2 do not use MLflow; tracing starts in lec_03a.
+        if any(int(NOTEBOOK.match(path.name).group(1)) >= 3 for path in todo):
             check_mlflow(os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5010"))
 
     print(f"Running {len(todo)} notebooks (tier={args.tier}, optional={args.optional})")
