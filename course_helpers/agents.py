@@ -1,12 +1,12 @@
-"""Tools and agents, promoted from lec_03c and lec_03d.
+"""Tools and agents, promoted from lec_03d and lec_03e.
 
 Functions only, in the order the notebooks build them: the course's tools -> running
-the tool calls a model asks for -> reading the messages an agent exchanged (lec_03c)
--> the agentic RAG graph, its step table and its cost scorers (lec_03d).
+the tool calls a model asks for -> reading the messages an agent exchanged (lec_03d)
+-> the agentic RAG graph, its step table and its cost scorers (lec_03e).
 
 A tool returns an ``{"error": ...}`` dict instead of raising: an exception would stop
 the program, a returned error is read by the model, which can correct its call or tell
-the user (lec_03c section 4).
+the user (lec_03d section 4).
 """
 
 import json
@@ -22,7 +22,11 @@ from langchain_core.tools import BaseTool, tool
 from mlflow.entities import SpanType, Trace
 from mlflow.genai.scorers import scorer
 
-from course_helpers.rag import DEFAULT_RAG_PROMPT, format_context_from
+from course_helpers.rag import (
+    DEFAULT_RAG_PROMPT,
+    format_context_from,
+    make_query_rewriter,
+)
 
 # The Python course has lectures 1 to 13 (corpus/uoa_py_course/lecture_01 ... _13).
 FIRST_LECTURE, LAST_LECTURE = 1, 13
@@ -32,7 +36,7 @@ def find_notebooks_of(documents: Iterable[Document], lecture: int) -> list[str]:
     """File names of the lecture notebooks (``lec_...``) of one lecture, sorted.
 
     Exercises and solutions are left out. A lecture that does not exist gives an
-    empty list: check the number before calling (lec_03c section 4).
+    empty list: check the number before calling (lec_03d section 4).
     """
     return sorted(
         Path(d.metadata["source"]).name
@@ -51,7 +55,7 @@ def make_course_tools(
 
     ``documents`` are the notes from ``course_helpers.corpus.load_corpus``; ``retriever``
     (for example ``store.as_retriever(...)``, lec_02d) adds ``search_notes``. Every tool
-    only reads the notes: no files written, no network, no shell (lec_03c section 7).
+    only reads the notes: no files written, no network, no shell (lec_03d section 7).
     """
 
     @tool
@@ -143,14 +147,9 @@ def message_table(
     return rows
 
 
-# --- Agentic RAG with LangGraph (promoted from lec_03d) ----------------------------
+# --- Agentic RAG with LangGraph (promoted from lec_03e) ----------------------------
 
-# The model rewrites the student's question into a search query in the notes' words.
-REWRITE_PROMPT = (
-    "Rewrite the question below as a short search query for the notes of a Python course, "
-    "with the technical terms the notes would use. Reply with the query only."
-    "\n\nQuestion: {question}"
-)
+# The first query comes from the rewrite step of lec_02d (rag.make_query_rewriter).
 
 # After a search graded "no", the model writes a different query.
 RETRY_PROMPT = (
@@ -159,7 +158,7 @@ RETRY_PROMPT = (
     "Reply with the query only.\n\nQuestion: {question}\n\nQuery that failed: {query}"
 )
 
-# The grade asks about the topic, not the answer: in lec_03d's example runs a stricter
+# The grade asks about the topic, not the answer: in lec_03e's example runs a stricter
 # wording said "no" to chunks that did answer, and every wrong "no" costs a search.
 GRADE_PROMPT = (
     "Notes:\n{context}\n\nQuestion: {question}\n\n"
@@ -179,7 +178,7 @@ def make_agentic_rag(
     max_searches: int = 2,
     answer_prompt: str | None = None,
 ) -> Any:
-    """Build lec_03d's graph: rewrite -> retrieve -> grade -> answer, or search again.
+    """Build lec_03e's graph: rewrite -> retrieve -> grade -> answer, or search again.
 
     The model writes the query and grades the chunks; the search and the limit are
     code. After ``max_searches`` searches the graph answers with what it found, and the
@@ -203,9 +202,7 @@ def make_agentic_rag(
             "answer": str,
         },
     )
-    rewrite_chain = (
-        ChatPromptTemplate.from_template(REWRITE_PROMPT) | llm | StrOutputParser()
-    )
+    rewrite_chain = make_query_rewriter(llm)
     retry_chain = (
         ChatPromptTemplate.from_template(RETRY_PROMPT) | llm | StrOutputParser()
     )

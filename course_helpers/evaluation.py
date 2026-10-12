@@ -2,7 +2,7 @@
 
 Functions only, in the order an evaluation is built: records -> deterministic scorers
 -> per-question table (lec_03a) -> LLM judge -> comparison of variants (lec_03b)
--> the judge checked against hand labels (lec_03e).
+-> the judge checked against hand labels (lec_03c).
 Every code-based scorer is a plain function wrapped by MLflow's ``@scorer``
 decorator, so ``mlflow.genai.evaluate`` can call it on each answer; called directly, it
 scores one answer, which is how lec_03a tests a scorer on hand-written text.
@@ -17,7 +17,7 @@ import pandas as pd
 from mlflow.entities import SpanType, Trace
 from mlflow.genai.scorers import scorer
 
-# Phrases a RAG answer uses to say "the notes do not contain this" (lec_03a section 3),
+# Phrases a RAG answer uses to say "the notes do not contain this" (lec_03a section 4),
 # matched in lower case after "n't" is spelled out as " not".
 REFUSAL_PHRASES = [
     "not contain",
@@ -29,7 +29,7 @@ REFUSAL_PHRASES = [
     "cannot answer",
 ]
 
-# Words too common to say anything about a fact (lec_03a section 3).
+# Words too common to say anything about a fact (lec_03a section 4).
 STOPWORDS = frozenset(
     "a an and are as at be by can do does for from has have how in into is it its "
     "of on or that the their them they this to use uses was when which with you your".split()
@@ -78,7 +78,7 @@ def extract_keywords_from(fact: str) -> list[str]:
 def keyword_coverage(answer: str, facts: Sequence[str]) -> float:
     """Share of ``facts`` with at least half of their keywords somewhere in ``answer``.
 
-    A crude first attempt: it matches substrings, not meaning (lec_03a section 6).
+    A crude first attempt: it matches substrings, not meaning (lec_03b section 1).
     """
     if not facts:
         return 0.0
@@ -282,14 +282,14 @@ def model_with_window(client: Any, model: str, num_ctx: int) -> str:
 
     Same weights, nothing downloaded: Ollama stores only the new setting. Returns the
     copy's name, e.g. ``qwen3:1.7b-ctx8k``. A judge on Ollama's OpenAI-compatible
-    endpoint cannot ask for a window per request; it can use this copy (lec_03b).
+    endpoint cannot ask for a window per request; it can use this copy (lec_03c).
     """
     name = f"{model}-ctx{num_ctx // 1024}k"
     client.create(model=name, from_=model, parameters={"num_ctx": num_ctx})
     return name
 
 
-# --- Checking the judge against hand labels (promoted from lec_03e) ----------------
+# --- Checking the judge against hand labels (promoted from lec_03c) ----------------
 
 
 def run_judge_on(
