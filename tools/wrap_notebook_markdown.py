@@ -17,7 +17,9 @@ Scope and safety:
     like ``3.14`` and ``gemma3:4b`` are safe because the punctuation there is
     not followed by whitespace.
   * Leaves headings, tables, block quotes, fenced code, and horizontal rules
-    untouched; wraps list-item bodies with a hanging indent.
+    untouched; wraps list-item bodies with a hanging indent, including unindented
+    continuation lines, which Markdown renders inside the item anyway.
+  * Collapses runs of blank lines (outside fenced code) to one.
 
 Usage (formatter contract, like ruff/mdformat):
     python tools/wrap_notebook_markdown.py [--width N] FILE.ipynb [FILE...]
@@ -151,6 +153,30 @@ def semantic_wrap(text: str, width: int) -> str:
     )  # soft breaks: source wraps, the render re-flows + justifies
 
 
+def _starts_block(line: str) -> bool:
+    """True for a blank line or a line that opens a block a paragraph cannot absorb."""
+    s = line.strip()
+    return (
+        s == ""
+        or s.startswith(_LEAVE_PREFIX)
+        or bool(_FENCE.match(line))
+        or bool(_HR.match(line))
+    )
+
+
+def _single_blank_lines(lines: list[str]) -> list[str]:
+    """Collapse runs of blank lines outside fenced code to one blank line."""
+    out: list[str] = []
+    in_fence = False
+    for line in lines:
+        if _FENCE.match(line):
+            in_fence = not in_fence
+        if not in_fence and line.strip() == "" and out and out[-1].strip() == "":
+            continue
+        out.append(line)
+    return out
+
+
 def process_source(src: str, width: int) -> str:
     lines = src.split("\n")
     out: list[str] = []
@@ -179,10 +205,10 @@ def process_source(src: str, width: int) -> str:
             cont, j = [], i + 1
             while j < len(lines):
                 nxt = lines[j]
-                if nxt.strip() == "" or _FENCE.match(nxt) or _LIST.match(nxt):
+                if _starts_block(nxt) or _LIST.match(nxt):
                     break
-                if (len(nxt) - len(nxt.lstrip())) < len(indent) + 1:
-                    break
+                # An unindented line here is a lazy continuation: Markdown renders it
+                # inside the item, so it joins the item and gets the hanging indent.
                 cont.append(_unbreak(nxt.strip()))
                 j += 1
             wrapped = semantic_wrap(" ".join([body, *cont]), max(20, width - hang))
@@ -207,7 +233,7 @@ def process_source(src: str, width: int) -> str:
             j += 1
         out.extend(semantic_wrap(" ".join(para), width).split("\n"))
         i = j
-    return "\n".join(out)
+    return "\n".join(_single_blank_lines(out))
 
 
 def process_notebook(path: str, width: int, justify: bool = False) -> bool:
