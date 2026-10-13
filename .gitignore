@@ -44,3 +44,5 @@ lecture_*/infra_tools/*.pdf
 # Instructor's private drafts, not for publication yet
 final_assignment/alternative_ideas.md
 lecture_04_assess_smart_manufacturing/
+# Exam questions and answers: never published (a prek hook also blocks a forced add)
+final_assignment/eclass_exam/

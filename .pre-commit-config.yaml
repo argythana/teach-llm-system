@@ -4,8 +4,8 @@
 #   uv run prek run <hook-id> --all-files
 # Skip: `git commit --no-verify`, or `SKIP=<hook-id>[,<hook-id>] git commit ...`
 # Hook ids: gitleaks, detect-private-key, check-added-large-files, check-json, check-toml, check-yaml,
-#   check-merge-conflict, end-of-file-fixer, trailing-whitespace, mdformat, ruff-format-nb, ruff-check-nb,
-#   ruff-check-py, wrap-notebook-markdown, glossary.
+#   check-merge-conflict, end-of-file-fixer, trailing-whitespace, no-exam-files, mdformat, ruff-format-nb,
+#   ruff-check-nb, ruff-check-py, wrap-notebook-markdown, glossary.
 #
 # `corpus/` is a dataset (exported course notes), not authored prose: formatters leave it alone.
 default_language_version:
@@ -39,6 +39,11 @@ repos:
   # Project tools, pinned via uv.lock and run through `uv run`.
   - repo: local
     hooks:
+      - id: "no-exam-files"
+        name: "exam questions stay out of git"
+        entry: "final_assignment/eclass_exam/ is private: unstage it (git restore --staged)"
+        language: fail
+        files: "^final_assignment/eclass_exam/"
       - id: "mdformat"
         name: "mdformat (Markdown docs, wrap 88)"
         entry: uv run mdformat --wrap 88
