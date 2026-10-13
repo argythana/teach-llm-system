@@ -8,16 +8,107 @@ notebooks: change a definition in its notebook, then rerun the script.
 
 ## Lecture 01: Your laptop as an LLM server, choosing a model, prompts as code
 
-- **Tokens per second** is the number to remember when you compare models or machines.
+- A **large language model (LLM)** is a model trained on a huge amount of text to
+  continue a text; answering, writing and summarising are all continuations.
+  ([`lec_01a` (intro)](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **VRAM** is the GPU's own memory, separate from the computer's RAM. A model runs at
+  full GPU speed only when it fits there.
+  ([`lec_01a` §0](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **`.env` file** is a plain-text file of `NAME=value` lines that holds your personal
+  settings. It stays outside the code, so a secret, such as a password or an access key,
+  never ends up in a notebook you share.
+  ([`lec_01a` §0](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- An **environment variable** is a named value that the operating system keeps for
+  programs, outside your code.
+  ([`lec_01a` §0](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Weights** are the numbers a model learned in training; a model file is mostly
+  weights.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- An **open model** is a model whose weights are published for anyone to download, such
+  as the Qwen3 family this course uses.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **request** is what one program sends to another program to ask for one thing.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **response** is what the program sends back for one request: the result, or an
+  error.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **server** is a program that runs in the background and handles requests at an
+  address.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **client** is the code that sends requests to a server and reads its responses.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- An **API** is the set of requests a server understands, with the shape of each request
+  and of its response.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Ollama** is a [local model server](https://docs.ollama.com/): it keeps a model in
+  memory and handles requests at the address in `OLLAMA_HOST`.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Parameters** are the numbers a model learns in training, its weights. The
+  coefficients of a scikit-learn `LinearRegression` are parameters too.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Quantization** is storing each weight in fewer bits than the model was trained with,
+  so the file is smaller and faster to read.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **provider** is a company that runs models on its own servers and sells their use
+  over the internet.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **hosted model** is a model that a provider runs for you; your client sends each
+  request to it over the internet.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- An **API key** is a secret that identifies your account with a provider; every request
+  to a hosted model carries it.
+  ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **prompt** is the text you send to a model.
   ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
-- **Tokens** are the units a model works in: it never sees letters or words, only token
-  IDs, and it writes its answer as token IDs that the tokenizer turns back into text.
+- An **answer** is the text a model writes back for a prompt.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **token** is the unit of text a model reads and writes: a word, a word piece or a
+  punctuation mark. Section 3 looks inside.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **stop token** is a token that a model writes to end its answer.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- An **endpoint** is one address of an API that handles one kind of request, such as
+  Ollama's `/api/chat`.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **reasoning model** is a model trained to write out its reasoning before its answer.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Thinking** is the reasoning text a model writes before its answer, like working a
+  problem on scrap paper.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **message** is one turn of a conversation: a dict with a `role`, who wrote it, and
+  its `content`, the text.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **special token** is a token reserved for structure, such as the start or the end of
+  a message, that never stands for ordinary text; the stop token is one.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Tokens per second** is a model's writing speed: the tokens of the answer divided by
+  the seconds spent writing them.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- The **vocabulary** is the fixed list of every token a model knows, about 151 000 for
+  Qwen3.
   ([`lec_01a` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
-- The **context window** is the maximum number of tokens that a model can work with:
-  your messages plus the model's response. The model writes by adding each new token to
-  the end of the same sequence that holds your prompt. A generated token is stored in
-  the window just like a prompt token.
+- A **token ID** is the number that stands for one token: its position in the
+  vocabulary.
+  ([`lec_01a` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **tokenizer** is the program that cuts text into tokens and replaces each with its
+  token ID.
+  ([`lec_01a` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- The **Hugging Face Hub** is the website where model makers publish their models'
+  files, one page per model, such as
+  [`Qwen/Qwen3-1.7B`](https://huggingface.co/Qwen/Qwen3-1.7B); `lec_01b` explores it.
+  ([`lec_01a` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- The **context window** is the maximum number of tokens that a model can work with at
+  once: your messages plus the model's answer.
   ([`lec_01a` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Truncation** is cutting off the part of a text that does not fit a limit.
+  ([`lec_01a` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Sampling** is drawing the next token at random, weighted by the probabilities the
+  model gave each token.
+  ([`lec_01a` §5](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **Temperature** is a setting that reshapes the token probabilities before the draw: at
+  `0` the most likely token is picked every time; higher values flatten the
+  probabilities, so less likely tokens get a chance and we get increased randomness.
+  ([`lec_01a` §5](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
 - **Qwen3** is [`apache-2.0`](https://www.apache.org/licenses/LICENSE-2.0), a
   **permissive** license: any use, including commercial, as long as you keep the license
   notices. MLflow uses it too; pandas and scikit-learn use BSD, a similar one. Its

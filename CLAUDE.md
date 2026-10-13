@@ -29,7 +29,8 @@ them.
   - **Form:** `- [A/An/The] **term** is/are <kind of thing> that <what sets it apart>.`
     The "is" marks a definition; list bullets use `- **Item**: ...`.
   - **One term per bullet**, with one bold span.
-  - **Self-contained:** the bullet reads alone, with no "them" or "this" pointing back.
+  - **Self-contained:** the bullet reads alone, with no "them" or "this" pointing to
+    text outside it: the bullet is copied into `glossary.md`.
   - **Define, don't describe:** say what the thing is; why it matters goes in the next
     sentence.
   - **Which terms:** a term gets a bullet when it comes back later (a later section or
@@ -41,9 +42,23 @@ them.
     any code uses it. A forward mention is a plain-text gloss ("a word piece, section
     3"). A mandatory notebook never relies on a definition in an optional one.
     `glossary.md` is generated from these bullets.
+  - **Prerequisite order:** a definition uses only everyday words, words known from the
+    Python course, and terms defined before it. Within a group, each bullet builds on
+    the ones above (prompt, answer, token, stop token); a group of parts and a whole
+    defines the parts first (node and edge before graph). Related definitions form one
+    tight list.
+  - **Complete chain:** every technical word a definition relies on has its own earlier
+    definition; if one is missing, add it first (request and response before server and
+    client). A pointer such as "special token (`lec_01a`)" leads to the notebook that
+    defines the term.
+  - **One word, one meaning:** a defined term keeps its meaning across the course. A
+    second sense gets its own name (an access key, not a token) or other words ("the
+    only sign", not "the only trace" before tracing); the server sends a response, the
+    model writes an answer.
 - **Bold means vocabulary.** Bold only for a term in its definition bullet, the anchor
-  at the start of a list bullet, the Status line and the callouts; emphasis uses
-  *italics*.
+  at the start of a list bullet or table row, a defined term in a recap or "What this
+  notebook covers" list, a label that opens a paragraph (`**Status: ...**`,
+  `**Next: ...**`) and the callouts; emphasis uses *italics*.
 - **One concept per code cell**; explicit variable names; a single imports cell at the
   top; comments explain a non-obvious choice, not what the code says.
 - **Contrast pitfalls as WRONG then RIGHT cells** (`# WRONG: ...` / `# RIGHT: ...`).
