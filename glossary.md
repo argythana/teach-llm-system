@@ -11,8 +11,15 @@ notebooks: change a definition in its notebook, then rerun the script.
 - A **large language model (LLM)** is a model trained on a huge amount of text to
   continue a text; answering, writing and summarising are all continuations.
   ([`lec_01a` (intro)](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
-- **VRAM** is the GPU's own memory, separate from the computer's RAM. A model runs at
-  full GPU speed only when it fits there.
+- A **central processing unit (CPU)** is the main processor of a computer: it runs every
+  program, a few calculations at a time.
+  ([`lec_01a` §0](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **graphics processing unit (GPU)** is a processor built for graphics that does
+  thousands of simple calculations at once.
+  ([`lec_01a` §0](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **RAM** is the computer's main memory, where running programs keep their data.
+  ([`lec_01a` §0](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- **VRAM** is the GPU's own memory, separate from the computer's RAM.
   ([`lec_01a` §0](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
 - A **`.env` file** is a plain-text file of `NAME=value` lines that holds your personal
   settings. It stays outside the code, so a secret, such as a password or an access key,
@@ -83,6 +90,9 @@ notebooks: change a definition in its notebook, then rerun the script.
   ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
 - A **chat model** is an LLM trained to continue a conversation of messages with the
   next answer.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **hallucination** is an answer that states something false or made up, as fluently
+  and confidently as a true one.
   ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
 - A **special token** is a token reserved for structure, such as the start or the end of
   a message, that never stands for ordinary text; the stop token is one.
@@ -165,12 +175,19 @@ notebooks: change a definition in its notebook, then rerun the script.
   estimates which models your hardware can run, and how fast, without downloading any
   (guide `01b_llmfit`).
   ([`lec_01b` §5](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- **JSON** is a [text format for data](https://www.json.org/json-en.html) that programs
+  exchange, built from objects like dicts, arrays like lists, strings, numbers, `true`,
+  `false` and `null`.
+  ([`lec_01b` §5](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
 - A **decision record** is a short note, kept next to the code, that captures one
   decision and its reasons.
   ([`lec_01b` §8](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
 - A **chat template** is a recipe, shipped with a model, that lays a list of messages
   out as one text, with special tokens (`lec_01a`) marking where each message starts and
   ends and its role.
+  ([`lec_01c` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- A **refusal** is an answer in which the model declines the request instead of
+  answering, such as "I can't help with that" or "The notes don't say".
   ([`lec_01c` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
 - A **system prompt** is the text of the `system` message: the product rules, such as
   tone, language, refusals and format.
@@ -203,6 +220,9 @@ notebooks: change a definition in its notebook, then rerun the script.
 - **Time to first token** is the time from sending a prompt to receiving the first piece
   of its answer.
   ([`lec_01c` §6](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- **Retrieval** is searching your own documents for the passages that answer a question,
+  so that a model can answer from the passages found.
+  ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
 - A **framework** is a library that solves the problems many applications share, once:
   it defines the parts and how they connect, and you supply the prompts and the model.
   ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
@@ -285,6 +305,9 @@ notebooks: change a definition in its notebook, then rerun the script.
   documents: search them for the passages closest to the question, and send those with
   the question.
   ([`lec_02b` (intro)](lecture_02_embeddings_rag_vector_store/reading_material/lec_02b_hand_built_rag.ipynb))
+- A **splitter** is code that cuts a long text into smaller pieces at chosen places,
+  such as headings.
+  ([`lec_02b` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02b_hand_built_rag.ipynb))
 - A **retriever** is the part of a RAG system that finds the passages for a question;
   here it is `retrieve_sections_for`.
   ([`lec_02b` §4](lecture_02_embeddings_rag_vector_store/reading_material/lec_02b_hand_built_rag.ipynb))
@@ -306,6 +329,9 @@ notebooks: change a definition in its notebook, then rerun the script.
   (the text) and `metadata` (a dict).
   ([`lec_02c` §5](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
 - A **query** is the text a search runs with, usually the user's question.
+  ([`lec_02d` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- A **database** is software that keeps data on disk for programs to search, add to and
+  change.
   ([`lec_02d` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
 - A **vector store** is a database for vectors: it stores each one with its text and
   metadata, and returns the nearest ones to a query.
@@ -439,13 +465,13 @@ notebooks: change a definition in its notebook, then rerun the script.
   ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
 - A **tool result** is what the tool returned, sent back to the model as a message.
   ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
-- An **agent** is a model in a loop that decides which tools to call, until the model
-  can answer.
-  ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
 - A **type hint** is a note after an argument's name, such as `term: str`, that names
   the type the argument must have; `-> dict` names the type returned
   ([Python glossary](https://docs.python.org/3/glossary.html#term-type-hint)).
   ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- An **agent** is a program that runs a model in a loop of tool calls and tool results,
+  in which the model decides which tool to call next and when to stop and answer.
+  ([`lec_03d` §3](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
 - **LangGraph** is a [library](https://docs.langchain.com/oss/python/langgraph/overview)
   from the LangChain team for systems that decide and loop, built from LangChain's
   parts.
