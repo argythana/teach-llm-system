@@ -20,6 +20,8 @@ Checks, one id per rule:
   lazy-continuation    a list item's continuation line that is not indented
   blank-lines          two blank lines in a row
   single-bullet        a one-item list that is neither a definition nor a command to remember
+  list-merge           definition bullets and other bullets in one rendered list: two lists
+                       separated only by a blank line render as one; put a sentence between
   def-duplicate        a term defined in two places
   def-in-exercises     a definition bullet in an exercises notebook (they refer back)
   used-before-defined  a term used in an earlier notebook than the one that defines it, or a
@@ -71,7 +73,7 @@ _ARTICLE = r"(?:(?:A|An|The)\s+)?"
 _DEFINITION = re.compile(
     rf"^{_ARTICLE}\*\*(?P<term>[^*]+?)\*\*(?:\s*\([^)]*\))?\s+(?:is|are)\b"
 )
-_ANCHOR = re.compile(rf"^{_ARTICLE}\*\*")
+_ANCHOR = re.compile(rf"^\[?{_ARTICLE}\*\*")  # a linked anchor starts with "[**"
 _COMMAND_ANCHOR = re.compile(r"^(\*\*)?`")
 # what follows a bold term that is being defined in place
 _DEFINES_AFTER = re.compile(
@@ -430,6 +432,9 @@ def check_cell(nb: Notebook, cell: Cell, defined: set[str]) -> list[Hit]:
             review = cell.recap or bi in covers
             top = min(item.indent for item in block.items)
             top_items = [it for it in block.items if it.indent == top]
+            kinds = {_is_definition(it) for it in top_items}
+            if len(kinds) == 2 and not review:
+                hit("list-merge", " / ".join(it.text[:40] for it in top_items))
             if len(top_items) == 1 and not review:
                 only = top_items[0]
                 if not _is_definition(only) and not _COMMAND_ANCHOR.match(only.text):
@@ -485,7 +490,7 @@ def _check_item(
             hit("def-pronoun", item.text)
         return hits
     if anchored and not review:
-        after = item.text[bolds[0].end() :]
+        after = re.sub(r"^\]\([^)]*\)", "", item.text[bolds[0].end() :])
         label = bolds[0].group(1).rstrip().endswith((".", ":", "?", "!"))
         if not label and not re.match(r"^\s*(?:\([^)]*\)\s*)?:", after):
             hit("def-form", item.text)
@@ -540,7 +545,8 @@ def cross_notebook_hits(notebooks: list[Notebook], defs: list[Definition]) -> li
                 continue
             for cell in nb.cells:
                 if cell.kind == "markdown" and any(
-                    mentions(cell.source, a) for a in d.aliases
+                    unpointed_mention(cell.source, a, d.notebook.short)
+                    for a in d.aliases
                 ):
                     where = "an optional notebook" if relies else "a later notebook"
                     hits.append(
@@ -561,6 +567,20 @@ def cross_notebook_hits(notebooks: list[Notebook], defs: list[Definition]) -> li
                 Hit(nb, 0, "cell-count", f"{len(nb.cells)} cells, {code} code cells")
             )
     return hits
+
+
+def unpointed_mention(text: str, alias: str, owner: str) -> bool:
+    """A mention of ``alias`` that is not a forward gloss pointing to its owner.
+
+    "a chat template, the recipe ... (`lec_01c` looks inside)" names the notebook that
+    defines the term within 150 characters: an allowed forward mention.
+    """
+    flat = " ".join(text.replace("`", "").split())
+    pattern = rf"(?<![\w-]){re.escape(alias)}(?:s|es)?(?![\w-])"
+    return any(
+        owner not in flat[max(0, m.start() - 150) : m.end() + 150]
+        for m in re.finditer(pattern, flat, re.IGNORECASE)
+    )
 
 
 def uses(d: Definition, defs: list[Definition]) -> list[Definition]:

@@ -72,7 +72,8 @@ them.
     eye-anchor at the start. A single bullet only for a defined term or a command to
     remember (`ollama ps`).
   - **Source matches render:** indent a list item's continuation lines, and leave one
-    blank line between blocks (the wrap hook does both).
+    blank line between blocks (the wrap hook does both). Two lists separated only by a
+    blank line render as one list: put a sentence between definitions and other bullets.
 - **Short notebooks.** A mandatory notebook is at most 25 code cells and 60 cells,
   walkable in 30-40 minutes. If it grows past that, it is two topics: split it.
 - **Callouts are the only emojis**: `⏱ **Skip if running long.**` before a section that
