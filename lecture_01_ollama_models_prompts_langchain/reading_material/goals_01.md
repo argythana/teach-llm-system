@@ -72,7 +72,12 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
   local one. Career-track value: how production systems mix local and hosted models.
 - Guides in `infra_tools/` (`01a_git_uv` to `01d_env_hugging_face`): git and uv, llmfit,
   Ollama (the server, its address and its API), the `.env` settings file and a Hugging
-  Face token.
+  Face read token.
+
+## Terms
+
+Every term this lecture defines, with a link to its definition, is in the course
+glossary, [`glossary.md`](../../glossary.md).
 
 ## Practice
 

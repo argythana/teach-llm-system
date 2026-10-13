@@ -75,8 +75,14 @@ notebooks: change a definition in its notebook, then rerun the script.
 - **Thinking** is the reasoning text a model writes before its answer, like working a
   problem on scrap paper.
   ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
-- A **message** is one turn of a conversation: a dict with a `role`, who wrote it, and
-  its `content`, the text.
+- A **role** is the label that says who wrote one turn of a conversation: `user` for
+  you, `assistant` for the model, `system` for the rules your code sets (`lec_01c`).
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **message** is one turn of a conversation: a dict with its `role` and its text, the
+  `content`.
+  ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
+- A **chat model** is an LLM trained to continue a conversation of messages with the
+  next answer.
   ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
 - A **special token** is a token reserved for structure, such as the start or the end of
   a message, that never stands for ordinary text; the stop token is one.
@@ -109,19 +115,152 @@ notebooks: change a definition in its notebook, then rerun the script.
   `0` the most likely token is picked every time; higher values flatten the
   probabilities, so less likely tokens get a chance and we get increased randomness.
   ([`lec_01a` §5](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
-- **Qwen3** is [`apache-2.0`](https://www.apache.org/licenses/LICENSE-2.0), a
-  **permissive** license: any use, including commercial, as long as you keep the license
-  notices. MLflow uses it too; pandas and scikit-learn use BSD, a similar one. Its
-  metadata says nothing about languages.
+- A **license** is the set of legal terms that say what you may do with a model's files,
+  such as commercial use or shipping in a product.
+  ([`lec_01b` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **requirement** is a condition a model must meet for the system to do its job.
+  ([`lec_01b` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **requirements table** is the list of a system's requirements, one row each, written
+  before looking at any model.
+  ([`lec_01b` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- **Latency** is the time a user waits for an answer; for a chat model it follows from
+  tokens per second (`lec_01a`).
+  ([`lec_01b` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **repo id** is the name of a model repository on the Hub, `<owner>/<name>`, such as
+  `Qwen/Qwen3-1.7B`. Every tool names a model by its repo id.
+  ([`lec_01b` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **gated model** is a model whose files the Hub serves only to accounts that accepted
+  its license.
+  ([`lec_01b` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **read token** is the Hub's API key (`lec_01a`): a secret that lets code download
+  files as your account. Despite its name, it is not a token of the kind a model reads.
+  ([`lec_01b` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **tag** is a short label attached to an item so that search can filter by that
+  label, such as a model's language or task on the Hub.
+  ([`lec_01b` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- **Fine-tuning** is training a trained model further on examples of one task, such as
+  instructions and their answers.
+  ([`lec_01b` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **base model** is a model before any fine-tuning: it only continues the text you
+  give it.
+  ([`lec_01b` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **model card** is the `README.md` of a model repository: a short document saying
+  what the model is meant for and how well it works.
   ([`lec_01b` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
-- **Memory** is arithmetic: **parameters × bytes per parameter**. Models are usually
-  published in 16-bit numbers, `BF16` or `FP16`, which take 2 bytes per weight: the
-  original [`Qwen/Qwen3-1.7B`](https://huggingface.co/Qwen/Qwen3-1.7B) files hold 2.0
-  billion numbers (`lec_01a` explained why not 1.7), 4.1 GB.
+- **Metadata** is data about other data: for a model, fields such as its license and
+  languages, as opposed to the weights themselves.
+  ([`lec_01b` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **permissive license** is a license that allows any use, including commercial, as
+  long as you keep the license notices.
+  ([`lec_01b` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- An **inference engine** is the program that runs a model: it does the arithmetic that
+  turns a prompt into an answer, such as the C++ library
+  [`llama.cpp`](https://github.com/ggml-org/llama.cpp) inside Ollama.
   ([`lec_01b` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
-- **`<|im_start|>` and `<|im_end|>`** are special tokens (`lec_01a`) that open and close
-  each message; the role follows the opening one.
+- **GGUF** is the file format of `llama.cpp`, and so of Ollama: one file holds the
+  quantized weights and what is needed to run them, such as the tokenizer
+  ([Hub docs](https://huggingface.co/docs/hub/gguf)).
+  ([`lec_01b` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- **llmfit** is a [command-line tool](https://github.com/AlexsJones/llmfit) that
+  estimates which models your hardware can run, and how fast, without downloading any
+  (guide `01b_llmfit`).
+  ([`lec_01b` §5](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **decision record** is a short note, kept next to the code, that captures one
+  decision and its reasons.
+  ([`lec_01b` §8](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **chat template** is a recipe, shipped with a model, that lays a list of messages
+  out as one text, with special tokens (`lec_01a`) marking where each message starts and
+  ends and its role.
   ([`lec_01c` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- A **system prompt** is the text of the `system` message: the product rules, such as
+  tone, language, refusals and format.
+  ([`lec_01c` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- A **shot** is one worked example, a question with its answer, placed inside a prompt.
+  ([`lec_01c` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- A **zero-shot prompt** is a prompt with the instruction only, no shots.
+  ([`lec_01c` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- A **few-shot prompt** is a prompt with the instruction plus a few shots.
+  ([`lec_01c` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- **Parsing** is turning text into values a program can use, such as a category name or
+  a number.
+  ([`lec_01c` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- **Structured output** is an answer in a fixed, machine-readable format instead of
+  prose, so a program can parse the answer without guessing.
+  ([`lec_01c` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- A **JSON schema** is a dictionary that describes the shape of a JSON object: its keys,
+  the type of each value, and which keys are required
+  ([guide](https://json-schema.org/learn/getting-started-step-by-step)).
+  ([`lec_01c` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- **Constrained decoding** is generating an answer while allowing, at each step, only
+  the tokens that keep the answer valid against a JSON schema.
+  ([`lec_01c` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- **Caching** is saving a result on its first computation, and reading the saved copy
+  afterwards instead of computing the result again.
+  ([`lec_01c` §5](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- **Streaming** is sending an answer piece by piece while the model writes, instead of
+  all at once at the end.
+  ([`lec_01c` §6](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- **Time to first token** is the time from sending a prompt to receiving the first piece
+  of its answer.
+  ([`lec_01c` §6](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01c_prompts_roles_structured_output.ipynb))
+- A **framework** is a library that solves the problems many applications share, once:
+  it defines the parts and how they connect, and you supply the prompts and the model.
+  ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- **LangChain** is a
+  [framework](https://docs.langchain.com/oss/python/langchain/overview) for LLM
+  applications, the most widely used one.
+  ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- A **LangChain chat model** (`ChatOllama`) is the LangChain object for a chat model
+  (`lec_01a`): it sends messages to the model and returns its answer as a message; you
+  wrote `client.chat(...)`.
+  ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- A **prompt template** (`ChatPromptTemplate`) is a prompt with named slots in curly
+  braces, filled in at run time; you wrote `build_prompt_from(question, style)`.
+  ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- An **output parser** (`StrOutputParser`) is a LangChain object that turns the model's
+  message into what your code wants; you wrote `.message.content.strip()`.
+  ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- A **chain** is a sequence of parts joined with `|` and run in order as one object: the
+  output of each becomes the input of the next.
+  ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- A **Runnable** is any LangChain object with the three methods `invoke`, `batch` and
+  `stream`
+  ([reference](https://reference.langchain.com/python/langchain-core/runnables)); every
+  part and every chain is one.
+  ([`lec_01d` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- The **LangChain Expression Language** (LCEL) is the `|` notation that joins LangChain
+  parts into a chain; the result is itself a Runnable.
+  ([`lec_01d` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- **Concurrency** is the number of requests a server handles at the same time.
+  ([`lec_01d` §3](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- An **OpenAI-compatible API** is an API that accepts the request format of OpenAI's
+  API, so that one client can talk to many providers.
+  ([`lec_01d` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+- A **class** is a named template for objects: it lists the data each object holds and
+  the functions it offers. You have used classes, such as `DataFrame` and
+  `GridSearchCV`; the Python course did not teach writing them.
+  ([`lec_01d` §6](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01d_langchain_chains.ipynb))
+
+### Optional / career-track notebooks
+
+- A **causal language model** (causal LM) is a model that predicts the next token from
+  the preceding tokens only; every chat model in this course is one.
+  ([`lec_01e` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01e_run_a_model_with_transformers.ipynb))
+- A **tensor** is an array like NumPy's that can also live on a GPU.
+  ([`lec_01e` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01e_run_a_model_with_transformers.ipynb))
+- **Safetensors** is a file format for weights that holds only numbers, so loading a
+  file cannot run code, as older PyTorch files could: a risk with files downloaded from
+  the internet.
+  ([`lec_01e` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01e_run_a_model_with_transformers.ipynb))
+- **pydantic** is a Python library that turns a class describing a record into a JSON
+  schema, and checks data against that schema.
+  ([`lec_01f` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01f_pydantic_and_hosted_inference.ipynb))
+- **Validation** is checking data against declared types and allowed values, and
+  refusing data that does not fit.
+  ([`lec_01f` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01f_pydantic_and_hosted_inference.ipynb))
+- **Hosted inference** is running a model on a provider's hardware: your code sends each
+  request over the internet and gets the answer back.
+  ([`lec_01f` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01f_pydantic_and_hosted_inference.ipynb))
 
 ## Lecture 03: Evaluation, LLM judges and agents
 
