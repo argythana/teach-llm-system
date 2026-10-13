@@ -25,12 +25,39 @@ them.
 - **Introduce before use.** A concept that appears in a code cell must be defined
   earlier in the same lecture or a previous one. Forward-reference later material in one
   sentence; never pre-teach it with code.
-- **Define jargon once**, in a sentence or a small table, where it first appears.
+- **Definition bullets for the course's terms.** `lec_01a` is the reference notebook.
+  - **Form:** `- [A/An/The] **term** is/are <kind of thing> that <what sets it apart>.`
+    The "is" marks a definition; list bullets use `- **Item**: ...`.
+  - **One term per bullet**, with one bold span.
+  - **Self-contained:** the bullet reads alone, with no "them" or "this" pointing back.
+  - **Define, don't describe:** say what the thing is; why it matters goes in the next
+    sentence.
+  - **Which terms:** a term gets a bullet when it comes back later (a later section or
+    notebook, the goals, the recap or the exercises) or is everyday industry vocabulary.
+    A one-off word gets a short inline explanation, not bold.
+  - **One form only:** no inline "**X**, a ..." definitions and no `| Term | Meaning |`
+    tables.
+  - **Define once:** in the first notebook that uses the term, in teaching order, before
+    any code uses it. A forward mention is a plain-text gloss ("a word piece, section
+    3"). A mandatory notebook never relies on a definition in an optional one.
+    `glossary.md` is generated from these bullets.
+- **Bold means vocabulary.** Bold only for a term in its definition bullet, the anchor
+  at the start of a list bullet, the Status line and the callouts; emphasis uses
+  *italics*.
 - **One concept per code cell**; explicit variable names; a single imports cell at the
   top; comments explain a non-obvious choice, not what the code says.
 - **Contrast pitfalls as WRONG then RIGHT cells** (`# WRONG: ...` / `# RIGHT: ...`).
-- **Short cells.** At most about 150 words per Markdown cell. Bullets over prose for
-  three or more items; bold or backticked eye-anchors at the start of a bullet.
+- **Short cells.** At most about 150 words per Markdown cell.
+  - **One idea per paragraph:** a blank line wherever the paragraph's job changes (the
+    main point, how it works, the lesson, an instruction, a pointer). A cause and its
+    effect stay together.
+  - **Paragraph limit:** at most 3 sentences and about 60 words. A long sentence becomes
+    two sentences; never a trailing-space line break (the wrap hook strips it).
+  - **Bullets:** over prose for three or more items, with a bold or backticked
+    eye-anchor at the start. A single bullet only for a defined term or a command to
+    remember (`ollama ps`).
+  - **Source matches render:** indent a list item's continuation lines, and leave one
+    blank line between blocks (the wrap hook does both).
 - **Short notebooks.** A mandatory notebook is at most 25 code cells and 60 cells,
   walkable in 30-40 minutes. If it grows past that, it is two topics: split it.
 - **Callouts are the only emojis**: `⏱ **Skip if running long.**` before a section that
@@ -158,6 +185,14 @@ are the instructor's own text; draft them, do not finalise them.
   Markdown cell, comment and printed string that describes an output against the new
   outputs (run-independent wording, above).
 - `uv run prek run --all-files` runs the hooks (gitleaks, ruff on notebooks, mdformat,
-  markdown wrap/justify). CI (`.github/workflows/lint.yml`) lints and import-smokes on
-  Linux and Windows; it does not execute notebooks.
+  markdown wrap/justify, glossary check). CI (`.github/workflows/lint.yml`) lints,
+  import-smokes and checks the glossary on Linux and Windows; it does not execute
+  notebooks.
+- `uv run python tools/notebook_prose.py --report` lists prose and terminology hits
+  (paragraph length, definition form, inline definitions, bold emphasis, single bullets,
+  terms defined twice or used before their definition); `--terms` lists every
+  definition. It is a report, not a gate: read each hit.
+- `uv run python tools/build_glossary.py` regenerates `glossary.md` from the definition
+  bullets; `--check` fails when it is stale or a term is defined twice. Rerun it after
+  editing a definition.
 - Commit messages: Conventional Commits with a lecture scope, e.g. `feat(lec01): ...`.
