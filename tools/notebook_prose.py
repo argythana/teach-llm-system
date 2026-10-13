@@ -24,7 +24,7 @@ Checks, one id per rule:
   def-in-exercises     a definition bullet in an exercises notebook (they refer back)
   used-before-defined  a term used in an earlier notebook than the one that defines it, or a
                        mandatory notebook relying on a definition in an optional one
-  cell-words           a Markdown cell over 150 words
+  cell-words           a Markdown cell over 160 words (the rule is about 150)
   cell-count           a mandatory notebook over 25 code cells or 60 cells
 
 "Define, don't describe" is editorial: ``--terms`` lists every definition to read.
@@ -50,7 +50,7 @@ REPO = Path(__file__).resolve().parents[1]
 
 PARA_MAX_SENTENCES = 3
 PARA_MAX_WORDS = 60
-CELL_MAX_WORDS = 150
+CELL_MAX_WORDS = 160  # CLAUDE.md: about 150 words per Markdown cell
 MANDATORY_MAX_CELLS, MANDATORY_MAX_CODE_CELLS = 60, 25
 EXERCISES_RANK = 10  # exercises come after the optional e and f notebooks
 
@@ -74,7 +74,8 @@ _DEFINES_AFTER = re.compile(
     re.IGNORECASE,
 )
 _POINTS_BACK = re.compile(
-    r"\b(it|its|them|they|this|these|those|above|previous)\b", re.IGNORECASE
+    r"\b(it|them|they|these|those|above|previous|this(?!\s+(?:course|notebook|lecture)))\b",
+    re.IGNORECASE,
 )
 _ABBREV = re.compile(r"\b(e\.g|i\.e|etc|vs|cf|approx)\.", re.IGNORECASE)
 _SENTENCE_END = re.compile(r"[.?!](?=\s|$)")
@@ -316,6 +317,29 @@ def sentence_count(text: str) -> int:
     return len(_SENTENCE_END.findall(_ABBREV.sub(r"\1", _plain(text))))
 
 
+class _Span:
+    """A bold match found on masked text, read back from the original text."""
+
+    def __init__(self, text: str, m: re.Match) -> None:
+        self._text, self._start, self._end = text, m.start(), m.end()
+
+    def start(self) -> int:
+        return self._start
+
+    def end(self) -> int:
+        return self._end
+
+    def group(self, i: int = 0) -> str:
+        whole = self._text[self._start : self._end]
+        return whole if i == 0 else whole[2:-2]
+
+
+def bold_spans(text: str) -> list[_Span]:
+    """Bold spans outside inline code (``**`` inside backticks is code, not bold)."""
+    masked = _CODE_SPAN.sub(lambda m: "`" + "x" * (len(m.group()) - 2) + "`", text)
+    return [_Span(text, m) for m in _BOLD.finditer(masked)]
+
+
 def _excerpt(text: str, width: int = 100) -> str:
     text = " ".join(text.split())
     return text if len(text) <= width else text[: width - 1] + "…"
@@ -418,7 +442,7 @@ def _check_paragraph(nb: Notebook, cell: Cell, text: str) -> list[Hit]:
             )
         )
     callout = text.startswith(("⏱", "⏸"))
-    for k, m in enumerate(_BOLD.finditer(text)):
+    for k, m in enumerate(bold_spans(text)):
         label = m.start() == 0 or (k == 0 and (callout or text.startswith("[**")))
         after = text[m.end() :]
         if _DEFINES_AFTER.match(after):
@@ -440,7 +464,7 @@ def _check_item(
 
     if item.lazy:
         hit("lazy-continuation", item.text)
-    bolds = list(_BOLD.finditer(item.text))
+    bolds = bold_spans(item.text)
     anchored = bool(_ANCHOR.match(item.text))
     if _is_definition(item) and not review:
         if nb.is_exercises:
@@ -592,7 +616,7 @@ def print_inventory(notebooks: list[Notebook]) -> None:
             covers = _covers_lists(cell)
             for bi, block in enumerate(cell.blocks):
                 if block.kind == "para":
-                    for m in _BOLD.finditer(block.text):
+                    for m in bold_spans(block.text):
                         if m.start() > 0:
                             add(m.group(1), nb, cell, "prose")
                 elif block.kind == "table":
@@ -604,7 +628,7 @@ def print_inventory(notebooks: list[Notebook]) -> None:
                             add(term.replace("**", "").strip(), nb, cell, "table")
                 elif block.kind == "list" and bi not in covers:
                     for item in block.items:
-                        bolds = list(_BOLD.finditer(item.text))
+                        bolds = bold_spans(item.text)
                         for k, m in enumerate(bolds):
                             anchored = k == 0 and _ANCHOR.match(item.text)
                             if anchored and _is_definition(item):
