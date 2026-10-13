@@ -45,6 +45,9 @@ an agentic RAG loop with LangGraph, and DSPy prompt optimization. Each lecture h
 `goals_NN.md` (what you should be able to do) and `practice_exercises/` with solutions.
 The course ends with a [final assignment](final_assignment/README.md).
 
+[Course terms](glossary.md) lists every term the notebooks define, with a link to the
+notebook and section that defines it.
+
 ## Setup, together in class
 
 Setting up the tools is part of the course, not homework: we run it together in class,
