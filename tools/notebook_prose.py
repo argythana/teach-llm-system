@@ -29,7 +29,8 @@ Checks, one id per rule:
   def-order            a definition that uses a term defined after it (prerequisite order)
   backref-mismatch     "term (`lec_NNx`)" pointing to a notebook that does not define the term
                        while another one does
-  cell-words           a Markdown cell over 160 words (the rule is about 150)
+  cell-words           a Markdown cell over 160 words of prose, fenced code excluded (the rule
+                       is about 150)
   cell-count           a mandatory notebook over 25 code cells or 60 cells
 
 Editorial, with ``--terms`` listing every definition and the defined terms it uses: "define,
@@ -414,7 +415,13 @@ def check_cell(nb: Notebook, cell: Cell, defined: set[str]) -> list[Hit]:
     def hit(check: str, text: str) -> None:
         hits.append(Hit(nb, cell.index, check, _excerpt(text)))
 
-    words = len(re.sub(r"<[^>]+>", " ", cell.source).split())
+    prose = "\n".join(
+        b.text for b in cell.blocks if b.kind != "code"
+    )  # not fenced code
+    prose += "\n" + "\n".join(
+        it.text for b in cell.blocks if b.kind == "list" for it in b.items
+    )
+    words = len(re.sub(r"<[^>]+>", " ", prose).split())
     if words > CELL_MAX_WORDS:
         hit("cell-words", f"{words} words: {cell.source}")
     if re.search(r"\n[ \t]*\n[ \t]*\n", cell.source):
@@ -460,7 +467,8 @@ def _check_paragraph(nb: Notebook, cell: Cell, text: str) -> list[Hit]:
     for k, m in enumerate(bold_spans(text)):
         label = m.start() == 0 or (k == 0 and (callout or text.startswith("[**")))
         after = text[m.end() :]
-        if _DEFINES_AFTER.match(after):
+        opening_label = label and ":" in m.group(1)  # **Next: `lec_01d`**, ...
+        if _DEFINES_AFTER.match(after) and not opening_label:
             hits.append(Hit(nb, cell.index, "def-inline", _excerpt(text[m.start() :])))
         elif not label:
             hits.append(
@@ -573,12 +581,17 @@ def unpointed_mention(text: str, alias: str, owner: str) -> bool:
     """A mention of ``alias`` that is not a forward gloss pointing to its owner.
 
     "a chat template, the recipe ... (`lec_01c` looks inside)" names the notebook that
-    defines the term within 150 characters: an allowed forward mention.
+    defines the term, or its lecture ("lecture 2"), within 150 characters: an allowed
+    forward mention.
     """
     flat = " ".join(text.replace("`", "").split())
     pattern = rf"(?<![\w-]){re.escape(alias)}(?:s|es)?(?![\w-])"
+    pointers = [re.escape(owner.lower())]
+    if owner[:4] == "lec_":
+        pointers.append(rf"lecture {int(owner[4:6])}(?!\d)")
+    near = re.compile("|".join(pointers))
     return any(
-        owner not in flat[max(0, m.start() - 150) : m.end() + 150]
+        not near.search(flat[max(0, m.start() - 150) : m.end() + 150].lower())
         for m in re.finditer(pattern, flat, re.IGNORECASE)
     )
 
