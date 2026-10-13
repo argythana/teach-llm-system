@@ -24,10 +24,15 @@ Checks, one id per rule:
   def-in-exercises     a definition bullet in an exercises notebook (they refer back)
   used-before-defined  a term used in an earlier notebook than the one that defines it, or a
                        mandatory notebook relying on a definition in an optional one
+  def-order            a definition that uses a term defined after it (prerequisite order)
+  backref-mismatch     "term (`lec_NNx`)" pointing to a notebook that does not define the term
+                       while another one does
   cell-words           a Markdown cell over 160 words (the rule is about 150)
   cell-count           a mandatory notebook over 25 code cells or 60 cells
 
-"Define, don't describe" is editorial: ``--terms`` lists every definition to read.
+Editorial, with ``--terms`` listing every definition and the defined terms it uses: "define,
+don't describe", the complete chain (every technical word a definition relies on is defined
+before it) and one word, one meaning.
 
 Usage:
     uv run python tools/notebook_prose.py [--report] [--only ID[,ID]] [NOTEBOOK ...]
@@ -146,6 +151,11 @@ class Definition:
         names = [normalize(self.term)]
         names += [normalize(a) for a in re.findall(r"\(([^)]+)\)", self.term)]
         return [n for n in names if n]
+
+    @property
+    def body(self) -> str:
+        """The definition after its bold term."""
+        return _BOLD.split(self.text, maxsplit=1)[-1]
 
 
 @dataclass
@@ -553,6 +563,70 @@ def cross_notebook_hits(notebooks: list[Notebook], defs: list[Definition]) -> li
     return hits
 
 
+def uses(d: Definition, defs: list[Definition]) -> list[Definition]:
+    """The other definitions whose term the definition ``d`` mentions."""
+    own = set(d.aliases)
+    return [
+        e
+        for e in defs
+        if e is not d
+        and not own & set(e.aliases)
+        and any(mentions(d.body, a) for a in e.aliases)
+    ]
+
+
+def order_hits(defs: list[Definition]) -> list[Hit]:
+    """Prerequisite order: a definition may only use terms defined before it."""
+    position = {id(d): k for k, d in enumerate(defs)}
+    hits = []
+    for d in defs:
+        for e in uses(d, defs):
+            if position[id(e)] > position[id(d)]:
+                hits.append(
+                    Hit(
+                        d.notebook,
+                        d.cell,
+                        "def-order",
+                        f"'{d.term}' uses '{e.term}', defined later in "
+                        f"{e.notebook.short} cell {e.cell}",
+                    )
+                )
+    return hits
+
+
+_BACKREF = re.compile(r"([^()]{1,80}?)\s*\(`(lec_\d\d[a-f])`\)")
+
+
+def backref_hits(notebooks: list[Notebook], defs: list[Definition]) -> list[Hit]:
+    """A "term (`lec_NNx`)" pointer must lead to the notebook that defines the term."""
+    owner = {}
+    for d in defs:
+        for a in d.aliases:
+            owner.setdefault(a, d)
+    hits = []
+    for nb in notebooks:
+        for cell in nb.cells:
+            if cell.kind != "markdown":
+                continue
+            for m in _BACKREF.finditer(" ".join(cell.source.replace("*", "").split())):
+                words = normalize(re.sub(r"`", "", m.group(1))).split()[-5:]
+                for size in range(len(words), 0, -1):
+                    d = owner.get(normalize(" ".join(words[-size:])))
+                    if d:
+                        if d.notebook.short != m.group(2):
+                            hits.append(
+                                Hit(
+                                    nb,
+                                    cell.index,
+                                    "backref-mismatch",
+                                    f"'{d.term}' points to {m.group(2)} but is defined in "
+                                    f"{d.notebook.short} cell {d.cell}",
+                                )
+                            )
+                        break
+    return hits
+
+
 def all_hits(notebooks: list[Notebook]) -> list[Hit]:
     defs = definitions(notebooks)
     defined = {a for d in defs for a in d.aliases}
@@ -561,7 +635,12 @@ def all_hits(notebooks: list[Notebook]) -> list[Hit]:
         for cell in nb.cells:
             if cell.kind == "markdown":
                 hits += check_cell(nb, cell, defined)
-    return hits + cross_notebook_hits(notebooks, defs)
+    return (
+        hits
+        + cross_notebook_hits(notebooks, defs)
+        + order_hits(defs)
+        + backref_hits(notebooks, defs)
+    )
 
 
 # ---------------------------------------------------------------- output
@@ -591,9 +670,13 @@ def print_report(notebooks: list[Notebook], filters: list[str], only: set[str]) 
 
 
 def print_terms(notebooks: list[Notebook]) -> None:
-    for d in definitions(notebooks):
+    """Every definition, then the defined terms it relies on (for the complete-chain read)."""
+    defs = definitions(notebooks)
+    for d in defs:
         where = f"{d.notebook.short} {d.section} cell {d.cell}"
         print(f"{where:30} {d.text}")
+        used = ", ".join(f"{e.term} ({e.notebook.short})" for e in uses(d, defs))
+        print(f"{'':30} uses: {used or 'no other defined term'}")
 
 
 def print_inventory(notebooks: list[Notebook]) -> None:
