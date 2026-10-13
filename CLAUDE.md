@@ -184,13 +184,11 @@ hand-written. Runtime state (Chroma index, embedding caches, Wikipedia pages) li
 
 ## AI collaboration log
 
-`ai_collaboration_log/` records the sessions in which this repository was built with
-Claude Code. After each session run
-`uv run python tools/export_claude_sessions.py --copy-raw` (curated Markdown and JSON
-per session; raw JSONL stays gitignored) and, to mirror it into MLflow and score it,
-`uv run python tools/log_session_to_mlflow.py --session <turns.json> --evaluate` plus
-the blind-judge procedure in `ai_collaboration_log/evaluation/README.md`. Reflections
-are the instructor's own text; draft them, do not finalise them.
+The record of the sessions in which this repository was built with Claude Code lives in
+a separate repository,
+[teach-llm-system-ai-log](https://github.com/argythana/teach-llm-system-ai-log); its
+exporter reads this repository's sessions with `--project`. Nothing is exported or
+logged from here.
 
 ## Verification
 

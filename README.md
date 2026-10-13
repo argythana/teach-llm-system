@@ -89,10 +89,14 @@ automates that check with an evaluation set. See `corpus/LICENSE_NOTE.md`.
 
 ## How this course was built
 
-The course was designed and written with an AI coding assistant. `ai_collaboration_log/`
-holds the curated transcripts of selected sessions, the instructor's reflections on the
-collaboration, and an automated evaluation of the assistant's replies that uses the same
-MLflow tooling lecture 3 teaches.
+The course was designed and written with an AI coding assistant (Claude Code).
+`CLAUDE.md` is the specification that steered it: the teaching rules and conventions the
+assistant follows, distilled from the instructor's corrections. Read it to see what
+working with an assistant takes.
+
+The session transcripts, the instructor's reflections, and an evaluation of the
+assistant's replies with the MLflow tooling of lecture 3 are in
+[teach-llm-system-ai-log](https://github.com/argythana/teach-llm-system-ai-log).
 
 ## For instructors and contributors
 

@@ -15,38 +15,10 @@ course material.
 
 ## What the server holds
 
-| Experiment                | Written by                       | What you see                                                                                 |
-| ------------------------- | -------------------------------- | -------------------------------------------------------------------------------------------- |
-| `llm-course-03-eval`      | the lecture notebooks            | traces of every model call and the evaluation runs (lecture 3)                               |
-| `llm-course-NN-exercises` | the exercise notebooks           | the same, for the practice exercises                                                         |
-| `ai-collaboration-log`    | `tools/log_session_to_mlflow.py` | the sessions in which this course was built with an AI assistant, ported into MLflow (below) |
-
-## The course's own build, ported into MLflow
-
-This course was designed and written with Claude Code (an AI coding assistant running
-Claude models). The transcripts are archived in `ai_collaboration_log/`, and the same
-tooling lecture 3 teaches is applied to them:
-
-- **Traces.** Each instructor turn becomes one MLflow trace: the instructor's message as
-  input, the assistant's reply as output, and one child span per tool call.
-
-- **Judges.** Three independent judges score the replies against
-  `ai_collaboration_log/evaluation/rubric.md`, and the Traces tab shows them side by
-  side:
-
-  - a **blind Claude judge**: a fresh Claude Code sub-agent on a Sonnet model that never
-    saw the session (`judge/*` feedback, source `LLM_JUDGE`);
-  - the **local judge** the course uses everywhere: `mlflow.genai.evaluate` with
-    deterministic scorers and `Guidelines` scorers run by the Ollama model
-    (`ollama:/qwen3:1.7b` on the `cpu` tier);
-  - optionally a **GitHub Copilot judge** from a different model family
-    (`tools/judge_with_copilot.py`, default model `gpt-5.4`), for anyone with a Copilot
-    subscription, which students and educators get through GitHub Education.
-
-  Why three: a model judging its own family can be lenient, a small local model is weak
-  on long technical replies, and a second family is the cheapest independent opinion.
-  The disagreements are the interesting part.
-  `ai_collaboration_log/evaluation/README.md` has the procedure and the caveats.
+| Experiment                | Written by             | What you see                                                   |
+| ------------------------- | ---------------------- | -------------------------------------------------------------- |
+| `llm-course-03-eval`      | the lecture notebooks  | traces of every model call and the evaluation runs (lecture 3) |
+| `llm-course-NN-exercises` | the exercise notebooks | the same, for the practice exercises                           |
 
 ## The MLflow Assistant (experimental): Copilot by default on the instructor's machine
 
