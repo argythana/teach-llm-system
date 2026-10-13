@@ -43,7 +43,7 @@ notebooks: change a definition in its notebook, then rerun the script.
 - **Ollama** is a [local model server](https://docs.ollama.com/): it keeps a model in
   memory and handles requests at the address in `OLLAMA_HOST`.
   ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
-- **Parameters** are the numbers a model learns in training, its weights. The
+- **Model parameters** are the numbers a model learns in training, its weights. The
   coefficients of a scikit-learn `LinearRegression` are parameters too.
   ([`lec_01a` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
 - **Quantization** is storing each weight in fewer bits than the model was trained with,
@@ -127,7 +127,7 @@ notebooks: change a definition in its notebook, then rerun the script.
   tokens per second (`lec_01a`).
   ([`lec_01b` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
 - A **repo id** is the name of a model repository on the Hub, `<owner>/<name>`, such as
-  `Qwen/Qwen3-1.7B`. Every tool names a model by its repo id.
+  `Qwen/Qwen3-1.7B`. Every library and server names a model by its repo id.
   ([`lec_01b` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
 - A **gated model** is a model whose files the Hub serves only to accounts that accepted
   its license.
@@ -161,7 +161,7 @@ notebooks: change a definition in its notebook, then rerun the script.
   quantized weights and what is needed to run them, such as the tokenizer
   ([Hub docs](https://huggingface.co/docs/hub/gguf)).
   ([`lec_01b` §4](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
-- **llmfit** is a [command-line tool](https://github.com/AlexsJones/llmfit) that
+- **llmfit** is a [command-line program](https://github.com/AlexsJones/llmfit) that
   estimates which models your hardware can run, and how fast, without downloading any
   (guide `01b_llmfit`).
   ([`lec_01b` §5](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
@@ -252,8 +252,8 @@ notebooks: change a definition in its notebook, then rerun the script.
   file cannot run code, as older PyTorch files could: a risk with files downloaded from
   the internet.
   ([`lec_01e` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01e_run_a_model_with_transformers.ipynb))
-- **pydantic** is a Python library that turns a class describing a record into a JSON
-  schema, and checks data against that schema.
+- **pydantic** is a Python library that turns a class describing the fields of an answer
+  into a JSON schema, and checks data against that schema.
   ([`lec_01f` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01f_pydantic_and_hosted_inference.ipynb))
 - **Validation** is checking data against declared types and allowed values, and
   refusing data that does not fit.
@@ -362,22 +362,140 @@ notebooks: change a definition in its notebook, then rerun the script.
 
 ## Lecture 03: Evaluation, LLM judges and agents
 
-- **`fact_keywords_found`** is a crude first check of content: a fact counts as stated
-  when at least half of its keywords (common words dropped) appear in the answer.
-  ([`lec_03a` §4](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
-- **`term: str`** is a
-  [**type hint**](https://docs.python.org/3/glossary.html#term-type-hint), the type the
-  argument must have (`-> dict`: the type returned).
+- A **scorer** is a function that grades one answer and returns a number, or True or
+  False.
+  ([`lec_03a` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- A **verdict** is the value a scorer returns for one answer.
+  ([`lec_03a` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- A **deterministic scorer** is a scorer written as plain code, so the same answer
+  always gets the same verdict.
+  ([`lec_03a` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- A **trace** is the stored history of one end-to-end call of an application, such as
+  one `rag_chain.invoke(...)`.
+  ([`lec_03a` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- A **span** is the stored history of one step inside a trace, with its inputs, outputs
+  and duration; spans nest inside each other.
+  ([`lec_03a` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- A **span type** is the kind of step a span stores: `RETRIEVER`, `CHAT_MODEL`, `CHAIN`
+  (a pipeline of steps).
+  ([`lec_03a` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- **Tracing** is recording every call of an application as a trace.
+  ([`lec_03a` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- **Token usage** is the number of tokens one call read and wrote: what a hosted
+  provider would bill, here the prompt with its four chunks plus the answer.
+  ([`lec_03a` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- A **decorator** is a line starting with `@` right before a `def`, which wraps the
+  function so that every call goes through the wrapper first.
+  ([`lec_03a` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- A **record** is one question of an evaluation set in the form MLflow reads: a dict
+  with the keys `inputs` and `expectations`.
+  ([`lec_03a` §3](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- An **evaluation run** is an MLflow run that holds every answer of one evaluation, with
+  its trace and its verdicts.
+  ([`lec_03a` §5](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
+- A **rubric** is the set of grading instructions a judge follows.
+  ([`lec_03b` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
+- A **rationale** is the explanation a judge logs next to its verdict (`lec_03a`).
+  ([`lec_03b` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
+- A **judge model** is the model that grades; here the local chat model that also
+  answers.
+  ([`lec_03b` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
+- An **LLM judge** is a scorer that sends the answer and a rubric to a judge model and
+  reads back a verdict, here `yes` or `no`, with its rationale.
+  ([`lec_03b` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
+- A **variant** is one version of a system, run on the same questions and scorers as the
+  others so that the results compare.
+  ([`lec_03b` §3](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
+- A **reference label** is the verdict an answer should get by the rubric, written down
+  before any judge sees the answer.
+  ([`lec_03c` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03c_judging_the_judge.ipynb))
+- **Agreement** is the share of answers on which judge and label agree: the accuracy of
+  a classifier.
+  ([`lec_03c` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03c_judging_the_judge.ipynb))
+- A **false yes** is a verdict `yes` on an answer labelled `no`.
+  ([`lec_03c` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03c_judging_the_judge.ipynb))
+- A **false no** is a verdict `no` on an answer labelled `yes`.
+  ([`lec_03c` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03c_judging_the_judge.ipynb))
+- A **lenient judge** is a judge that gives many false yes verdicts: it passes wrong
+  answers.
+  ([`lec_03c` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03c_judging_the_judge.ipynb))
+- A **strict judge** is a judge that gives many false no verdicts: it fails right
+  answers.
+  ([`lec_03c` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03c_judging_the_judge.ipynb))
+- The **false-yes rate** is the share of the answers labelled `no` that the judge
+  passes.
+  ([`lec_03c` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03c_judging_the_judge.ipynb))
+- A **judge bias** is a systematic pull on the verdict from something the rubric does
+  not ask about.
+  ([`lec_03c` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03c_judging_the_judge.ipynb))
+- An **action** is work that needs code rather than text, such as counting across files,
+  a lookup or a calculation.
+  ([`lec_03d` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- A **tool** is a Python function that the model may ask your code to run, described by
+  a name, a description and typed arguments.
   ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- A **tool call** is the model's request to run a tool: a tool name and argument values,
+  written instead of an answer.
+  ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- A **tool result** is what the tool returned, sent back to the model as a message.
+  ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- An **agent** is a model in a loop that decides which tools to call, until the model
+  can answer.
+  ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- A **type hint** is a note after an argument's name, such as `term: str`, that names
+  the type the argument must have; `-> dict` names the type returned
+  ([Python glossary](https://docs.python.org/3/glossary.html#term-type-hint)).
+  ([`lec_03d` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- **LangGraph** is a [library](https://docs.langchain.com/oss/python/langgraph/overview)
+  from the LangChain team for systems that decide and loop, built from LangChain's
+  parts.
+  ([`lec_03d` §6](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- A **hard limit** is a cap, written in code, on how many steps a loop may take, so that
+  the loop always ends.
+  ([`lec_03d` §6](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
+- **Prompt injection** is text that a model reads as data, such as a retrieved note, but
+  follows as an instruction
+  ([OWASP](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)).
+  ([`lec_03d` §7](lecture_03_evaluation_judges_agents/reading_material/lec_03d_tools_and_agents.ipynb))
 
 ### Optional / career-track notebooks
 
-- **`retrieve`** is code, not a decision (`lec_03d`): it searches on every pass and
-  counts the searches.
+- **Search grading** is a model call that judges whether the chunks a search found are
+  on the question's topic.
+  ([`lec_03e` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03e_agentic_rag_langgraph.ipynb))
+- **Agentic RAG** is RAG in which a model makes decisions about retrieval: what to
+  search for, and whether to search again.
+  ([`lec_03e` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03e_agentic_rag_langgraph.ipynb))
+- A **graph state** is the dict that every step reads and updates.
   ([`lec_03e` §4](lecture_03_evaluation_judges_agents/reading_material/lec_03e_agentic_rag_langgraph.ipynb))
-- **`grade`** is the grade of section 3.
+- A **node** is one step: a function that receives the graph state and returns the keys
+  it changes.
   ([`lec_03e` §4](lecture_03_evaluation_judges_agents/reading_material/lec_03e_agentic_rag_langgraph.ipynb))
-- **`metric_passed/mean`** is what the optimizer was told to raise. In example runs
-  every variant scored 1.0, or one answer short of it: on these questions there was
-  little left to gain.
-  ([`lec_03f` §6](lecture_03_evaluation_judges_agents/reading_material/lec_03f_dspy_prompt_optimization.ipynb))
+- An **edge** is the link from one node to the node that runs next.
+  ([`lec_03e` §4](lecture_03_evaluation_judges_agents/reading_material/lec_03e_agentic_rag_langgraph.ipynb))
+- A **conditional edge** is an edge chosen by a function of the graph state: where a
+  loop is decided.
+  ([`lec_03e` §4](lecture_03_evaluation_judges_agents/reading_material/lec_03e_agentic_rag_langgraph.ipynb))
+- A **graph** is a set of nodes joined by edges, run from `START` to `END`.
+  ([`lec_03e` §4](lecture_03_evaluation_judges_agents/reading_material/lec_03e_agentic_rag_langgraph.ipynb))
+- A **DSPy signature** is DSPy's description of a step: what goes in and what comes out,
+  such as `context, question -> answer`, plus instructions.
+  ([`lec_03f` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03f_dspy_prompt_optimization.ipynb))
+- A **DSPy module** is a DSPy step that calls the model with a DSPy signature;
+  `dspy.Predict` is the simplest.
+  ([`lec_03f` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03f_dspy_prompt_optimization.ipynb))
+- A **demo** is DSPy's name for a shot (`lec_01c`): a worked example, inputs and a good
+  output, put into the prompt.
+  ([`lec_03f` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03f_dspy_prompt_optimization.ipynb))
+- An **optimizer** is a program that tries prompts or demos on a set of questions and
+  keeps what the metric scores best.
+  ([`lec_03f` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03f_dspy_prompt_optimization.ipynb))
+- **Compiling** is DSPy's word for running an optimizer on a DSPy module; it returns the
+  optimized module.
+  ([`lec_03f` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03f_dspy_prompt_optimization.ipynb))
+- **Dev questions** are the questions an optimizer tries its prompts on, as a training
+  set is for a model.
+  ([`lec_03f` §3](lecture_03_evaluation_judges_agents/reading_material/lec_03f_dspy_prompt_optimization.ipynb))
+- **Held-out questions** are questions kept away from the optimizer and used once, at
+  the end, to grade the result.
+  ([`lec_03f` §3](lecture_03_evaluation_judges_agents/reading_material/lec_03f_dspy_prompt_optimization.ipynb))

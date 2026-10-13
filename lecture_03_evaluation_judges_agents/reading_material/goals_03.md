@@ -57,6 +57,11 @@ Two sessions. Session 5: `lec_03a` and `lec_03b`. Session 6: `lec_03c` and `lec_
 - Guide in `infra_tools/` (`03b_dspy_optional_group`): installing the optional
   `career-track` group, and why a plain `uv sync` removes it.
 
+## Terms
+
+Every term this lecture defines, with a link to its definition, is in the course
+glossary, [`glossary.md`](../../glossary.md).
+
 ## Practice
 
 `practice_exercises/lec_03_exercises.ipynb` (solutions in
