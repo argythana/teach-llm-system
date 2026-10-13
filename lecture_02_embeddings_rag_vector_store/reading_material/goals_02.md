@@ -57,6 +57,11 @@ Two sessions. Session 3: `lec_02a` and `lec_02b`. Session 4: `lec_02c` and `lec_
   licences, polite fetching, and the cost of embedding at scale.
 - Guide `infra_tools/02a_docker_pgvector`: PostgreSQL + pgvector with Docker.
 
+## Terms
+
+Every term this lecture defines, with a link to its definition, is in the course
+glossary, [`glossary.md`](../../glossary.md).
+
 ## Practice
 
 `practice_exercises/lec_02_exercises.ipynb` (solutions in

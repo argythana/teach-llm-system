@@ -262,6 +262,104 @@ notebooks: change a definition in its notebook, then rerun the script.
   request over the internet and gets the answer back.
   ([`lec_01f` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01f_pydantic_and_hosted_inference.ipynb))
 
+## Lecture 02: Embeddings, retrieval and a vector store
+
+- A **vector** is a fixed-length list of numbers.
+  ([`lec_02a` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02a_embeddings_cosine_similarity.ipynb))
+- An **embedding model** is a model trained so that texts with similar meaning get
+  nearby vectors.
+  ([`lec_02a` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02a_embeddings_cosine_similarity.ipynb))
+- An **embedding** is the vector that an embedding model assigns to a text; to *embed* a
+  text is to compute its embedding.
+  ([`lec_02a` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02a_embeddings_cosine_similarity.ipynb))
+- The **dimension** is the length of an embedding model's vectors, fixed per model (768
+  here).
+  ([`lec_02a` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02a_embeddings_cosine_similarity.ipynb))
+- **Cosine similarity** is a measure of how closely two vectors point the same way:
+  `a · b / (|a| |b|)`, 1 for the same direction and 0 for vectors at right angles.
+  ([`lec_02a` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02a_embeddings_cosine_similarity.ipynb))
+- **Keyword search** is searching by counting the words that each document shares with
+  the question.
+  ([`lec_02a` §4](lecture_02_embeddings_rag_vector_store/reading_material/lec_02a_embeddings_cosine_similarity.ipynb))
+- **Retrieval-augmented generation (RAG)** is a way of making a model answer from your
+  documents: search them for the passages closest to the question, and send those with
+  the question.
+  ([`lec_02b` (intro)](lecture_02_embeddings_rag_vector_store/reading_material/lec_02b_hand_built_rag.ipynb))
+- A **retriever** is the part of a RAG system that finds the passages for a question;
+  here it is `retrieve_sections_for`.
+  ([`lec_02b` §4](lecture_02_embeddings_rag_vector_store/reading_material/lec_02b_hand_built_rag.ipynb))
+- **Chunking** is cutting documents into pieces small enough to embed and focused enough
+  to match one question.
+  ([`lec_02c` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
+- A **chunk** is one piece of a document cut by chunking: the unit a RAG system embeds
+  and retrieves.
+  ([`lec_02c` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
+- The **chunk size** is the maximum length of a chunk, here counted in characters.
+  ([`lec_02c` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
+- A **separator** is a string at which a splitter may cut a text, such as a heading
+  mark, a blank line, a line break or a space.
+  ([`lec_02c` §3](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
+- **Overlap** is the text that two neighbouring chunks share: the end of each chunk
+  repeated at the start of the next.
+  ([`lec_02c` §4](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
+- A **`Document`** is LangChain's object for a text with its metadata: `page_content`
+  (the text) and `metadata` (a dict).
+  ([`lec_02c` §5](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
+- A **query** is the text a search runs with, usually the user's question.
+  ([`lec_02d` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- A **vector store** is a database for vectors: it stores each one with its text and
+  metadata, and returns the nearest ones to a query.
+  ([`lec_02d` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- **Chroma** is an open-source vector store that runs inside Python and keeps its data
+  in a folder ([docs](https://docs.trychroma.com/)).
+  ([`lec_02d` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- A **collection** is one named set of vectors inside a vector store, like a table in a
+  database.
+  ([`lec_02d` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- An **id** is the unique name of one item, such as one stored chunk.
+  ([`lec_02d` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- An **index** is the searchable store of a set of documents' vectors, with a structure
+  that finds near neighbours without comparing the query with every vector (not the
+  index of a DataFrame). Chroma's structure is
+  [HNSW](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world).
+  ([`lec_02d` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- **Ingestion** is loading documents into a vector store: cutting them into chunks,
+  embedding the chunks and storing them.
+  ([`lec_02d` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- An **idempotent operation** is an operation whose result is the same after one run or
+  after many.
+  ([`lec_02d` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- **Cosine distance** is 1 minus the cosine similarity of two vectors (`lec_02a`): 0 for
+  the same direction, so a lower distance means a closer chunk.
+  ([`lec_02d` §3](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- A **metadata filter** is a search condition on a chunk's metadata, such as its `kind`,
+  that keeps only the matching chunks.
+  ([`lec_02d` §4](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- A **content filter** is a search condition on a chunk's text, such as containing an
+  exact term, that keeps only the matching chunks.
+  ([`lec_02d` §4](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- **Hybrid search** is searching by exact words and by meaning at once, and combining
+  the two rankings.
+  ([`lec_02d` §4](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- An **evaluation set** is a set of questions with known good answers, used to measure a
+  system on many questions instead of one.
+  ([`lec_02d` §6](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- **Hit rate@k** is the share of the questions for which a chunk of the file that
+  answers the question is among the top `k` results.
+  ([`lec_02d` §6](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- **Mean reciprocal rank (MRR)** is the average of 1 divided by the rank of the first
+  chunk from the file that answers the question: 1 if it is always first, 0.5 if always
+  second, 0 if it is not in the top 8.
+  ([`lec_02d` §6](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+- **Query rewriting** is a model call before the search that turns the question into a
+  query in the documents' terms.
+  ([`lec_02d` §7](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
+
+### Optional / career-track notebooks
+
+- **SQL** is the language for querying relational databases, such as PostgreSQL.
+  ([`lec_02e` §3](lecture_02_embeddings_rag_vector_store/reading_material/lec_02e_pgvector_docker_compose.ipynb))
+
 ## Lecture 03: Evaluation, LLM judges and agents
 
 - **`fact_keywords_found`** is a crude first check of content: a fact counts as stated
