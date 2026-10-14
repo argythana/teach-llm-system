@@ -17,8 +17,9 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 - Explain the context window and temperature and choose their values for a given use.
   *(lec_01a §4-5)* <!-- G4 -->
 - Write a requirements table (task, languages, license, context, latency, hardware,
-  privacy, maintenance) before choosing a model, and check candidates against it.
-  *(lec_01b §1, §3, §6)* <!-- G5 -->
+  privacy, maintenance) before choosing a model, shortlist candidates with public
+  benchmarks, say what a benchmark cannot tell you, and check candidates against the
+  table. *(lec_01b §1, §3, §6)* <!-- G5 -->
 - Search the Hugging Face Hub from Python, read a model card's license and language
   metadata, and read the quantization variants and sizes of a GGUF repository. *(lec_01b
   §2-4)* <!-- G6 -->
@@ -54,9 +55,9 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 - `lec_01a_first_call_tokens_context.ipynb`: CPU, GPU and memory, Ollama as a local
   model server and its Python client, local versus hosted, the first call and its reply,
   tokens, context window, temperature.
-- `lec_01b_choosing_a_model_requirements_hf_hub.ipynb`: requirements table, Hub API,
-  model cards, licenses and open weights, quantization, llmfit, comparing candidates,
-  what thinking costs, decision record.
+- `lec_01b_choosing_a_model_requirements_hf_hub.ipynb`: requirements table, benchmarks,
+  Hub API, model cards, licenses and open weights, quantization, llmfit, comparing
+  candidates, what thinking costs, decision record.
 - `lec_01c_prompts_roles_structured_output.ipynb`: prompts as functions, roles,
   few-shot, JSON-schema output and its limits, DataFrames, caching by model and prompt
   version, streaming.

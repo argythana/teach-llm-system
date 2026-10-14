@@ -136,6 +136,9 @@ notebooks: change a definition in its notebook, then rerun the script.
 - **Latency** is the time a user waits for an answer; for a chat model it follows from
   tokens per second (`lec_01a`).
   ([`lec_01b` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
+- A **benchmark** is a fixed set of test questions with a scoring rule, published so
+  that every model can be scored on the same skill.
+  ([`lec_01b` §1](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
 - A **repo id** is the name of a model repository on the Hub, `<owner>/<name>`, such as
   `Qwen/Qwen3-1.7B`. Every library and server names a model by its repo id.
   ([`lec_01b` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01b_choosing_a_model_requirements_hf_hub.ipynb))
