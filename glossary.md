@@ -70,7 +70,7 @@ notebooks: change a definition in its notebook, then rerun the script.
 - An **answer** is the text a model writes back for a prompt.
   ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
 - A **token** is the unit of text a model reads and writes: a word, a word piece or a
-  punctuation mark. Section 3 looks inside.
+  punctuation mark.
   ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
 - A **stop token** is a token that a model writes to end its answer.
   ([`lec_01a` §2](lecture_01_ollama_models_prompts_langchain/reading_material/lec_01a_first_call_tokens_context.ipynb))
@@ -292,8 +292,7 @@ notebooks: change a definition in its notebook, then rerun the script.
 - An **embedding** is the vector that an embedding model assigns to a text; to *embed* a
   text is to compute its embedding.
   ([`lec_02a` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02a_embeddings_cosine_similarity.ipynb))
-- The **dimension** is the length of an embedding model's vectors, fixed per model (768
-  here).
+- The **dimension** is the length of an embedding model's vectors, fixed per model.
   ([`lec_02a` §1](lecture_02_embeddings_rag_vector_store/reading_material/lec_02a_embeddings_cosine_similarity.ipynb))
 - **Cosine similarity** is a measure of how closely two vectors point the same way:
   `a · b / (|a| |b|)`, 1 for the same direction and 0 for vectors at right angles.
@@ -308,8 +307,7 @@ notebooks: change a definition in its notebook, then rerun the script.
 - A **splitter** is code that cuts a long text into smaller pieces at chosen places,
   such as headings.
   ([`lec_02b` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02b_hand_built_rag.ipynb))
-- A **retriever** is the part of a RAG system that finds the passages for a question;
-  here it is `retrieve_sections_for`.
+- A **retriever** is the part of a RAG system that finds the passages for a question.
   ([`lec_02b` §4](lecture_02_embeddings_rag_vector_store/reading_material/lec_02b_hand_built_rag.ipynb))
 - **Chunking** is cutting documents into pieces small enough to embed and focused enough
   to match one question.
@@ -317,7 +315,8 @@ notebooks: change a definition in its notebook, then rerun the script.
 - A **chunk** is one piece of a document cut by chunking: the unit a RAG system embeds
   and retrieves.
   ([`lec_02c` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
-- The **chunk size** is the maximum length of a chunk, here counted in characters.
+- The **chunk size** is the maximum length of a chunk, counted in characters or in
+  tokens.
   ([`lec_02c` §2](lecture_02_embeddings_rag_vector_store/reading_material/lec_02c_chunking_size_overlap_metadata.ipynb))
 - A **separator** is a string at which a splitter may cut a text, such as a heading
   mark, a blank line, a line break or a space.
@@ -375,7 +374,7 @@ notebooks: change a definition in its notebook, then rerun the script.
   ([`lec_02d` §6](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
 - **Mean reciprocal rank (MRR)** is the average of 1 divided by the rank of the first
   chunk from the file that answers the question: 1 if it is always first, 0.5 if always
-  second, 0 if it is not in the top 8.
+  second, 0 if it is not among the results.
   ([`lec_02d` §6](lecture_02_embeddings_rag_vector_store/reading_material/lec_02d_chroma_retriever_langchain_rag.ipynb))
 - **Query rewriting** is a model call before the search that turns the question into a
   query in the documents' terms.
@@ -408,7 +407,7 @@ notebooks: change a definition in its notebook, then rerun the script.
 - **Tracing** is recording every call of an application as a trace.
   ([`lec_03a` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
 - **Token usage** is the number of tokens one call read and wrote: what a hosted
-  provider would bill, here the prompt with its four chunks plus the answer.
+  provider bills.
   ([`lec_03a` §2](lecture_03_evaluation_judges_agents/reading_material/lec_03a_tracing_and_deterministic_scorers.ipynb))
 - A **decorator** is a line starting with `@` right before a `def`, which wraps the
   function so that every call goes through the wrapper first.
@@ -423,11 +422,10 @@ notebooks: change a definition in its notebook, then rerun the script.
   ([`lec_03b` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
 - A **rationale** is the explanation a judge logs next to its verdict (`lec_03a`).
   ([`lec_03b` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
-- A **judge model** is the model that grades; here the local chat model that also
-  answers.
+- A **judge model** is the model that grades the answers.
   ([`lec_03b` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
 - An **LLM judge** is a scorer that sends the answer and a rubric to a judge model and
-  reads back a verdict, here `yes` or `no`, with its rationale.
+  reads back a verdict, such as `yes` or `no`, with its rationale.
   ([`lec_03b` §1](lecture_03_evaluation_judges_agents/reading_material/lec_03b_llm_judge_comparing_variants.ipynb))
 - A **variant** is one version of a system, run on the same questions and scorers as the
   others so that the results compare.

@@ -18,7 +18,8 @@ Two sessions. Session 5: `lec_03a` and `lec_03b`. Session 6: `lec_03c` and `lec_
 - Compare two variants of the RAG system on the same questions and scorers, on quality
   and on cost, in the MLflow UI and from code. *(lec_03b §3)* <!-- G5 -->
 - Measure how far to trust an LLM judge: agreement with reference labels, a confusion
-  matrix, repeat stability, its window, and a known bias. *(lec_03c)* <!-- G6 -->
+  matrix, repeat stability, what fits in its context window, and a known bias.
+  *(lec_03c)* <!-- G6 -->
 - Write a tool with `@tool`, run the tool loop by hand (the model asks, your code runs),
   and validate a tool's arguments in code. *(lec_03d §1-4)* <!-- G7 -->
 - Run an agent with `create_agent`, read its tool spans in the trace, explain when
@@ -47,6 +48,11 @@ Two sessions. Session 5: `lec_03a` and `lec_03b`. Session 6: `lec_03c` and `lec_
 - `lec_03d_tools_and_agents.ipynb`: tools, the tool loop by hand, argument checks, a
   small model's decision, `create_agent`, safe tools, when an agent is worth it.
 
+### Guides, run in class
+
+- Guide `infra_tools/03a_mlflow_server`: starting the MLflow tracking server that the
+  lecture 3 notebooks record their traces and evaluations in.
+
 ### Optional / Further reading
 
 - `lec_03e_agentic_rag_langgraph.ipynb`: a LangGraph graph that rewrites, retrieves,
@@ -66,5 +72,4 @@ glossary, [`glossary.md`](../../glossary.md).
 
 `practice_exercises/lec_03_exercises.ipynb` (solutions in
 `lec_03_exercises_solutions.ipynb`). Exercises are tagged with the goal they practise,
-e.g. `[G2]`; `[O1]` marks optional exercises on the career-track notebook `lec_03e`. The
-MLflow tracking server is started with guide `infra_tools/03a_mlflow_server`.
+e.g. `[G2]`; `[O1]` marks optional exercises on the career-track notebook `lec_03e`.

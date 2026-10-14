@@ -22,19 +22,21 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 - Search the Hugging Face Hub from Python, read a model card's license and language
   metadata, and read the quantization variants and sizes of a GGUF repository. *(lec_01b
   §2-4)* <!-- G6 -->
-- Use `llmfit` to check hardware fit and Ollama to pull a model from the Hub; write a
-  short decision record. *(lec_01b §5-8)* <!-- G7 -->
+- Use `llmfit` to check hardware fit and Ollama to pull a model from the Hub, explain
+  what thinking costs in tokens and time, and write a short decision record. *(lec_01b
+  §5-8)* <!-- G7 -->
 - Write a prompt as a versioned Python function, use the system, user and assistant
   roles, and resend history for a multi-turn conversation. *(lec_01c §1-2)* <!-- G8 -->
 - Use few-shot examples and JSON-schema structured output to get answers a program can
   parse, load them into a DataFrame, and explain what a schema enforces (the shape) and
-  what it does not (the content, or rules only the prompt can carry). *(lec_01c §3-5)*
-      <!-- G9 -->
+  what it does not (the content, or rules only the prompt can carry); cache the answers
+  by model and prompt version, and stream an answer to cut the time to first token.
+  *(lec_01c §3-6)* <!-- G9 -->
 - Build a LangChain chain (prompt template, chat model, output parser), read the prompt
-  it renders, run it with `invoke` and `batch`, and use structured output inside it;
-  explain what the framework adds over the plain client, what it costs, and when the
-  plain client is enough, and why this course chose LangChain. *(lec_01d §1-3, §5-6)*
-      <!-- G10 -->
+  it renders, run it with `invoke` and `batch`, use structured output inside it, and
+  swap the model in one line; explain what the framework adds over the plain client,
+  what it costs, and when the plain client is enough, and why this course chose
+  LangChain. *(lec_01d §1-6)* <!-- G10 -->
 
 ### Optional / Career track
 
@@ -49,18 +51,24 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 
 ### Required notebooks
 
-- `lec_01a_first_call_tokens_context.ipynb`: Ollama as a local model server and its
-  Python client, local versus hosted, the first call and its reply, tokens, context
-  window, temperature.
+- `lec_01a_first_call_tokens_context.ipynb`: CPU, GPU and memory, Ollama as a local
+  model server and its Python client, local versus hosted, the first call and its reply,
+  tokens, context window, temperature.
 - `lec_01b_choosing_a_model_requirements_hf_hub.ipynb`: requirements table, Hub API,
   model cards, licenses and open weights, quantization, llmfit, comparing candidates,
-  decision record.
+  what thinking costs, decision record.
 - `lec_01c_prompts_roles_structured_output.ipynb`: prompts as functions, roles,
   few-shot, JSON-schema output and its limits, DataFrames, caching by model and prompt
   version, streaming.
 - `lec_01d_langchain_chains.ipynb`: why a framework, LangChain parts and chains,
   rendered prompts, structured output in a chain, the one-line model swap, what
-  LangChain adds and what it costs.
+  LangChain adds and what it costs, and a decision record for the framework.
+
+### Guides, run in class
+
+- Guides in `infra_tools/` (`01a_git_uv` to `01d_env_hugging_face`): git and uv, llmfit,
+  Ollama (the server, its address and its API), the `.env` settings file and a Hugging
+  Face read token.
 
 ### Optional / Further reading
 
@@ -70,9 +78,6 @@ Two sessions. Session 1: `lec_01a` and `lec_01b`. Session 2: `lec_01c` and `lec_
 - `lec_01f_pydantic_and_hosted_inference.ipynb`: pydantic schemas and validation, the
   OpenAI-compatible API, and the one-line swap to a hosted model, weighed against a
   local one. Career-track value: how production systems mix local and hosted models.
-- Guides in `infra_tools/` (`01a_git_uv` to `01d_env_hugging_face`): git and uv, llmfit,
-  Ollama (the server, its address and its API), the `.env` settings file and a Hugging
-  Face read token.
 
 ## Terms
 
