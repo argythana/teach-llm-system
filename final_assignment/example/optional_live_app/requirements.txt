@@ -1,0 +1,4 @@
+gradio==6.28.0
+langchain-ollama==1.1.0
+langchain-postgres==0.0.17
+psycopg[binary]==3.3.5

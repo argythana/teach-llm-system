@@ -46,3 +46,6 @@ final_assignment/alternative_ideas.md
 lecture_04_assess_smart_manufacturing/
 # Exam questions and answers: never published (a prek hook also blocks a forced add)
 final_assignment/eclass_exam/
+
+# Final assignment live app: the index dump is rebuilt (see its README), 5 MB
+final_assignment/example/optional_live_app/index.sql.gz
