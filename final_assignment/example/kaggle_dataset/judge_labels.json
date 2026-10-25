@@ -1,0 +1,152 @@
+[
+ {
+  "id": "j01",
+  "question_id": "q01",
+  "kind": "real answer",
+  "answer": "LegalAgentBench provides 37 tools and 300 annotated tasks. It is specifically designed for the Chinese legal system. \n\nThis information is derived from the excerpt on page 1 of the paper **LegalAgentBench: Evaluating LLM Agents in Legal Domain**.",
+  "papers": [
+   "2025.acl-long.116"
+  ],
+  "label": "yes",
+  "why": "States 37 tools, 300 annotated tasks and the Chinese legal system."
+ },
+ {
+  "id": "j02",
+  "question_id": "q02",
+  "kind": "real answer",
+  "answer": "26",
+  "papers": [
+   "2025.acl-long.189"
+  ],
+  "label": "no",
+  "why": "One number, without saying which benchmark it counts; the 23 of SWE-Bench Lite is missing."
+ },
+ {
+  "id": "j03",
+  "question_id": "q03",
+  "kind": "real answer",
+  "answer": "CheckEval makes LLM-judge ratings more reliable by using a structured binary checklist approach. This method reduces ambiguity and enhances consistency through structured binary responses, which improve inter-rater agreement (IEA) and reduce variability. The framework transforms evaluation criteria into structured binary questions, enabling reliable evaluation of open-ended text. These improvements are verified through comprehensive experiments across multiple LLM-based evaluator models and datasets. The paper is **CheckEval: A reliable LLM-as-a-Judge framework for evaluating text generation using checklists**.",
+  "papers": [
+   "2025.emnlp-main.796"
+  ],
+  "label": "yes",
+  "why": "Says the criteria become a checklist of binary questions."
+ },
+ {
+  "id": "j04",
+  "question_id": "q06",
+  "kind": "real answer",
+  "answer": "EnterpriseBench contains 100 tasks, and the best agents complete 65% of them.",
+  "papers": [
+   "2025.emnlp-main.466"
+  ],
+  "label": "no",
+  "why": "100 tasks and 65% contradict the expected 500 tasks and 41.8%."
+ },
+ {
+  "id": "j05",
+  "question_id": "q04",
+  "kind": "real answer",
+  "answer": "The Alternative Annotator Test decides whether an LLM can replace human annotators by verifying if the LLM's annotations are as good as or better than those of human annotators. According to the excerpts, the test requires a modest subset of annotated examples, specifically between 50 and 100 instances. This is mentioned in the excerpt from page 2, which states: \"comparing the LLM to a small group of human annotators (at least three) on a modest subset of examples (between 50 and 100).\" The paper is **The Alternative Annotator Test for LLM-as-a-Judge: How to Statistically Justify Replacing Human Annotators with LLMs**.",
+  "papers": [
+   "2025.acl-long.782"
+  ],
+  "label": "yes",
+  "why": "Replacing human annotators, and a modest subset of 50 to 100 examples."
+ },
+ {
+  "id": "j06",
+  "question_id": "q05",
+  "kind": "real answer",
+  "answer": "AgentGym includes 7 real-world scenarios, 14 environments, and 89 tasks. These details are from the paper **AgentGym: Evaluating and Training Large Language Model-based Agents across Diverse Environments**.",
+  "papers": [
+   "2025.acl-long.1355"
+  ],
+  "label": "yes",
+  "why": "7 scenarios, 14 environments and 89 tasks."
+ },
+ {
+  "id": "j07",
+  "question_id": "q05",
+  "kind": "written",
+  "answer": "AgentGym includes 7 scenarios, 14 environments and 98 tasks.",
+  "papers": [
+   "2025.acl-long.1355"
+  ],
+  "label": "no",
+  "why": "98 tasks contradicts the expected 89."
+ },
+ {
+  "id": "j08",
+  "question_id": "q07",
+  "kind": "written",
+  "answer": "GEMMAS proposes accuracy and F1 score as its two metrics.",
+  "papers": [
+   "2025.emnlp-industry.106"
+  ],
+  "label": "no",
+  "why": "Names two metrics the paper does not propose."
+ },
+ {
+  "id": "j09",
+  "question_id": "q09",
+  "kind": "real answer",
+  "answer": "The tasks of InvestorBench cover financial products such as stocks, bonds, and other financial instruments, as indicated by the description of the Stock market environment in the paper. Specifically, the Stock market environment integrates information from daily stock open, high, low, close, and volume (OHLCV) data, summarized insights from company reports, and news articles for seven stocks. These include Microsoft Corporation (MSFT), Johnson & Johnson (JNJ), UVV Corporation (UVV), and Honeywell International Inc. (HON), which are examples of financial products.",
+  "papers": [
+   "2025.acl-long.126"
+  ],
+  "label": "no",
+  "why": "Names stocks but not cryptocurrencies or ETFs, and adds bonds, which the paper does not list."
+ },
+ {
+  "id": "j10",
+  "question_id": "q11",
+  "kind": "written",
+  "answer": "It checks whether a model follows many different rules, whether it copes when the rules change, and whether its behaviour matches what people prefer.",
+  "papers": [
+   "2025.acl-long.557"
+  ],
+  "label": "yes",
+  "why": "All three aspects, in other words."
+ },
+ {
+  "id": "j11",
+  "question_id": "q12",
+  "kind": "written",
+  "answer": "YESciEval reduces the optimism bias of LLM evaluators.",
+  "papers": [
+   "2025.acl-long.675"
+  ],
+  "label": "no",
+  "why": "Names the bias but not the rubric-based assessment with reinforcement learning."
+ },
+ {
+  "id": "j12",
+  "question_id": "q14",
+  "kind": "written",
+  "answer": "It builds a Character Knowledge Graph from the narrative and checks the summary against it.",
+  "papers": [
+   "2025.emnlp-main.1204"
+  ],
+  "label": "yes",
+  "why": "Names the Character Knowledge Graph."
+ },
+ {
+  "id": "j13",
+  "question_id": "q17",
+  "kind": "written",
+  "answer": "The papers do not say how much electricity it takes to train a large language model.",
+  "papers": [],
+  "label": "yes",
+  "why": "Says the papers do not contain it."
+ },
+ {
+  "id": "j14",
+  "question_id": "q17",
+  "kind": "written",
+  "answer": "Training a model like GPT-3 used about 1,300 MWh of electricity.",
+  "papers": [],
+  "label": "no",
+  "why": "Answers from outside the papers instead of saying they do not contain it."
+ }
+]

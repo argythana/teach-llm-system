@@ -60,9 +60,14 @@ CC0.
   arXiv distribute the paper, not you: skip those papers.
 - **Open-access journals**: check the license printed on each article.
 
-Upload the PDFs as a public Kaggle dataset, with `papers.csv`: one row per paper with
-its id, title, authors, year, link and license. The notebook stops if a license is not
-on the allowed list.
+Upload them as a public Kaggle dataset, with `papers.csv`: one row per paper with its
+id, title, authors, year, link and license. The notebook stops if a license is not on
+the allowed list.
+
+Put the PDFs in a `pdfs/` folder. Kaggle's dataset page previews the first file of the
+list, and a PDF there makes some browsers download it on every visit. Fill in the
+dataset's description, cover image and file descriptions too: Kaggle shows the result as
+a usability score.
 
 ### 2. An index in pgvector
 
