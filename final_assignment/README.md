@@ -69,6 +69,10 @@ list, and a PDF there makes some browsers download it on every visit. Fill in th
 dataset's description, cover image and file descriptions too: Kaggle shows the result as
 a usability score.
 
+Describe every column of your CSV files as well, on the dataset page: select the file,
+click the pencil next to *About this file* and fill in the box under each column. The
+Kaggle command-line tool accepts column descriptions but does not save them.
+
 ### 2. An index in pgvector
 
 Split the papers into chunks, embed them with Ollama and store them in PostgreSQL with
