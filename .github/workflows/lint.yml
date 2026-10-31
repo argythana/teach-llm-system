@@ -45,6 +45,16 @@ jobs:
         run: uv run python tools/export_corpus.py --check
       - name: Glossary matches the notebooks' definitions
         run: uv run python tools/build_glossary.py --check
+      # Cache only the built hooks: the Go toolchain that builds gitleaks is 700 MB and
+      # is not needed to run it.
+      - name: Cache pre-commit hooks (Linux only)
+        if: runner.os == 'Linux'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/prek/hooks
+            ~/.cache/prek/repos
+          key: prek-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
       - name: Pre-commit hooks (Linux only)
         if: runner.os == 'Linux'
         run: uv run prek run --all-files --show-diff-on-failure

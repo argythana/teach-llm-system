@@ -65,10 +65,10 @@ repos:
         files: "\\.ipynb$"
         require_serial: true
       - id: "ruff-check-py"
-        name: "ruff format + check (course_helpers/, tools/)"
+        name: "ruff format + check (Python files)"
         entry: bash -c 'uv run ruff format "$@" && uv run ruff check --fix "$@"' --
         language: system
-        files: "^(course_helpers|tools)/.*\\.py$"
+        files: "\\.py$" # every Python file, as CI's `ruff format --check .`
         require_serial: true
       - id: "wrap-notebook-markdown"
         name: "wrap + justify (notebook markdown cells)"
