@@ -16,7 +16,9 @@ from langchain_postgres import PGVector
 
 HERE = Path(__file__).resolve().parent
 CHAT_MODEL = os.environ.get("CHAT_MODEL", "qwen3:1.7b")
-SQL_URL = os.environ.get("PAPERS_SQL_URL", "postgresql+psycopg://user@/papers?host=/tmp")
+SQL_URL = os.environ.get(
+    "PAPERS_SQL_URL", "postgresql+psycopg://user@/papers?host=/tmp"
+)
 NUM_THREAD = int(os.environ.get("NUM_THREAD", "2"))  # a free Space has 2 vCPUs
 K = 4
 
@@ -86,7 +88,10 @@ with gr.Blocks(title="Agent evaluation papers") as demo:
         "LLM judges, answered by a small local model on a free CPU: expect to wait."
     )
     with gr.Tab("Ask"):
-        question = gr.Textbox(label="Question", placeholder="How do papers check an LLM judge against human labels?")
+        question = gr.Textbox(
+            label="Question",
+            placeholder="How do papers check an LLM judge against human labels?",
+        )
         ask = gr.Button("Ask", variant="primary")
         answer_box = gr.Markdown()
         gr.Markdown("**Sources**")
@@ -102,4 +107,6 @@ with gr.Blocks(title="Agent evaluation papers") as demo:
         )
 
 if __name__ == "__main__":
-    demo.queue(default_concurrency_limit=1).launch(server_name="0.0.0.0", server_port=7860)
+    demo.queue(default_concurrency_limit=1).launch(
+        server_name="0.0.0.0", server_port=7860
+    )
